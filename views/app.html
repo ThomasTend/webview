@@ -1,0 +1,117 @@
+
+<div class="row">
+  <div class="col-md-2">
+  </div>
+
+ <div class="col-md-8 col-xs-12"> 
+<div style="height:100vh">
+
+<nav class="navbar" style="background-color: #27ae60;">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only" style="color: #C8E6C9;">Toggle navigation</span>
+      <span class="icon-bar" style="background-color: #C8E6C9;"></span>
+      <span class="icon-bar" style="background-color: #C8E6C9;"></span>
+      <span class="icon-bar" style="background-color: #C8E6C9;"></span>
+    </button>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li ui-sref-active="active"><a status="active" ui-sref="app.Home" style="color: #C8E6C9;" href><i class="fa fa-home iconMenuBar"></i> Home</a></li>
+      <li ui-sref-active="active"><a ui-sref="app.Appointments" style="color: #C8E6C9;"  href><i class="fa fa-calendar iconMenuBar"></i> Appointments</a></li>
+       <li ui-sref-active="active"><a ui-sref="app.TreatmentPlan" style="color: #C8E6C9;"  href><i class="fa fa-tasks iconMenuBar"></i> Treatment Plan</a></li>
+      <li ui-sref-active="active"><a ui-sref="app.Documents" style="color: #C8E6C9;"  href><i class="fa fa-folder iconMenuBar"></i> Documents</a></li>
+     <!-- <li ui-sref-active="active"><a ui-sref="app.Messages" href><i class="fa fa-envelope iconMenuBar"></i> Messages <span class="badge">{{NumberOfNewMessages}}</span></a></li>
+
+      <li ui-sref-active="active"><a ui-sref="app.Maps" href><i class="fa fa-hospital-o iconMenuBar"></i> Maps</a></li> -->
+      <li ui-sref-active="active"><a ui-sref="app.Educational" style="color: #C8E6C9;"  href><i class="fa fa-book iconMenuBar"></i> Educational</a></li>
+      <li ui-sref-active="active"><a ui-sref="app.Contacts" style="color: #C8E6C9;" href><i class="ion-android-people iconMenuBar"></i> My Account</a></li>
+  </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ui-sref-active="active" class="dropdown dropdown-lg " ng-controller="NotificationsController">
+          <a  href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="Notifications=''"><i class="fa fa-bell iconMenuBar" ng-class="(Notifications>0?'iconThemeViews':'')" style="color: #C8E6C9;"></i><span class="badge">{{Notifications}}</span></a>
+          <ul class="dropdown-menu dropdown-menu-lg row" align="center">
+            <hr style="margin:5px 0 5px 0;padding:0">
+            <li ng-repeat="notification in notifications" ng-class="(notification.ReadStatus=='0')?'unreadNotification':''" ng-click="goToNotification($index,notification)" class="list__item--tappable">
+              <div class="row" >
+              <div class="col-xs-1" align="center" >
+                <div style="margin-left:5px;">
+                  <span class="glyphicon glyphicon-bell" style="color: #388E3C;"></span>
+                </div>
+
+              </div>
+              <div class="col-xs-8" align="center">
+                <div class="profile-name" >
+                {{notification.Name}}
+              </div>
+          <div class="desc">
+                {{notification.IssuedBy}}
+                <div style=" color:grey;">{{notification.Content}}</div>
+              </div>
+              </div>
+              <div class="col-xs-3" >
+                {{notification.DateAdded|dateEmail}}
+              </div>
+            </div>
+            <hr style="margin:5px 0 5px 0;padding:0">
+            </li>
+            <li>
+              <div class="row">
+              <div class="col-xs-12" align="center">
+
+                <a href ui-sref="app.Notifications">See all &raquo;</a>
+              </div>
+            </div>
+            </li>
+              </ul>
+        </li>
+        <li ui-sref-active="active"><a ng-click="logout()" style="color: #C8E6C9;"></i> Log out</a></li>
+        <!--
+      <li ui-sref-active="active" class="dropdown">
+        <a  href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret" style="color: #C8E6C9; size: 20 px;"></span></a>
+        <ul class="dropdown-menu">
+        <li><a  ui-sref="app.Account"> <i class="fa fa-cog iconThemeViews"></i> Personal Account</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a ng-click="logout()"> <i class="fa fa-sign-out iconThemeViews"></i> Log Out</a></li>
+
+        </ul>
+      </li>-->
+  </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div style="margin-top:-10px" >
+<div ui-view></div>
+</div>
+</div>
+</div>
+
+ <div class="col-md-2">
+  </div>
+
+<style>
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    background-color: #4CAF50;
+}
+</style>
+
+</div>
+<div class="row" style="margin-top: 80px; padding: 80px;">
+  <div class="col-md-12">
+    <hr style="color: green;">
+    <center>
+      <table>
+        <tr>
+            <td><img class="img-responsive" ng-src="./img/muhc-logo-text.png" alt="McGill University Health Center" title="McGill University Health Center"></td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><img class="img-responsive" ng-src="./img/ceadarsLogo.png" style="width: 300px; height: 90px;" alt="Cedars Cancer Foundation" title="Cedars Cancer Foundation"></td>
+        </tr>
+      </table>
+  </center>
+    <hr style="color: green;">
+  </div>
+</div>
