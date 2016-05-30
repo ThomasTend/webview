@@ -93,44 +93,109 @@
         <div class="panel-title" style="color: #C8E6C9;"></span></span><span class="glyphicon glyphicon-link" style="color: #C8E6C9;"></span> Useful Information - <strong>{{dateToday|date:fulldate}}</strong></div>
     </div>
     <div class="panel-body" style="background-color: white;">
-            <div class="row" style="margin-top:15px;font-size:15px;height:80;">
-    <div align="left"><h4>Dear {{patient.FirstName}},</h4></div>
-    <p>
+         <style>
+   a:link {
+    text-decoration: none;
+}
 
-Thank you for downloading and registering for OPA, the MUHC Oncology Patient App. <br><br>
+a:visited {
+    text-decoration: none;
+}
 
-This app was developed in collaboration with your MUHC treating team and with former MUHC radiation oncology patients. Through the app you have access to your radiation oncology medical data. <br><br>
+a:hover {
+    text-decoration: none;
+}
 
-You may directly access the following information:<br>
-<ul>
-<li>The status of your oncology treatment and your estimated wait times</li>
-<li>Your future and past radiation oncology appointments
-</li>
-<li>Your medical documents
-</li>
-<li>Your test results
-</li>
-<li>Educational material tailored for your diagnosis
-</li>
-</ul>
+a:active {
+    text-decoration: none;
+}
+    </style>
+    <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+  <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-car fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Parking Information</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-map-marker fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Hospital Maps</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+</div>
 
-
-You may also use the app to contact your treating team and to check in for your next appointment when you arrive at the Cancer Centre. If you like, you can use the app to share information about your treatment with your family doctor and with your loved ones. <br><br>
-
-We encourage you to leave us comments at any time via the main menu. We appreciate your feedback in order to improve the app for future patients.<br><br>
-
-<strong>Your MUHC radiation oncology treating team</strong></p>
-
+    <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href="https://www.cedars.ca/" style="color: black;" target="_blank">
+  <table>
+    <tr>
+        <td>
+    <i class="glyphicon glyphicon-tree-conifer fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Cedars Cancer Foundation</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-question fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Feedback Questionnaire</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+ 
     </div>
     </div>
 
     </div>
 
 
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title" style="color: #C8E6C9;"></span><span class="fa fa-info" style="color: #C8E6C9;"></span> Home</div>
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+       <p>
+        In your Home tab, you will be provided with news about your medical status, documents, hospital announcements and directions to the Hospital.
+       </p>
+    </div>
 
-
-
-
+    </div>
 
 
     </div>
