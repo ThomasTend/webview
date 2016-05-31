@@ -4,7 +4,7 @@
 </head>
 
 
-<body>
+<body >
 <div class="container-fluid main-scroll-mobile" style="padding:10px">
 <div class="row" >
     <!--<div class="col-md-1">
@@ -88,9 +88,9 @@
 
 
 
-<div class="panel">
+<div class="panel" style="margin-top: 49px;">
     <div class="panel-heading">
-        <div class="panel-title" style="color: #C8E6C9;"></span></span><span class="glyphicon glyphicon-link" style="color: #C8E6C9;"></span> Useful Information - <strong>{{dateToday|date:fulldate}}</strong></div>
+        <div class="panel-title" style="color: #C8E6C9;"></span></span><span class="glyphicon glyphicon-link" style="color: #C8E6C9;"></span> News Feed - {{dateToday|date:fulldate}}</strong></div>
     </div>
     <div class="panel-body" style="background-color: white;">
          <style>
@@ -110,6 +110,86 @@ a:active {
     text-decoration: none;
 }
     </style>
+    <div ng-cloak>
+
+            <md-content style="background-color: #fff;">
+                <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Notifications">
+
+                  <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+  <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-globe fa-4x" aria-hidden="true" style="color: #96C238;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;General Announcements</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+          <i class="fa fa-user-md fa-4x" aria-hidden="true" style="color: #96C238;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Treating Team Notifications</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+</div>
+
+    <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href style="color: black;" target="_blank">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-user fa-4x" aria-hidden="true" style="color: #96C238;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;Appointments</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+        <div class="col-xs-6 col-md-6">
+  <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
+    <a href style="color: black;">
+  <table>
+    <tr>
+        <td>
+    <i class="fa fa-folder fa-4x" aria-hidden="true" style="color: #96C238;"></i>
+        </td>
+        <td>
+            <span>&nbsp;&nbsp;&nbsp;New Documents</span>
+        </td>
+    </tr>
+</table>
+</a>
+  </md-whiteframe>
+        </div>
+ 
+    </div>
+
+                </md-tab>
+                <md-tab label="Quick Links">
+
     <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
@@ -117,7 +197,7 @@ a:active {
   <table>
     <tr>
         <td>
-    <i class="fa fa-car fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+    <i class="fa fa-car fa-4x" aria-hidden="true" style="color: #96C238;"></i>
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Parking Information</span>
@@ -133,7 +213,7 @@ a:active {
   <table>
     <tr>
         <td>
-    <i class="fa fa-map-marker fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+          <i class="fa fa-map-marker fa-4x" aria-hidden="true" style="color: #96C238;"></i>
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Hospital Maps</span>
@@ -152,7 +232,7 @@ a:active {
   <table>
     <tr>
         <td>
-    <i class="glyphicon glyphicon-tree-conifer fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+    <i class="glyphicon glyphicon-tree-conifer fa-4x" aria-hidden="true" style="color: #96C238;"></i>
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Cedars Cancer Foundation</span>
@@ -168,7 +248,7 @@ a:active {
   <table>
     <tr>
         <td>
-    <i class="fa fa-question fa-4x" aria-hidden="true" style="color: #388E3C;"></i>
+    <i class="fa fa-question fa-4x" aria-hidden="true" style="color: #96C238;"></i>
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Feedback Questionnaire</span>
@@ -180,10 +260,16 @@ a:active {
         </div>
  
     </div>
+      </md-tab>
+    </md-tabs>
+    </md-content>
+  </div>
     </div>
 
     </div>
 
+
+<!--
 
 <div class="panel">
     <div class="panel-heading">
@@ -196,6 +282,8 @@ a:active {
     </div>
 
     </div>
+
+  -->
 
 
     </div>
@@ -327,7 +415,7 @@ a:active {
         </div></p>
                 </md-content>
               </md-tab>
-                    <md-tab label="Appointments">
+                    <md-tab label="Next Appointment">
                     <md-content class="md-padding">
                         <p>
                             <div style="font-size: 20px;">
@@ -351,7 +439,7 @@ a:active {
 
     <div class="panel-footer clearfix" style="background-color: white;">
         <div class="pull-right">
-          <a href ui-sref="app.TreatmentPlan" class="btn" style="background-color: #27ae60; color: #C8E6C9;">See Treatment Plan</a>
+          <a href ui-sref="app.TreatmentPlan" class="btn" style="background-color: #74A333; color: #C8E6C9;">See Treatment Plan</a>
         </div>
     </div>
 </div>
@@ -369,13 +457,10 @@ a:active {
     </div>
     <div class="panel-footer clearfix" style="background-color: white;">
         <div class="pull-right">
-            <a href ui-sref="app.Appointments" class="btn" style="background-color: #27ae60; color: #C8E6C9;">See Appointments</a>
+            <a href ui-sref="app.Appointments" class="btn" style="background-color: #74A333; color: #C8E6C9;">See Appointments</a>
         </div>
     </div>
-
-    </div>
-
-
+  </div>
 
 
 

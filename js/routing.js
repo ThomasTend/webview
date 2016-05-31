@@ -32,7 +32,6 @@ var myApp=angular.module('MUHCApp');
         templateUrl:'./views/projects/projects.html',
         controller:'ProjectsController'
     })
-
     .state('app.Appointments',{
         url:'/Appointments',
         templateUrl:'./views/appointments/appointments.html',

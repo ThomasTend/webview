@@ -2,6 +2,7 @@
 /*
 *Icons
 */
+
 .iconThemeViews{
   margin-top:5px;
   font-size:18px;
@@ -38,10 +39,10 @@
 }
 
 .panel > .panel-heading {
-  color: #C8E6C9; 
-  background-color: #27ae60; 
+  color: #5B82AB; 
+  background-color: #74A333; 
 }
 
 .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-    background-color: #229753;
+  background-color: #96c238;
 }
