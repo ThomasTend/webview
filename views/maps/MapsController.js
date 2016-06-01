@@ -17,6 +17,7 @@ myApp.controller('ContactsController', ['$scope','Doctors', '$timeout','UpdateUI
     $scope.oncologists=Doctors.getOncologists();
     $scope.primaryPhysician=Doctors.getPrimaryPhysician();
     $scope.otherDoctors=Doctors.getOtherDoctors();
+    $scope.dateToday=new Date();
     $scope.goDoctorContact=function(doctor) {
       $timeout(function(){
         $scope.doctorSelected=doctor;

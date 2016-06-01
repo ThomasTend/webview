@@ -63,7 +63,7 @@
             <div class="row">
 <div class="col-xs-12 " >
 <div align="center">
-<img ng-src="{{patient.ProfileImage}}" class="img-circle" width="60%" style="max-height:250px">
+<img ng-src="{{patient.ProfileImage}}" class="img-circle" width="40%" style="height:100px">
 </div>
 </div>
 <center>
@@ -90,7 +90,7 @@
 
 <div class="panel" style="margin-top: 49px;">
     <div class="panel-heading">
-        <div class="panel-title" style="color: #C8E6C9;"></span></span><span class="glyphicon glyphicon-link" style="color: #C8E6C9;"></span> News Feed - {{dateToday|date:fulldate}}</strong></div>
+        <div class="panel-title" style="color: #C8E6C9;"><span class="fa fa-newspaper-o" aria-hidden="true" style="color: #C8E6C9;"></span> News Feed - {{dateToday|date:fulldate}}</strong></div>
     </div>
     <div class="panel-body" style="background-color: white;">
          <style>
@@ -135,7 +135,7 @@ a:active {
         </div>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a href style="color: black;">
+    <a ui-sref="app.Maps" style="color: black;">
   <table>
     <tr>
         <td>
@@ -154,7 +154,7 @@ a:active {
     <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a href style="color: black;" target="_blank">
+    <a ui-sref="app.Appointments" style="color: black;">
   <table>
     <tr>
         <td>
@@ -170,7 +170,7 @@ a:active {
         </div>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a href style="color: black;">
+    <a ui-sref="app.Documents" style="color: black;">
   <table>
     <tr>
         <td>
