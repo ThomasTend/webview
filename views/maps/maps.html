@@ -64,9 +64,12 @@
 <div class="row">
 
 <div class="col-md-6">
+
+<!--
+
 <div class="panel">
     <div class="panel-heading">
-        <div class="panel-title" style="color: #C8E6C9;"></span><i class="fa fa-users" aria-hidden="true"></i> Contacts</div>
+        <div class="panel-title" style="color: #C8E6C9;"></span><i class="fa fa-users" aria-hidden="true"></i> Treating Team</div>
     </div>
     <div class="panel-body" style="background-color: white;">
         
@@ -92,7 +95,64 @@
 </ul>
     </div>
   </div>
+
+-->
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title" style="color: #C8E6C9;"></span><i class="fa fa-users" aria-hidden="true"></i> Treating Team</div>
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+      <div ng-cloak>
+        <md-content style="background-color: #fff;">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Primary Doctor">
+              <div class="list__item__contacts  " ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])" style="font-size: 18px;">
+                {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}
+              </div>
+            </md-tab>
+            <md-tab label="Oncologist">
+              <div class="list__item__contacts  " ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)" style="font-size: 18px;">
+                {{doctor.FirstName}} {{doctor.LastName}}
+              </div>
+            </md-tab>
+            <md-tab label="Other">
+              <div class="list__item__contacts " ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)" style="font-size: 18px;">
+                {{doctor.FirstName}} {{doctor.LastName}}
+              </div>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+    </div>
+  </div>
+
+<style>
+.list__item__contacts_active:active {
+  background-color: blue;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.selected-contact{
+  background-color: blue;
+}
+
+.myclass {
+  background-color: blue;
+}
+</style>
+
+
+
+
+
 </div>
+
+
 
 
 
