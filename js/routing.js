@@ -60,7 +60,7 @@ var myApp=angular.module('MUHCApp');
     .state('app.Maps',{
         url:'/Maps',
         templateUrl:'./views/maps/maps.html',
-        controller:'MapsController'
+        controller:'ContactsController'
     })
     .state('app.Notifications',{
         url:'/Notifications',
