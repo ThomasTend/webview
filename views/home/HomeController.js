@@ -15,7 +15,7 @@ function homeInit(){
   }else{
     $scope.status='No treatment plan available!';
   }
-
+  console.log('Amro');
   if(CheckinService.haveNextAppointmentToday())
   {
     if(!CheckinService.isAlreadyCheckedin())
