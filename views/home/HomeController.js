@@ -15,7 +15,7 @@ function homeInit(){
   }else{
     $scope.status='No treatment plan available!';
   }
-
+  console.log('boom');
   if(CheckinService.haveNextAppointmentToday())
   {
     if(!CheckinService.isAlreadyCheckedin())
