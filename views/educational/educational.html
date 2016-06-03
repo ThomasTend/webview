@@ -54,10 +54,10 @@
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-list" style="color: #C8E6C9;"></span> Educational Material</div>
     </div>
-    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+    <div class="panel-body" style="background-color: white; overflow-y: scroll;" ng-controller="AppointmentsController">
         <div style="margin-top:10px">
-               <ul class="list list--inset div-container-section" ng-repeat="material in materials" style="margin-top:5px" ng-click="selectMaterial(material)">
-       <li class="list__item list--inset__item list__item--tappable">
+        <ul class="list-group list--inset" ng-repeat="material in materials" ng-click="selectMaterial(material)">
+            <li class="list-group-item list--inset__item list__item--tappable">
          <div style="padding:8px;">
            <div class="row" >
              <div class="col-xs-1">
