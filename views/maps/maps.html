@@ -115,13 +115,42 @@
 
  
 
-<div class="col-md-6">
+<div class="col-md-12">
 
   <div class="panel" style="padding: 15px;">
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-user" style="color: #C8E6C9;"></span> Information</div>
     </div>
-    <div class="panel-body" style="background-color: white;">
+    <div class="panel-body" style="background-color: white; align: center;">
+      <div class="row">
+        <div class="col-xs-4">
+          <ul class="list" style="overflow-y:scroll;height:100%">
+  <li class=" list__header">
+    Primary Doctor
+  </li>
+  <li class="list__item__contacts  " ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])">
+    {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}
+  </li>
+  <li class="list__header">
+    Oncologists
+  </li>
+  <li class="list__item__contacts  " ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+    {{doctor.FirstName}} {{doctor.LastName}}
+  </li>
+  <li class="list__header">
+    Other
+  </li>
+  <li class="list__item__contacts " ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+    {{doctor.FirstName}} {{doctor.LastName}}
+  </li>
+</ul>
+<div>
+
+</div>
+        </div>
+
+        <center>
+        <div class="col-xs-8">
        <div style="margin-bottom:50px;margin-top:50px;width:400px">
         <div class="row">
           <div class="col-xs-4">
@@ -173,22 +202,28 @@
       </div>
         </div>
       </div>
+    </center>
+      </div>
+      </div>
   </div>
-
-<center>
-  <div style="margin-top: 40px;">
-    <img src="https://muhc.ca/sites/default/files/users/user178/bear%20outside_MCH%20atrium.jpg" style="height: 500px;">
-  </div>
-</center>
 
 </div>
+</div>
+
+<div class="row">
 
 
 
 <div class="col-md-6">
 
-<!--
 
+<center>
+<div style="margin-top: 1px;">
+  <img src="http://www.contemporist.com/wp-content/uploads/2015/03/public-art_190315_04-800x646.jpg?1ff4a6" style="height: 400px; width: 580px;">
+</div>
+</center>
+
+<!--
 <div class="panel">
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><i class="fa fa-users" aria-hidden="true"></i> Treating Team</div>
@@ -217,9 +252,11 @@
 </ul>
     </div>
   </div>
-
 -->
 
+
+
+<!--
   <center>
 <div style="margin-top: 1px;">
   <img src="http://www.contemporist.com/wp-content/uploads/2015/03/public-art_190315_04-800x646.jpg?1ff4a6" style="height: 400px; width: 580px;">
@@ -264,10 +301,17 @@
         
     </div>
   </div>
-
+-->
 
 </div>
 
+<div class="col-md-6">
+<center>
+  <div style="margin-top: 1px;">
+    <img src="https://muhc.ca/sites/default/files/users/user178/bear%20outside_MCH%20atrium.jpg" style="height: 500px;">
+  </div>
+</center>
+</div>
 
 
 

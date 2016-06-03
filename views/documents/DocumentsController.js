@@ -1,6 +1,25 @@
 var myApp=angular.module('MUHCApp');
 myApp.controller('DocumentsController',['Documents', '$scope', 'UserPreferences',function(Documents,$scope,UserPreferences){
   init();
+
+   (function() {
+  'use strict';
+
+  angular.module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
+    .controller('DemoCtrl', function() {
+      this.topDirections = ['left', 'up'];
+      this.bottomDirections = ['down', 'right'];
+
+      this.isOpen = false;
+
+      this.availableModes = ['md-fling', 'md-scale'];
+      this.selectedMode = 'md-fling';
+
+      this.availableDirections = ['up', 'down', 'left', 'right'];
+      this.selectedDirection = 'up';
+    });
+})();
+
   function init(){
 
       $scope.documents=Documents.getDocuments();
