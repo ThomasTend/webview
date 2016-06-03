@@ -14,7 +14,7 @@ function homeInit(){
     }
   }else{
     $scope.status='No treatment plan available!';
-  }
+  } 
 
   if(CheckinService.haveNextAppointmentToday())
   {

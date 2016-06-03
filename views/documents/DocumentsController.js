@@ -27,7 +27,7 @@ myApp.controller('DocumentsController',['Documents', '$scope', 'UserPreferences'
 console.log($scope.documents);
 if(UserPreferences.getLanguage()=='EN'){
   for(var i=0;i<$scope.documents.length;i++){
-    $scope.documents[i].Name=$scope.documents[i].AliasName_EN;
+    $scope.documents[i].Name=$scope.documents[i].AliasName_EN; 
     $scope.documents[i].Description=$scope.documents[i].AliasDescription_EN;
   }
 
