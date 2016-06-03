@@ -17,7 +17,6 @@ function homeInit(){
 
     } 
   }
-
   if(CheckinService.haveNextAppointmentToday())
   {
     if(!CheckinService.isAlreadyCheckedin())
