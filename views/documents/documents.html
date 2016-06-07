@@ -1,6 +1,51 @@
-<div style="height:85vh;overflow-y:scroll">
+<div style="height:85vh;">
 <div class="row">
-  <div class="col-xs-12 col-sm-4">
+
+
+ <div class="col-md-4 col-xs-12">
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title" style="color: #C8E6C9;"></span><span class="fa fa-folder" style="color: #C8E6C9;"></span> Documents</div>
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+      <div style="margin-top:10px">
+               <ul class="list list--inset div-container-section" ng-repeat="document in documents" style="margin-top:5px" ng-click="goToDocument(document)">
+       <li class="list__item list--inset__item list__item--tappable">
+         <div style="padding:8px;">
+           <div class="row" > 
+             <div class="col-xs-1">
+               <div align="right" >
+                 <i class="ion-document-text iconThemeViews"></i>
+               </div>
+             </div>
+             <div class="col-xs-11">
+             <div  align="middle" style="margin-left:5px">
+                <div class="profile-name" >
+                     {{document.Name}}
+                   </div>
+               <div class="desc">
+                     Oct, 3 2015
+                     <div style=" color:grey;">{{document.Description}}</div>
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+      </li>
+    </ul>
+   </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+<!--
+  <div class="col-md-4 col-xs-12">
     <h4>Documents</h4>
     <div class="div-container-section" style="height:70vh;overflow-y:scroll">
 
@@ -22,17 +67,139 @@
                <div class="desc">
                      Oct, 3 2015
                      <div style=" color:grey;">{{document.Description}}</div>
-                   </div>
-                   </div>
-             </div>
-           </div>
-             </div>
-       </li>
-     </ul>
-     </div>
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+      </li>
+    </ul>
+   </div>
+  </div>
+</div>
+  -->
+
+
+
+
+  <div class="col-md-8 col-xs-12">
+    
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title" style="color: #C8E6C9;"><span class="glyphicon glyphicon-file" style="color: #C8E6C9;"></span> {{selectedDocument.Name}}</div>
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+        <div class="row" >
+          <div class="col-md-12">
+          <div  align="middle" style="margin-left:5px">
+            <div style="margin-top:20px" align="center">
+            <img height="auto" width="60%" ng-src="{{selectedDocument.Content}}">
+            </div>
+             <!-- <div align="center"> -->
+        <!--{{documentObject.date|date:"EEEE MMMM d, yyyy"}}--> <!-- <br>
+        {{selectedDocument.Description}}<br>
+        <span class="glyphicon glyphicon-calendar" style="color: #5B82AB;"></span> Oct 3, 2015
+          </div>-->
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="panel-footer clearfix" style="background-color: white; height: 70px;">
+      <div class="pull-right">
+          <div class="share-button sharer" style="display: inline-block;">
+<button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;"><span class="fa fa-share" style="color: #C8E6C9"></span> Share</button>
+<div class="social top center networks-5 ">
+ <!-- Facebook Share Button -->
+    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url"><i class="fa fa-facebook"></i></a> 
+    <!-- Google Plus Share Button -->
+    <a class="fbtn share gplus" href="https://plus.google.com/share?url=url"><i class="fa fa-google-plus"></i></a> 
+    <!-- Twitter Share Button -->
+    <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fa fa-twitter"></i></a> 
+ </a>
+</div>
+</div>
+</div>
+          <style>
+          .social .fbtn {
+    width: 50px;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    line-height:18px;
+    float: left;
+}
+.social .fa{padding:15px 0px}
+.facebook {
+    background-color: #3b5998;
+}
+ 
+.gplus {
+    background-color: #dd4b39;
+}
+ 
+.twitter {
+    background-color: #55acee;
+}
+ 
+.stumbleupon {
+    background-color: #eb4924;
+}
+ 
+.pinterest {
+    background-color: #cc2127;
+}
+ 
+.linkedin {
+    background-color: #0077b5;
+}
+ 
+.buffer {
+    background-color: #323b43;
+}
+
+.share-button.sharer {
+  height: 10px;
+  padding: 10px;
+  margin-right: 10px;
+}
+.share-button.sharer .social.active.top {
+  transform: scale(1) translateY(-10px);
+}
+.share-button.sharer .social.active {
+  opacity: 1;
+  transition: all 0.4s ease 0s;
+  visibility: visible;
+}
+.share-button.sharer .social.networks-5 {
+
+}
+.share-button.sharer .social.top {
+  margin-top: -80px;
+  transform-origin: 0 0 0;
+}
+.share-button.sharer .social {
+  margin-left: -170px;
+  opacity: 0;
+  transition: all 0.4s ease 0s;
+  visibility: hidden;
+}
+          </style>
+          <script>
+          $( document ).ready(function() {
+  //custom button for homepage
+     $( ".share-btn" ).click(function(e) {
+       $('.networks-5').not($(this).next( ".networks-5" )).each(function(){
+          $(this).removeClass("active");
+       });
+     
+            $(this).next( ".networks-5" ).toggleClass( "active" );
+    });   
+});
+          </script>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-8" >
+
+<!--
     <div class="div-container-section">
       <div class="row" >
   <div class="col-xs-1">
@@ -46,19 +213,19 @@
             <div style="margin-top:30px" align="center">
             <img height="auto" width="60%" ng-src="{{selectedDocument.Content}}">
             </div>
-              <div align="center">
+              <div align="center"> -->
         <!--{{documentObject.date|date:"EEEE MMMM d, yyyy"}}--><br>
-        {{selectedDocument.Description}}<br>
+    <!--    {{selectedDocument.Description}}<br>
         Oct 3, 2015
-
-       </div>
-
+          </div>
         </div>
+      </div>
     </div>
+  </div> -->
 </div>
-    </div>
+
+
+
+
   </div>
-</div>
-
-
 </div>

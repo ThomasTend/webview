@@ -558,3 +558,21 @@ md-sidenav{
   height:600px;
   max-height: 600px;
 }
+.md-sidenav-left{
+  height:600px;
+  max-height: 600px;
+}
+md-tabs.ng-isolate-scope{
+  height:600px;
+}
+#content {
+  height:100vh;
+  width:100%;
+}
+md-card {
+  height: 600px; 
+}
+md-list-item > button {
+  width:100%;
+  text-align:left !important;
+}

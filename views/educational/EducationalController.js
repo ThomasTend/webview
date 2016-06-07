@@ -18,7 +18,7 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
     $timeout(function(){
       $scope.selectedMaterial=material;
     })
-
+ 
   }
 
 

@@ -6,80 +6,90 @@
     </md-toolbar>
   </div>
   <div class = "row">
-    <div class = "col-lg-4 col-md-8 col-sm-6">
-   <!--  <md-list> 
-          <md-list-item id = "UpcomingButton" ng-click="null" style="background-color:#5B82AB;" flex> <h4 style = "color: white;">Upcoming</h4> </md-list-item>
-        </md-list> -->
+    <div class = "col-lg-4 col-md-4 col-sm-6">
      <md-sidenav
      class="md-sidenav-left md-whiteframe-z2"
      md-is-locked-open="true">
      <md-tabs md-border-bottom >
       <md-tab label="Next">
+      <md-content class="md-padding">
         <md-list flex> 
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
-          </md-list-item>
-          <md-list-item>
-            owirencwoirno0iwnrofiwroifwr
+          <md-list-item class="md-3-line" ng-repeat="app in futureAppointments" >
+          <md-button ng-click="clickEventOnList(app.AppointmentSerNum)">
+          <div class="md-list-item-text" layout="column">
+          <h3 > <Strong> {{app.AppointmentType_EN}}</Strong></h3>
+          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3> 
+          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
+          </div>
+          </md-button>
           </md-list-item>
         </md-list>
-        <md-content class="md-padding">
-          All your next appointments
         </md-content>
       </md-tab>
       <md-tab label="Past">
         <md-content class="md-padding">
-          All your previous appointmnets
+        <md-list flex> 
+          <md-list-item class="md-3-line" ng-repeat="app in pastAppointments" >
+          <md-button ng-click="clickEventOnList(app.AppointmentSerNum)">
+          <div class="md-list-item-text" layout="column">
+          <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
+          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3>
+          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
+          </div>
+          </md-button>
+          </md-list-item>
+        </md-list>
         </md-content>
       </md-tab>
       <md-tab label="All">
         <md-content class="md-padding">
-          All your appointments in general
+        <md-list flex> 
+          <md-list-item class="md-3-line" ng-repeat="app in appointments" >
+          <md-button ng-click="clickEventOnList(app.AppointmentSerNum)">
+          <div class="md-list-item-text" layout="column">
+          <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
+          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3> 
+          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
+          </div>
+          </md-button>
+          </md-list-item>
+        </md-list>
         </md-content>
       </md-tab>
       <md-tab>
-        <md-tab-label> <md-icon md-svg-icon="./img/search.svg"></md-icon></md-tab-label>
+      <md-tab-label> <md-icon md-svg-icon="./img/search.svg"></md-icon></md-tab-label>
         <md-content class="md-padding">
-          All your appointments in general
         </md-content>
       </md-tab>
    </md-sidenav>
+ </div>
+ <div class = "col-lg-8 col-md-8 col-sm-6">
+    <md-content  id="content" class="lightgreen" >
+    <md-card md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Next Appointment</span>
+            <span class="md-headline">fivemgp imdwoimfpvo</span>
+            <span class="md-subhead">Date</span>
+            <span class="md-subhead">Location</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div class="md-media-xl card-media"></div>
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>
+      </md-content>
  </div>
 </div>
 </div>
