@@ -71,8 +71,8 @@ html, body {
     background-color: #96c238;
     outline: 0;
 }
-
-@media (max-width: 767px) {
+/*
+@media (max-width: 991px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #3d5da9;
   }
@@ -100,7 +100,7 @@ html, body {
     text-decoration: none;
     background-color: #96c238;
 }
-}
+} */
 /*
 *Menu notifications
 */
@@ -147,7 +147,8 @@ html, body {
   color: #428bca;
   font-size: 18px;
 }
-@media (max-width: 768px) {
+/*
+@media (max-width: 991px) {
   .dropdown-menu-lg {
     margin-left: 0 ;
     margin-right: 0 ;
@@ -161,7 +162,7 @@ html, body {
   .dropdown-menu-lg .dropdown-header {
     padding: 3px 15px !important;
   }
-}
+} */
 /*
  * Footer
  */
@@ -176,35 +177,7 @@ html, body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
 
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
-  }
-}
 #circle
 {
 border-radius:50% 50% 50% 50%;
@@ -212,15 +185,7 @@ width:200px;
 height:180px;
 border: 2px solid #909090;
 }
-@media (max-width:900px){
 
-  .main-scroll-mobile{
-    height:80vh;
-    overflow-y: scroll;
-  }
-
-
-}
 .reply-notification {
   position: absolute;
   right: 18px;
