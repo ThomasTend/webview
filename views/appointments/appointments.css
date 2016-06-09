@@ -557,7 +557,7 @@
   margin-right: -15px;
 }
 
-md-tabs.ng-isolate-scope{
+.md-tabs-app.ng-isolate-scope{
   height:600px;
 }
 #content {
