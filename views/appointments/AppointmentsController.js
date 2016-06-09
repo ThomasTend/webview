@@ -172,17 +172,20 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
         callback(events);
       };
       /* alert on eventClick */
-      $scope.clickEventOnList=function(serNum)
+      $scope.clickEventOnList=function(app)
       {
+        console.log("The appointment is "+ app.AppointmentType_EN )
+        $scope.appointmentType = app.AppointmentType_EN;
+        console.log (appointmentType);
         // console.log ("Im called :)");
         // var object={};
-        // object.id=serNum;
+        // object.id=serNum;k
         // var modalInstance = $uibModal.open({
         //   animation: $scope.animationsEnabled,
         //   templateUrl: './views/appointments/individual-appointment.html',
         //   controller: 'IndividualAppointmentController',
         //   resolve: {
-        //     items: function () {
+        //     itesms: function () {
         //       return object;
         //     }
         //   }
