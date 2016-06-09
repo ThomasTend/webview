@@ -9,12 +9,12 @@
     <div class = "col-lg-4 col-md-4 col-sm-6">
      <md-sidenav
      class="md-sidenav-left md-whiteframe-z2"
-     md-is-locked-open="true">
+     md-is-locked-open="true" id = "sidenav-app">
      <md-tabs md-border-bottom >
       <md-tab label="Next">
       <md-content class="md-padding">
         <md-list flex> 
-          <md-list-item class="md-3-line" ng-repeat="app in futureAppointments" >
+          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in futureAppointments"  >
           <md-button ng-click="clickEventOnList(app)">
           <div class="md-list-item-text" layout="column">
           <h3 > <Strong> {{app.AppointmentType_EN}}</Strong></h3>
@@ -29,7 +29,7 @@
       <md-tab label="Past">
         <md-content class="md-padding">
         <md-list flex> 
-          <md-list-item class="md-3-line" ng-repeat="app in pastAppointments" >
+          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in pastAppointments" >
           <md-button ng-click="clickEventOnList(app.AppointmentSerNum)">
           <div class="md-list-item-text" layout="column">
           <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
@@ -44,7 +44,7 @@
       <md-tab label="All">
         <md-content class="md-padding">
         <md-list flex> 
-          <md-list-item class="md-3-line" ng-repeat="app in appointments" >
+          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in appointments" >
           <md-button ng-click="clickEventOnList(app.AppointmentSerNum)">
           <div class="md-list-item-text" layout="column">
           <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
