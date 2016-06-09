@@ -1,105 +1,15 @@
+<div style="height:85vh;">
 <div class="row">
-  <div class="col-md-4">
-    <div class="panel-container green animated" style="cursor: pointer; margin-left: 15px;">
-      <a ui-sref="app.Appointments" style="color: #fff;">
-      <div class="row">
-        <div class="col-md-3">
-          <span class="fa fa-calendar fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Appointments
-        </div>
-      </div>
-    </a>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel-container green animated" style="cursor: pointer;">
-    <a ui-sref="app.TreatmentPlan" style="color: #fff;">
-      <div class="row">
-        <div class="col-md-3">
-          <span class="fa fa-list fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Treatment Plan
-        </div>
-      </div>
-    </a>
-  </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel-container green animated" style="cursor: pointer; margin-right: 15px;">
-    <a ui-sref="app.Documents" style="color: #fff;">
-      <div class="row">
-        <div class="col-md-3">
-          <span class="fa fa-folder fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Documents
-        </div>
-      </div>
-    </a>
-  </div>
-  </div>
-</div>
 
-<style>
-.panel-container.green {
-    background-color: #74A333;
-    color: #C8E6C9;
-}
-.panel-container {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #e1e8ed;
-    border-radius: 7px;
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-    vertical-align: middle;
-    margin-bottom: 20px;
-    margin-top: 15px;
-}
-</style>
-
-<div class="row" style="padding-top: 20px;">
 
  <div class="col-md-4 col-xs-12">
 
 <div class="panel">
-  <!--
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="fa fa-folder" style="color: #C8E6C9;"></span> Documents</div>
-    </div> -->
-    <div class="panel-body" style="background-color: white;overflow-y: scroll;" ng-controller="AppointmentsController">
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
       <div style="margin-top:10px">
-          <ul class="list-group list--inset" ng-repeat="document in documents" ng-click="goToDocument(document)">
-            <li class="list-group-item list--inset__item list__item--tappable">
-              <div style="padding:8px;">
-           <div class="row" > 
-             <div class="col-xs-1">
-               <div align="right" >
-                 <i class="ion-document-text iconThemeViews"></i>
-               </div>
-             </div>
-             <div class="col-xs-11">
-             <div  align="middle" style="margin-left:5px">
-                <div class="profile-name" >
-                     {{document.Name}}
-                   </div>
-               <div class="desc">
-                     Oct, 3 2015
-                     <div style=" color:grey;">{{document.Description}}</div>
-                </div>
-              </div>
-            </div>
-         </div>
-        </div>
-            </li>
-          </ul>
-  </div>
-
-<!--
                <ul class="list list--inset div-container-section" ng-repeat="document in documents" style="margin-top:5px" ng-click="goToDocument(document)">
        <li class="list__item list--inset__item list__item--tappable">
          <div style="padding:8px;">
@@ -123,12 +33,8 @@
          </div>
         </div>
       </li>
-    </ul> -->
- 
-
-
-
-
+    </ul>
+   </div>
   </div>
 </div>
 
@@ -179,18 +85,16 @@
   <div class="col-md-8 col-xs-12">
     
 <div class="panel">
-    <!--<div class="panel-heading">
+    <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"><span class="glyphicon glyphicon-file" style="color: #C8E6C9;"></span> {{selectedDocument.Name}}</div>
-    </div>-->
+    </div>
     <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
         <div class="row" >
           <div class="col-md-12">
           <div  align="middle" style="margin-left:5px">
             <div style="margin-top:20px" align="center">
-            <img height="auto" width="80%" ng-src="{{selectedDocument.Content}}">
+            <img height="auto" width="60%" ng-src="{{selectedDocument.Content}}">
             </div>
-            <br>
-            {{selectedDocument.Name}}
              <!-- <div align="center"> -->
         <!--{{documentObject.date|date:"EEEE MMMM d, yyyy"}}--> <!-- <br>
         {{selectedDocument.Description}}<br>
@@ -206,11 +110,11 @@
 <button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;"><span class="fa fa-share" style="color: #C8E6C9"></span> Share</button>
 <div class="social top center networks-5 ">
  <!-- Facebook Share Button -->
-    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url" target="_blank"><i class="fa fa-facebook"></i></a> 
+    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url"><i class="fa fa-facebook"></i></a> 
     <!-- Google Plus Share Button -->
-    <a class="fbtn share gplus" href="https://plus.google.com/share?url=url" target="_blank"><i class="fa fa-google-plus"></i></a> 
+    <a class="fbtn share gplus" href="https://plus.google.com/share?url=url"><i class="fa fa-google-plus"></i></a> 
     <!-- Twitter Share Button -->
-    <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs" target="_blank"><i class="fa fa-twitter"></i></a> 
+    <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fa fa-twitter"></i></a> 
  </a>
 </div>
 </div>
@@ -318,5 +222,10 @@
       </div>
     </div>
   </div> -->
+</div>
+
+
+
+
   </div>
 </div>
