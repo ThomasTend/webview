@@ -14,9 +14,14 @@ function homeInit(){
     }
   }else{
     $scope.status='No treatment plan available!';
+<<<<<<< HEAD
+  }
+  console.log('boom');
+=======
 
     } 
   }
+>>>>>>> 74b6f0d9b453351df0cfcd7f254bdefa709d0157
   if(CheckinService.haveNextAppointmentToday())
   {
     if(!CheckinService.isAlreadyCheckedin())
