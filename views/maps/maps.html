@@ -126,21 +126,21 @@
         <div class="col-xs-4">
           <ul class="list" style="overflow-y:scroll;height:100%">
   <li class=" list__header">
-    Primary Doctor
+    <strong>Primary Doctor</strong>
   </li>
-  <li class="list__item__contacts  " ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])">
+  <li class="list__item__contacts" ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])">
     {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}
   </li>
   <li class="list__header">
-    Oncologists
+    <strong>Oncologists</strong>
   </li>
-  <li class="list__item__contacts  " ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+  <li class="list__item__contacts" ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
     {{doctor.FirstName}} {{doctor.LastName}}
   </li>
   <li class="list__header">
-    Other
+    <strong>Other</strong>
   </li>
-  <li class="list__item__contacts " ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+  <li class="list__item__contacts" ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
     {{doctor.FirstName}} {{doctor.LastName}}
   </li>
 </ul>
@@ -153,11 +153,17 @@
         <div class="col-xs-8">
        <div>
         <div class="row">
-          <div class="col-xs-4">
-              <img ng-show="doctorSelected.ProfileImage" ng-src="data:image/jpg;base64,{{doctorSelected.ProfileImage}}" class="img-circle" width="100px">
-          </div>
-          <div class="col-xs-8">
+          <div class="col-xs-12">
+            <table>
+              <tr>
+                <td>
+             <img ng-show="doctorSelected.ProfileImage" ng-src="data:image/jpg;base64,{{doctorSelected.ProfileImage}}" class="img-circle" width="100px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           </td>
+           <td>
             <h3>{{doctorSelected.FirstName}} {{doctorSelected.LastName}}</h3>
+          </td>
+          </tr>
+          </table>
             <strong style="color:grey">{{doctorSelected.Title}}</strong><br>
             <strong style="color:grey">{{doctorSelected.Institution}}</strong>
           </div>
