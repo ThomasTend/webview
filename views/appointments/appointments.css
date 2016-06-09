@@ -543,3 +543,52 @@
   -o-transition: none;
   transition: none;
 }
+md-sidenav{
+  max-width: none;
+  width :auto;
+  margin-left: -15px;
+  margin-right: -15px;
+
+}
+#UpcomingButton{
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.md-sidenav-left{
+  height:600px;
+  max-height: 600px;
+}
+.md-sidenav-left{
+  height:600px;
+  max-height: 600px;
+}
+md-tabs.ng-isolate-scope{
+  height:600px;
+}
+#content {
+  height:100vh;
+  width:100%;
+}
+md-card {
+  height: 600px; 
+}
+md-list-item > button {
+  width:100%;
+  text-align:left !important;
+}
+.panel-container.green {
+  background-color: #74A333;
+  color: #C8E6C9;
+}
+.panel-container {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 7px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  vertical-align: middle;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}

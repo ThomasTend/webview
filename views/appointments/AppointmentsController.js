@@ -1,90 +1,120 @@
-var app=angular.module('MUHCApp')
+// "getting/fetching" the MUHCApp module to apply changes to it
+var app=angular.module('MUHCApp');
+
+// binding the controller of appointments.html and attaching our required services 
 app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig','Appointments','$timeout','$uibModal', function($scope,$compile,uiCalendarConfig,Appointments,$timeout, $uibModal)
 {
-  init();
+  init(); // calling the init function below 
   function init(){
     $scope.dateToday=new Date();
-  var date;
-  var nextAppointment=Appointments.getNextAppointment();
-  var lastAppointment=Appointments.getLastAppointmentCompleted();
-  if(nextAppointment.Index!=-1){
+    var date;
+    var nextAppointment=Appointments.getNextAppointment();
+    var lastAppointment=Appointments.getLastAppointmentCompleted();
+    if(nextAppointment.Index!=-1){ // check if there is a next appointment
       $scope.noAppointments=false;
       $scope.appointmentShown=nextAppointment.Object;
       $scope.titleAppointmentsHome='Next Appointment';
       date=nextAppointment.Object.ScheduledStartTime;
+      
       var dateDay=date.getDate();
       var dateMonth=date.getMonth();
       var dateYear=date.getFullYear();
 
+      // check if the next appointment is today 
       if(dateMonth==$scope.dateToday.getMonth()&&dateDay==$scope.dateToday.getDate()&&dateYear==$scope.dateToday.getFullYear()){
-          console.log('asdas');
-          $scope.nextAppointmentIsToday=true;
+        $scope.nextAppointmentIsToday=true;
       }else{
-          console.log('notToday');
-          $scope.nextAppointmentIsToday=false;
+        $scope.nextAppointmentIsToday=false;
       }
-  }else if(lastAppointment!=-1){
-    $scope.nextAppointmentIsToday=false;
-    $scope.appointmentShown=lastAppointment;
-    $scope.titleAppointmentsHome='Last Appointment';
-  }
-  else{
-      $scope.noAppointments=true;
-  }
-  }
-  //Initializing choice
-    if(Appointments.getTodaysAppointments().length!==0){
-        $scope.radioModel = 'Today';
-    }else {
-        $scope.radioModel = 'All';
     }
+    // if there is no nex appointment, then you just display the last appointment
+    else if(lastAppointment!=-1){
+      $scope.nextAppointmentIsToday=false;
+      $scope.appointmentShown=lastAppointment;
+      $scope.titleAppointmentsHome='Last Appointment';
+    }
+    else{
+      $scope.noAppointments=true;
+    }
+  }
+
+
+
+
+  //Initializing choice
+  if(Appointments.getTodaysAppointments().length!==0){
+    $scope.radioModel = 'Today';
+  }else {
+    $scope.radioModel = 'All';
+  }
 
 
     //Today's date
-    $scope.today=new Date();
+  $scope.today=new Date();
 
     //Sets up appointments to display based on the user option selected
-    $scope.$watch('radioModel',function(){
+  $scope.$watch('radioModel',function(){
 
-        $timeout(function(){
-            selectAppointmentsToDisplay();
-        });
+      $timeout(function(){
+        selectAppointmentsToDisplay();
+      });
 
     });
 
      //Function to select whether the today, past, or upcoming buttons are selected
-    function selectAppointmentsToDisplay(){
-            console.log($scope.radioModel);
-        var selectionRadio=$scope.radioModel;
-        if(selectionRadio==='Today'){
-            $scope.appointments=Appointments.getTodaysAppointments();
+     
 
-        }else if(selectionRadio==='Upcoming'){
-            $scope.appointments=Appointments.getFutureAppointments();
-        }else if(selectionRadio==='Past'){
-            $scope.appointments=Appointments.getPastAppointments();
-        }else{
-            $scope.appointments=Appointments.getUserAppointments();
-        }
-        if($scope.appointments.length==0){
-            $scope.noAppointments=true;
-        }
+    //  function selectAppointmentsToDisplay(){
+    //   console.log("is this working!!");
+    //   var selectionRadio=$scope.radioModel;
+    //   if(selectionRadio==='Today'){
+    //     $scope.appointments=Appointments.getTodaysAppointments();
+
+    //   }else if(selectionRadio==='Upcoming'){
+    //     $scope.appointments=Appointments.getFutureAppointments();
+    //   }else if(selectionRadio==='Past'){
+    //     $scope.appointments=Appointments.getPastAppointments();
+    //   }else{
+    //     $scope.appointments=Appointments.getUserAppointments();
+    //   }
+    //   if($scope.appointments.length==0){
+    //     $scope.noAppointments=true;
+    //   }
+    // }
+    $scope.futureAppointments = Appointments.getFutureAppointments();
+    $scope.pastAppointments = Appointments.getPastAppointments();
+    $scope.appointments = Appointments.getUserAppointments();
+    if($scope.appointments.length==0){
+        $scope.noAppointments=true;
     }
+    // $scope.selectAppointmentsToDisplay=function (timePeriod){
+    //   console.log(timePeriod);
+    //   if(timePeriod==='Next'){
+    //     $scope.appointments=Appointments.getFutureAppointments();
+    //   }else if(timePeriod==='Past'){
+    //     $scope.appointments=Appointments.getPastAppointments();
+    //   }else{
+    //     $scope.appointments=Appointments.getUserAppointments();
+    //   }
+    //   if($scope.appointments.length==0){
+    //     $scope.noAppointments=true;
+    //   }
+    // }
 
     //Function to select the color of the appointment depending on whether the date has passed or not
     $scope.getStyle=function(index){
-        var today=$scope.today;
-        var dateAppointment=$scope.appointments[index].ScheduledStartTime;
+      var today=$scope.today;
+      var dateAppointment=$scope.appointments[index].ScheduledStartTime;
 
-        if(today.getDate()===dateAppointment.getDate()&&today.getMonth()===dateAppointment.getMonth()&&today.getFullYear()===dateAppointment.getFullYear()){
-            return '#3399ff';
+      if(today.getDate()===dateAppointment.getDate()&&today.getMonth()===dateAppointment.getMonth()&&today.getFullYear()===dateAppointment.getFullYear()){
+        return '#3399ff';
 
-        }else if(dateAppointment>today){
-            return '#3399ff';
+      }else if(dateAppointment>today){
+        return '#3399ff';
 
-        }else{
-            return '#5CE68A';
-        }
+      }else{
+        return '#5CE68A';
+      }
     };
     var date = new Date();
     var d = date.getDate();
@@ -94,37 +124,37 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
     $scope.changeTo = 'French';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+      url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
-    };
-    /* event source that contains custom events on the scope */
-    $scope.events =[];
-    var appointments=Appointments.getUserAppointments();
-    for (var i = 0; i < appointments.length; i++) {
-      var objectEvent={};
-      objectEvent.title=appointments[i].AppointmentType_EN;
-      objectEvent.id=appointments[i].AppointmentSerNum;
-      objectEvent.start=appointments[i].ScheduledStartTime;
-      var copiedDate=new Date(objectEvent.start.getTime());
-      copiedDate.setHours(copiedDate.getHours()+1);
-      objectEvent.end=copiedDate;
-      var today=$scope.today;
-      var dateAppointment=appointments[i].ScheduledStartTime;
+          };
+          /* event source that contains custom events on the scope */
+          $scope.events =[];
+          var appointments=Appointments.getUserAppointments();
+          for (var i = 0; i < appointments.length; i++) {
+            var objectEvent={};
+            objectEvent.title=appointments[i].AppointmentType_EN;
+            objectEvent.id=appointments[i].AppointmentSerNum;
+            objectEvent.start=appointments[i].ScheduledStartTime;
+            var copiedDate=new Date(objectEvent.start.getTime());
+            copiedDate.setHours(copiedDate.getHours()+1);
+            objectEvent.end=copiedDate;
+            var today=$scope.today;
+            var dateAppointment=appointments[i].ScheduledStartTime;
 
-      if(today.getDate()===dateAppointment.getDate()&&today.getMonth()===dateAppointment.getMonth()&&today.getFullYear()===dateAppointment.getFullYear()){
-          objectEvent.color='#3399ff';
+            if(today.getDate()===dateAppointment.getDate()&&today.getMonth()===dateAppointment.getMonth()&&today.getFullYear()===dateAppointment.getFullYear()){
+              objectEvent.color='#3399ff';
 
-      }else if(dateAppointment>today){
-          objectEvent.color='#3399ff';
+            }else if(dateAppointment>today){
+              objectEvent.color='#3399ff';
 
 
-      }else{
-          objectEvent.color='#5CE68A';
-      }
+            }else{
+              objectEvent.color='#5CE68A';
+            }
 
-      $scope.events.push(objectEvent);
-    }
+            $scope.events.push(objectEvent);
+          }
     /*$scope.events = [
       {title: 'All Day Event',start: new Date(y, m, 1)},
       {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
@@ -132,55 +162,59 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
       {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
       {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    ];*/
-    /* event source that calls a function on every view switch */
-    $scope.eventsF = function (start, end, timezone, callback) {
-      var s = new Date(start).getTime() / 1000;
-      var e = new Date(end).getTime() / 1000;
-      var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      callback(events);
-    };
-    /* alert on eventClick */
-    $scope.clickEventOnList=function(serNum)
-    {
-      var object={};
-      object.id=serNum;
-      var modalInstance = $uibModal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: './views/appointments/individual-appointment.html',
-        controller: 'IndividualAppointmentController',
-        resolve: {
-          items: function () {
-            return object;
-          }
-        }
-          });
-    }
-    $scope.alertOnEventClick = function( date, jsEvent, view){
+      ];*/
+      /* event source that calls a function on every view switch */
+      $scope.eventsF = function (start, end, timezone, callback) {
+        var s = new Date(start).getTime() / 1000;
+        var e = new Date(end).getTime() / 1000;
+        var m = new Date(start).getMonth();
+        var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+        callback(events);
+      };
+      /* alert on eventClick */
+      $scope.clickEventOnList=function(app)
+      {
+        console.log("The appointment is "+ app.AppointmentType_EN )
+        $scope.appointmentType = app.AppointmentType_EN;
+        console.log (appointmentType);
+        // console.log ("Im called :)");
+        // var object={};
+        // object.id=serNum;k
+        // var modalInstance = $uibModal.open({
+        //   animation: $scope.animationsEnabled,
+        //   templateUrl: './views/appointments/individual-appointment.html',
+        //   controller: 'IndividualAppointmentController',
+        //   resolve: {
+        //     itesms: function () {
+        //       return object;
+        //     }
+        //   }
+        // })
+      }
+      $scope.alertOnEventClick = function( date, jsEvent, view){
 
-    console.log(date);
- var modalInstance = $uibModal.open({
-   animation: $scope.animationsEnabled,
-   templateUrl: './views/appointments/individual-appointment.html',
-   controller: 'IndividualAppointmentController',
-   resolve: {
-     items: function () {
-       return date;
-     }
-   }
-  });
-    };
-    /* alert on Drop */
-     $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
+        console.log(date);
+        var modalInstance = $uibModal.open({
+         animation: $scope.animationsEnabled,
+         templateUrl: './views/appointments/individual-appointment.html',
+         controller: 'IndividualAppointmentController',
+         resolve: {
+           items: function () {
+             return date;
+           }
+         }
+       });
+      };
+      /* alert on Drop */
+      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
        $scope.alertMessage = ('Event Dropped to make dayDelta ' + delta);
-    };
-    /* alert on Resize */
-    $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
+     };
+     /* alert on Resize */
+     $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
        $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-    };
-    /* add and removes an event source of choice */
-    $scope.addRemoveEventSource = function(sources,source) {
+     };
+     /* add and removes an event source of choice */
+     $scope.addRemoveEventSource = function(sources,source) {
       var canAdd = 0;
       angular.forEach(sources,function(value, key){
         if(sources[key] === source){
@@ -227,11 +261,11 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
     if(uiCalendarConfig.calendars['myCalendar1']){
       uiCalendarConfig.calendars['myCalendar1'].fullCalendar('render');
     }
-     /* Render Tooltip */
+    /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) {
-        element.attr({'tooltip': event.title,
-                     'tooltip-append-to-body': true});
-        $compile(element)($scope);
+      element.attr({'tooltip': event.title,
+       'tooltip-append-to-body': true});
+      $compile(element)($scope);
     };
     /* config object */
 
@@ -251,4 +285,4 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-}]);
+  }]);
