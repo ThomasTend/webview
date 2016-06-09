@@ -1,4 +1,4 @@
-<div style="height:85vh;;margin-left:10px;margin-right:10px">
+<div style="margin-left:10px;margin-right:10px">
 <div class="row">
   <div class="col-md-4 col-xs-12">
 
@@ -54,10 +54,10 @@
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-list" style="color: #C8E6C9;"></span> Educational Material</div>
     </div>
-    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+    <div class="panel-body" style="background-color: white; overflow-y: scroll;" ng-controller="AppointmentsController">
         <div style="margin-top:10px">
-               <ul class="list list--inset div-container-section" ng-repeat="material in materials" style="margin-top:5px" ng-click="selectMaterial(material)">
-       <li class="list__item list--inset__item list__item--tappable">
+        <ul class="list-group list--inset" ng-repeat="material in materials" ng-click="selectMaterial(material)">
+            <li class="list-group-item list--inset__item list__item--tappable">
          <div style="padding:8px;">
            <div class="row" >
              <div class="col-xs-1">
@@ -156,11 +156,11 @@
 <button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;"><span class="fa fa-share" style="color: #C8E6C9"></span> Share</button>
 <div class="social top center networks-5 ">
  <!-- Facebook Share Button -->
-    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url"><i class="fa fa-facebook"></i></a> 
+    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url" target="_blank"><i class="fa fa-facebook"></i></a> 
     <!-- Google Plus Share Button -->
-    <a class="fbtn share gplus" href="https://plus.google.com/share?url=url"><i class="fa fa-google-plus"></i></a> 
+    <a class="fbtn share gplus" href="https://plus.google.com/share?url=url" target="_blank"><i class="fa fa-google-plus"></i></a> 
     <!-- Twitter Share Button -->
-    <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fa fa-twitter"></i></a> 
+    <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs" target="_blank"><i class="fa fa-twitter"></i></a> 
  </a>
 </div>
 </div>

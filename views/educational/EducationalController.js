@@ -21,7 +21,4 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
  
   }
 
-
-
-
 }]);

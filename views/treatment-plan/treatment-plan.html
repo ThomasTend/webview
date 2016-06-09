@@ -1,3 +1,67 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel-container green animated" style="cursor: pointer; margin-left: 15px;">
+      <a ui-sref="app.Appointments" style="color: #fff;">
+      <div class="row">
+        <div class="col-md-3">
+          <span class="fa fa-calendar fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
+        </div>
+        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
+          Appointments
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel-container green animated" style="cursor: pointer;">
+    <a ui-sref="app.TreatmentPlan" style="color: #fff;">
+      <div class="row">
+        <div class="col-md-3">
+          <span class="fa fa-list fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
+        </div>
+        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
+          Treatment Plan
+        </div>
+      </div>
+    </a>
+  </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel-container green animated" style="cursor: pointer; margin-right: 15px;">
+    <a ui-sref="app.Documents" style="color: #fff;">
+      <div class="row">
+        <div class="col-md-3">
+          <span class="fa fa-folder fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
+        </div>
+        <div class="col-md-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
+          Documents
+        </div>
+      </div>
+    </a>
+  </div>
+  </div>
+</div>
+
+<style>
+.panel-container.green {
+    background-color: #74A333;
+    color: #C8E6C9;
+}
+.panel-container {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 7px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    vertical-align: middle;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+</style>
+
 
 <div class="container-fluid" ng-controller="TreatmentPlanController" style="height:100%" id="verticallyAlignTreatment">
 <div class="row">
