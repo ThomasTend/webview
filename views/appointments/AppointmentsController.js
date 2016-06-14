@@ -47,9 +47,7 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
   }else {
     $scope.radioModel = 'All';
   }
-
-
-    //Today's date
+   //Today's date
   $scope.today=new Date();
 
     //Sets up appointments to display based on the user option selected
@@ -61,45 +59,12 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
 
     });
 
-     //Function to select whether the today, past, or upcoming buttons are selected
-     
-
-    //  function selectAppointmentsToDisplay(){
-    //   console.log("is this working!!");
-    //   var selectionRadio=$scope.radioModel;
-    //   if(selectionRadio==='Today'){
-    //     $scope.appointments=Appointments.getTodaysAppointments();
-
-    //   }else if(selectionRadio==='Upcoming'){
-    //     $scope.appointments=Appointments.getFutureAppointments();
-    //   }else if(selectionRadio==='Past'){
-    //     $scope.appointments=Appointments.getPastAppointments();
-    //   }else{
-    //     $scope.appointments=Appointments.getUserAppointments();
-    //   }
-    //   if($scope.appointments.length==0){
-    //     $scope.noAppointments=true;
-    //   }
-    // }
     $scope.futureAppointments = Appointments.getFutureAppointments();
     $scope.pastAppointments = Appointments.getPastAppointments();
     $scope.appointments = Appointments.getUserAppointments();
     if($scope.appointments.length==0){
         $scope.noAppointments=true;
     }
-    // $scope.selectAppointmentsToDisplay=function (timePeriod){
-    //   console.log(timePeriod);
-    //   if(timePeriod==='Next'){
-    //     $scope.appointments=Appointments.getFutureAppointments();
-    //   }else if(timePeriod==='Past'){
-    //     $scope.appointments=Appointments.getPastAppointments();
-    //   }else{
-    //     $scope.appointments=Appointments.getUserAppointments();
-    //   }
-    //   if($scope.appointments.length==0){
-    //     $scope.noAppointments=true;
-    //   }
-    // }
 
     //Function to select the color of the appointment depending on whether the date has passed or not
     $scope.getStyle=function(index){
@@ -155,14 +120,6 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
 
             $scope.events.push(objectEvent);
           }
-    /*$scope.events = [
-      {title: 'All Day Event',start: new Date(y, m, 1)},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-      ];*/
       /* event source that calls a function on every view switch */
       $scope.eventsF = function (start, end, timezone, callback) {
         var s = new Date(start).getTime() / 1000;
@@ -176,21 +133,20 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
       {
         console.log("The appointment is "+ app.AppointmentType_EN )
         $scope.appointmentType = app.AppointmentType_EN;
-        console.log (appointmentType);
-        // console.log ("Im called :)");
-        // var object={};
-        // object.id=serNum;k
-        // var modalInstance = $uibModal.open({
-        //   animation: $scope.animationsEnabled,
-        //   templateUrl: './views/appointments/individual-appointment.html',
-        //   controller: 'IndividualAppointmentController',
-        //   resolve: {
-        //     itesms: function () {
-        //       return object;
-        //     }
-        //   }
-        // })
-      }
+        $scope.scheduleStartTime = app.ScheduledStartTime;
+        $scope.resourceName = app.ResourceName;
+        $scope.mainAppointmentType = ""
+      };
+      $scope.displayNext = function (){
+        console.log("this is working!!!!");
+        var nextAppointment=Appointments.getNextAppointment();
+        if (nextAppointment.Index!=-1){
+          $scope.mainAppointmentType = "Next Appointment";
+          $scope.appointmentType = nextAppointment.Object.AppointmentType_EN;
+          $scope.scheduleStartTime = nextAppointment.Object.ScheduledStartTime;
+          $scope.resourceName = nextAppointment.Object.ResourceName;
+        }
+      };
       $scope.alertOnEventClick = function( date, jsEvent, view){
 
         console.log(date);
@@ -205,6 +161,11 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
          }
        });
       };
+
+      $scope.getLocationImage = function(){
+        return './img/D-S1_map_RadOnc-MedPhys_16June2015_en.png';
+      };
+
       /* alert on Drop */
       $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
        $scope.alertMessage = ('Event Dropped to make dayDelta ' + delta);
