@@ -40,7 +40,8 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer', functio
             setNotificationsNumberAlert();
         },
          getUserNotifications:function(){
-            return this.Notifications;
+            var testArray = [{Type: 'Appointment', Name: 'Notification', Content: 'New Appointment', ReadStatus: '0', DateAdded: '29/01/2016'}, {Type: 'Appointment', Name: 'Notification', Content: 'New Appointment', ReadStatus: '0', DateAdded: '28/01/2016'}, {Type: 'Document', Name: 'Notification', Content: 'New Appointment', ReadStatus: '1', DateAdded: '19/01/2016'}];
+            return testArray//this.Notifications;
         },
         setNotificationReadStatus:function(notificationIndex){
             this.Notifications[notificationIndex].ReadStatus='1';

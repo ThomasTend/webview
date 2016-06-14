@@ -1,7 +1,11 @@
-<div class="container-fluid">
-  <div class="col-xs-offset-1 col-xs-12 col-sm-10" align="center">
-    <div class="btn btn-block div-container-section" ng-click="goToNotification($index,notification)"  ng-repeat="notification in notifications">
-      <div class="row">
+
+  <div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title" style="color: #C8E6C9; text-align: left;"></span><span class="glyphicon glyphicon-bell" style="color: #C8E6C9;"></span> All Notifications</div>
+    </div>
+    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+      <div class="btn btn-block" ng-click="goToNotification($index,notification)"  ng-repeat="notification in notifications">
+        <div class="row">
         <div class="col-xs-2" align="center">
           <i class="iconThemeViews fa fa-dropbox"></i>
           <span style="color:grey" ng-show="notification.ReadStatus=='0'">UNREAD</span><br>
@@ -16,8 +20,7 @@
 
         </div>
       </div>
-
     </div>
   </div>
-
 </div>
+
