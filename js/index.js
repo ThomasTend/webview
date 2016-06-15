@@ -43,7 +43,7 @@ myWeb.controller('MainController', function ($scope,$q,$state, UserAuthorization
 
 myWeb.filter('formatDate',function(){
 	return function(str) {
-    if(typeof str==='string'){
+    if(typeof str==='string') {
         str=str.replace('T',' ');
         str=str.replace('Z','');
         return new Date(str);
@@ -58,7 +58,8 @@ myWeb.filter('dateToFirebase',function(){
       var minutes=date.getMinutes();
       var seconds=date.getSeconds();
       var hours=date.getHours();
-      var string= year+'-'+month+'-'+day+'T'+hours+':'+ minutes +':'+seconds+'.000'+'Z';      return string;
+      var string= year+'-'+month+'-'+day+'T'+hours+':'+ minutes +':'+seconds+'.000'+'Z';      
+      return string;
     }
 
   });

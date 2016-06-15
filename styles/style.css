@@ -5,6 +5,10 @@ html, body {
 /*
 *Menu
 */
+.badge {
+    background: red;
+    position: relative;
+}
 .navbar-default {
   background-color: #ececec;
   border-color: #a5a7ac;
