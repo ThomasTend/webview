@@ -108,15 +108,15 @@ a:active {
                   <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-  <a href style="color: black;">
+  <a href style="color: black;" ng-click="Announcements=''">
   <table>
     <tr>
         <td>
           <i class="fa fa-globe fa-4x" aria-hidden="true" style="color: #96C238;"></i>
         </td>
         <td>
-          <span>&nbsp;&nbsp;&nbsp;General</span>
-          <span class="badge">1</span>
+          <span>&nbsp;&nbsp;&nbsp;Announcements</span>
+          <span class="badge">{{Announcements}}</span>
             <style>
             .badge {
                background:red;
@@ -131,7 +131,7 @@ a:active {
         </div>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a ui-sref="app.Maps" style="color: black;">
+    <a ui-sref="app.Maps" style="color: black;" ng-click="TxTeamMeassages=''">
   <table>
     <tr>
         <td>
@@ -139,7 +139,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Treating Team</span>
-            <span class="badge">1</span>
+            <span class="badge">{{TxTeamMessages}}</span>
             <style>
             .badge {
                background:red;
@@ -156,7 +156,7 @@ a:active {
     <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a ui-sref="app.Appointments" style="color: black;">
+    <a ui-sref="app.Appointments" style="color: black;" ng-click="Appointments=''">
   <table>
     <tr>
         <td>
@@ -164,7 +164,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Appointments</span>
-            <span class="badge">2</span>
+            <span class="badge" ng-click="setReadStatusToOneForAppointments()">{{Appointments}}</span>
             <style>
             .badge {
                background:red;
@@ -179,7 +179,7 @@ a:active {
         </div>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a ui-sref="app.Documents" style="color: black;">
+    <a ui-sref="app.Documents" style="color: black;" ng-click="Documents=''">
   <table>
     <tr>
         <td>
@@ -187,7 +187,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Documents</span>
-            <span class="badge">7</span>
+            <span class="badge">{{Documents}}</span>
             <style>
             .badge {
                background:red;

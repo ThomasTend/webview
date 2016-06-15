@@ -4,6 +4,36 @@ myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location'
 homeInit();
 $scope.enableCheckin=false;
 function homeInit(){
+
+  // Get number of unread notifications by Type
+    var testArrray = Notifications.getUserNotifications();
+    var numNewAnnouncements = 0;
+    var numNewTxTeamMessages = 0;
+    var numNewDocuments = 0;
+    var numNewAppointments = 0;
+
+    for(var i = 0; i < testArray.length; i++) {
+        if(testArray[i].ReadStatus === '0') {
+            if(testArray[i].Type === 'Announcement') {
+              numNewAnnouncements += 1;
+            }
+            if(testArray[i].Type === 'TxTeamMessage') {
+              numNewTxTeamMessages += 1;
+            }
+            if(testArray[i].Type === 'Appointment') {
+              numNewAppointments += 1;
+            }
+            if(testArray[i].Type === 'Document') {
+              numNewDocuments += 1;
+            }
+        }
+    }
+    
+    $scope.Announcements = '4';
+    $scope.TxTeamMessages = numNewTxTeamMessages;
+    $scope.Appointments = numNewAppointments;
+    $scope.Documents = numNewDocuments;
+
 	$scope.dateToday=new Date();
 	if(UserPlanWorkflow.isEmpty())
   {
@@ -16,7 +46,7 @@ function homeInit(){
     $scope.status='No treatment plan available!';
 
     } 
-  }
+  
   if(CheckinService.haveNextAppointmentToday())
   {
     if(!CheckinService.isAlreadyCheckedin())
