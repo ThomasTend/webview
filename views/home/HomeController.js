@@ -1,4 +1,3 @@
-var myWeb=angular.module('MUHCApp');
 
 myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','CheckinService','$rootScope',function ($scope, $timeout,$filter, $location,UserAuthorizationInfo,EncryptionService,Notifications,Patient,Doctors,Appointments,UserPlanWorkflow,CheckinService,$rootScope) {
 homeInit();
