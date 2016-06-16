@@ -2,98 +2,83 @@
     font-family: 'FontAwesome', sans-serif;
 }
 
-body {
-    background: #f9f9f9;
-    color: #0e171c;
-    font: 300 100%/1.5em 'Lato', sans-serif;
-    margin: 0;
-}
 
-a {
+a.app-calendar {
     text-decoration: none;
 }
 
-h2 {
+h2.app-calendar {
     font-size: 22px;
     line-height: 20px;
     margin: 4px 0;
 }
 
-h3 {
+h3.app-calendar {
     font-size: 24px;
     line-height: 24px;
     margin: 5px 0;
 }
 
-table {
+table.app-calendar{
     border-spacing: 0;
     width: 100%;
 }
 
-.calendar-container {
-    height: 538px;
-    left: 50%;
-    margin: -255px 0 0 -245px;
-    position: absolute;
-    top: 45%;
-    width: 510px;
-}
 
-.calendar {
+
+.calendar-app {
     text-align: center;
 }
 
-.calendar header {
+.calendar-app header {
     position: relative;
 }
 
-.calendar h2 {
+.calendar-app h2 {
     text-transform: uppercase;
 }
 
-.calendar thead {
+.calendar-app thead {
     font-weight: 600;
     text-transform: uppercase;
 }
 
-.calendar tbody {
+.calendar-app tbody {
     color: #7c8a95;
 }
 
-.calendar tbody td:hover {
-    border: 2px solid #c0392b;
-    border-radius: 50%;
-    position: absolute;
-    height: 64px;
-    width: 64px;
+.calendar-app tbody td:hover {
+    border: 2px solid #74A333;
 }
 
-.calendar tbody td.active {
-    border: 2px solid #c0392b;
+.calendar-app tbody td.active {
+    border: 2px solid #74A333;
 }
 
-.calendar td {
+.calendar-app td {
     border: 2px solid transparent;
     border-radius: 50%;
-    height: 64px;
-    line-height: 64px;
+    height: 50px;
+    line-height: 45px;
     text-align: center;
-    width: 64px;
-    padding: 2px;
+    display: inline-block;
+    width: 50px;
+    padding: 1px;
+    float: left;
 }
 
-.current-day {
-    background: #c0392b;
+.current-day-app {
+    background: #74A333;
     color: #f9f9f9;
 }
 
-.event {
+.event-app {
     cursor: pointer;
     position: relative;
 }
 
-.event:after {
-    background: #c0392b;
+.event-app:after {
+    background: #74A333;
     border-radius: 50%;
     bottom: 8px;
     display: block;
@@ -105,58 +90,50 @@ table {
     width: 8px;
 }
 
-.event.green-event:after {
-    background: #009E82;
-}
-
-.event.blue-event:after {
-    background: #0078AB;
-}
-
-.event.current-day:after {
+.event-app.current-day-app:after {
     background: #f9f9f9;
 }
 
-.btn-prev,
-.btn-next {
-	border: 2px solid #cbd1d2;
-	border-radius: 50%;
-	color: #cbd1d2;
-	height: 32px;
-	font-size: 22px;
-	line-height: 28px;
-	margin: -16px;
-	position: absolute;
-	top: 50%;
-	width: 32px;
+.btn-prev-app,
+.btn-next-app {
+    border: 2px solid #74A333;
+    border-radius: 50%;
+    color: #cbd1d2;
+    height: 32px;
+    font-size: 22px;
+    line-height: 28px;
+    margin: -16px;
+    position: absolute;
+    top: 50%;
+    width: 32px;
 }
 
-.btn-prev:hover,
-.btn-next:hover {
-    background: #cbd1d2;
+.btn-prev-app:hover,
+.btn-next-app:hover {
+    background: #74A333;
     color: #f9f9f9;
 }
 
-.btn-prev {
+.btn-prev-app {
     left: 30px;
 }
 
-.btn-next {
+.btn-next-app {
     right: 35px;
 }
 
-.list {
+.list-app {
     margin-top: 20px;
 }
 
-.close {
+.close-app {
     color: #A4AAAB;
     margin-top: -15px;
     margin-right: 10px;
     float: right;
 }
 
-.day-event {
+.day-event-app {
     background-color: #F2F2F2 ;
     width: 100%;
     padding-top: 20px;
@@ -166,17 +143,17 @@ table {
 
 }
 
-.day-event p{
+.day-event-app p{
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
 }
 
-.day-event span{
+.day-event-app span{
     font-size: 12px;
 }
 
-.day-event button {
+.day-event-app button {
     position: relative;
     vertical-align: top;
     width: 100%;
@@ -197,9 +174,8 @@ table {
 .check-btn {
     width: 100%;
 }
-input[type=checkbox] {display:none;}
 
-span {
+span.app {
     background-color:#373740;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
@@ -224,30 +200,10 @@ span {
     transition:background-color 150ms ease-in;
 }
 
-span:hover {
+span.app:hover {
     background-color:#c0392b;
 }
 
-input[type=checkbox]:checked + span {
-    background-color:#9C2E23;
-    text-decoration:none;
-    -webkit-border-radius:4px;
-    -moz-border-radius:4px;
-    border-radius:4px;
-    background:#9C2E23 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAX9JREFUeNpi+P//PwMNsS4QbwBiLnQ5WlqqAsRP/0PARiBmoYfFkkB8+z8qWALEjLS0mB+IL/3HDibSymJQXB7/jx/UgNSCvU4lwAbEG4DYkwi1WUxUspQZiOcRaSkIWOAKMk0Sg3jaf+IBOIVjMyQWiH8DsR+RljaTYOkBWJ5GNwRk2R+ooh9A7ETA0jwSLL0ATfEYqRpkyVc0xR+A2AyHpdFA/I9IS0F5WhRbAWIEtQQbeAXE6lhC5jeRlj4GYgVsRaYK1HBCmmWgmuyxhAwu8BpaXjNgs/gYkYbcAGIXPCGDDkCOM8eVPkCEFhE+JhX8BGJnfAkTxgC57BOVLAXlihBC2RA9Vf+k0FJQKk8nJv+jCwQi5WNyQAWxpR02wRQS8icy6CKlmMUlUUGipfOQK3lKLAbhdhIKfWZS6258kiAfzCZg6V4gZiOn0UBIAcgn63BYehK50Ke2xQxQH+3FUoqJUtJMIlYhLxAfxVJu09xiWENuMxCrUaNhCBBgAOAVfjALa5TLAAAAAElFTkSuQmCC) no-repeat 7% center;
-    background-size:15px 13px;
-}
-
-input[type=checkbox]:checked:hover + span {
-    background-color:#9C2E23;
-    color:rgba(255,255,255,0.5);
-    text-decoration:none;
-    -webkit-border-radius:4px;
-    -moz-border-radius:4px;
-    border-radius:4px;
-    background:#9C2E23 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAS5JREFUeNq8110OgjAMAGBGvIY3VESjt9jPg95PT+LccBIZ7dYOWJPGB+g+Ymg3hLW2QeLkcu/y2pSFdvl0eQevehjI3uXbfkMh96TShFq/xhG6J4faAtxEtSBOQTm4QWpnOBWl4CZT69fuYpiCpnBDrB1xLhrjgoFO8F1oGcFslUv4bV32zFoxmOHJta0XMn65dC0UaiddA8UGiN4axeC1cUkdmWviEls/NwL1FqjPNtNvoimPdC3yRCUTiTXbt0R/oSnw2iiK10BBvBY6w2uiE3xJr8oFtcrvxy/fVcyeVdGx98yotcOxN/znHeMUIhdMOG8c4reagssF43VEoT5O4ZJwvNUUFJtcEE5BMXyGpnanf5yDxjiI+hSJj7YunEBvhbuTCh9tD+jiR4ABAJ0SrJgNr1UAAAAAAElFTkSuQmCC) no-repeat 7% center;
-    background-size:15px 15px;
-}
 
 .print-btn {
     padding: 1px 14px 5px 14px;

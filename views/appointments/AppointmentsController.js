@@ -50,14 +50,6 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
    //Today's date
   $scope.today=new Date();
 
-    //Sets up appointments to display based on the user option selected
-  $scope.$watch('radioModel',function(){
-
-      $timeout(function(){
-        selectAppointmentsToDisplay();
-      });
-
-    });
 
     $scope.futureAppointments = Appointments.getFutureAppointments();
     $scope.pastAppointments = Appointments.getPastAppointments();
