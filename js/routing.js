@@ -96,7 +96,7 @@ myApp.run(function ($rootScope, $state, $stateParams,$q, $rootScope,$location,$t
  });
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams)
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) 
     {
       if(!$rootScope.refresh)
       {

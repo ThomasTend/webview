@@ -2,6 +2,12 @@ var myApp=angular.module('MUHCApp');
 
 
 myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doctors','Appointments','Messages','Documents','UserPreferences', 'UserAuthorizationInfo', '$q', 'Notifications', 'UserPlanWorkflow', 'Notes', 'LocalStorage','RequestToServer',function (EncryptionService,$http,$filter, Patient,Doctors, Appointments,Messages, Documents, UserPreferences, UserAuthorizationInfo, $q, Notifications, UserPlanWorkflow, Notes,LocalStorage,RequestToServer) {
+    /*var intializedMappings = {
+        'Appointments':Appointment.setAppointments,
+        ..
+    }*/
+
+
     function updateAllServices(dataUserObject,mode){
         function setDocuments(dataUserObject){
             var setDocProm=$q.defer();
@@ -11,7 +17,7 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
             return setDocProm.promise;
 
         }
-        setDocuments(dataUserObject).then(function(){
+        setDocuments(dataUserObject).then(function() {
           var plan={
              '1':{'Name':'CT for Radiotherapy Planning','Date':'2015-10-19T09:00:00Z','Description':'stage1','Type': 'Appointment'},
              '2':{'Name':'Physician Plan Preparation','Date':'2015-10-21T09:15:00Z','Description':'stage2','Type':'Task'},
@@ -28,7 +34,7 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
              valAdded+=2;
              plan[key].Date=$filter('formatDateToFirebaseString')(tmp);
            }
-           UserPlanWorkflow.setUserPlanWorkflow(plan);
+            UserPlanWorkflow.setUserPlanWorkflow(plan);
             console.log(dataUserObject);
             UserPreferences.setUserPreferences(dataUserObject.Patient.Language,dataUserObject.Patient.EnableSMS);
             Doctors.setUserContacts(dataUserObject.Doctors);
@@ -47,7 +53,7 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
 
     function updateUIOnline(){
         var r = $q.defer();
-        var firebaseLink = new Firebase('https://brilliant-inferno-7679.firebaseio.com/Users/' + UserAuthorizationInfo.getUserName()+ '\/'+RequestToServer.getIdentifier());
+        var firebaseLink = new Firebase('https://brilliant-inferno-7679.firebaseio.com/Users/' + UserAuthorizationInfo.getUserName()+ '\/' + RequestToServer.getIdentifier());
         obtainDataLoop();
        function obtainDataLoop(){
         firebaseLink.once('value', function (snapshot) {
@@ -103,7 +109,6 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
         switch(section){
             case 'All':
                 updateAllServices(data,'Offline');
-
                 break;
             case 'Doctors':
                 Doctors.setUserContacts(data);
@@ -136,6 +141,13 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
         r.resolve(true);
         return r.promise;
     }
+    /*
+    function update(type, parameters)
+    {
+        for (var i = 0; i < parameters.length; i++) {
+            initializeMappgints[parameters[i]](data[parameters[i]]);
+        };
+    }*/
     function UpdateSectionOnline(section)
     {
         var r=$q.defer();

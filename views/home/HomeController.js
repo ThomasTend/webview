@@ -1,8 +1,21 @@
 
-myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','CheckinService','$rootScope',function ($scope, $timeout,$filter, $location,UserAuthorizationInfo,EncryptionService,Notifications,Patient,Doctors,Appointments,UserPlanWorkflow,CheckinService,$rootScope) {
+myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','CheckinService','$rootScope','UpdateUI',function ($scope, $timeout,$filter, $location,UserAuthorizationInfo,EncryptionService,Notifications,Patient,Doctors,Appointments,UserPlanWorkflow,CheckinService,$rootScope,UpdateUI) {
 homeInit();
 $scope.enableCheckin=false;
+/*
+if(!dataNot)
+{
+RequestToServer.sendRequest('Refresh',['Appointments', 'Patient'...])
+  UpdateUI.UpdateSectionOnline('Fields', ['Appointments', 'Patient'...]).then(function(){
+    homeInit();
+  });
+}else{
+  homeInit();
+}
+*/
+
 function homeInit(){
+  
 
   // Get number of unread notifications by Type
     var testArrray = Notifications.getUserNotifications();
