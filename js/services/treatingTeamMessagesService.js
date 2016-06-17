@@ -1,12 +1,22 @@
 var myApp = angular.module('MUHCApp');
 
 myApp.service('TreatingTeamMessages', ['$filter', 'RequestToServer', 'UserPreferences', function($filter, RequestToServer, UserPreferences) {
-    // Array were all the current Treating Team Messages are Stored
+    // Array where all the current Treating Team Messages are Stored
     var treatingTeamMessagesArray = [];
+
+    function deleteTreatingTeamMessages(treatingTeamMessages) {
+        for(var i = 0; i < treatingTeamMessagesArray.length; i++) {
+            for(var j = 0; j < treatingTeamMessages.length; j++) {
+                if(treatingTeamMessagesArray[i].TxTeamMessageSerNum == treatingTeamMessages[j].TxTeamMessageSerNum) { // if same object
+                    treatingTeamMessagesArray.splice(i, 1); // delete object in treatingTeamMessagesArray to be added later using the addTreatingTeamMessages function 
+                }
+            }
+        }
+    }
 
     // Add new Treating Team Message to the txTeamMessagesArray
     function addTreatingTeamMessages(newMessages) { // where newMessages is the array of new messages
-        // If the Array is undefined, return
+        // If the Array (object) is undefined, return
         if(typeof newMessages == 'undefined') {
             return;
         }
@@ -16,27 +26,28 @@ myApp.service('TreatingTeamMessages', ['$filter', 'RequestToServer', 'UserPrefer
                 continue;
             }
             // format date to javascript for later use in controllers
-            newMessages[i].DateAdded = $filter.('formatDate')(newMessages[i].DateAdded);
-            // Now add the newMessages to the txTeamMessagesArray
+            newMessages[i].DateAdded = $filter.('formatDate') (newMessages[i].DateAdded);
+            // Add the newMessages to the txTeamMessagesArray
             treatingTeamMessagesArray.push(newMessages[i]);
         }
     }
-    return { // public functions starting here
+
+    return { // public functions start here
         // set treatingTeamMessagesArray 
-        function setTreatingTeamMessagesArray(newMessages) {
-            // initialize empty array
+        setTreatingTeamMessagesArray: function(newMessages) {
+            // create empty array
             var treatingTeamMessagesArray = [];
             // Initialize the array by adding messages to it
             addTreatingTeamMessages(newMessages);
-        }
+        },
 
         // get treatingTeamMessagesArray
-        function getTreatingTeamMessagesArray() {
+        getTreatingTeamMessagesArray: function() {
             return treatingTeamMessagesArray;
-        }
+        },
 
         // get unread messages for the notifications view
-       function getUnreadTreatingTeamMessages() {
+       getUnreadTreatingTeamMessages: function() {
             var unreadMessages = [];
             // circle through treatingTeamMessagesArray array and check ReadStatus
             // circle from end to beginning so that when we add to unreadMessages, the objects are already sorted and ready to be displayed
@@ -46,10 +57,10 @@ myApp.service('TreatingTeamMessages', ['$filter', 'RequestToServer', 'UserPrefer
                 }
             }
             return unreadMessages;
-        }
+        },
 
-        // Get number of unread treating team messages for the badges
-        function getNumberUnreadTreatingTeamMessages() {
+        // Get the number of unread treating team messages for the badges
+        getNumberUnreadTreatingTeamMessages: function() {
             // initialize number to return
             var toRet = 0;
             for(var i = 0; i < treatingTeamMessagesArray.length; i++) {
@@ -58,38 +69,46 @@ myApp.service('TreatingTeamMessages', ['$filter', 'RequestToServer', 'UserPrefer
                 }
             }
             return toRet;
-        }
+        },
 
         // get a treating team message by TxTeamMessageSerNum
-        function getTreatingTeamMessageBySerNum(serNum) {
+        getTreatingTeamMessageBySerNum: function(serNum) {
             for(var i = 0; i < treatingTeamMessagesArray.length; i++) {
                 if(treatingTeamMessagesArray[i].TxTeamMessageSerNum == serNum) {
                     return angular.copy(treatingTeamMessagesArray[i]);
                 }
             }
-        }
+        },
 
         // Update ReadStatus for the UI and the backend by SerNum
-        function updateReadStatusTreatingTeamMessageBySerNum(serNum) {
+        updateReadStatusTreatingTeamMessageBySerNum: function(serNum) {
             for(var i = 0; i < treatingTeamMessagesArray.length; i++) {
                 if(treatingTeamMessagesArray[i].TxTeamMessageSerNum == serNum) {
                     treatingTeamMessagesArray[i].ReadStatus = '1'; // Update for UI
                     RequestToServer.sendRequest('Read', {'Id':treatingTeamMessagesArray[i].TxTeamMessageSerNum, 'Field':'TxTeamMessages'}); // Update backend (in database)
                 }
             }
-        }
+        },
 
-        // get name of treating team message in French and English
-        function getTreatingTeamMessageName(serNum) {
+        // get name of treating team message in French or English by TxTeamMessageSerNum
+        getTreatingTeamMessageName: function(serNum) {
             for(var i = 0; i < treatingTeamMessagesArray.length; i++) {
                 if(treatingTeamMessagesArray[i].TxTeamMessageSerNum == serNum) {
                     return { NameEN: treatingTeamMessagesArray[i].PostName_EN, NameFR: treatingTeamMessagesArray[i].PostName_FR};
                 }
             }
-        }
+        },
+
+        // Synchronize treating team messages and ReadStatus changes
+        updateTreatingTeamMessagesArray: function(treatingTeamMessages) {  
+            // Delete the outdated messages
+            deleteTreatingTeamMessages(treatingTeamMessages);
+            // Add the updated messages to treatingTeamMessagesArray
+            addTreatingTeamMessages(treatingTeamMessages);
+        },
 
         // set language of treating team messages according to user preferences
-        function setTreatingTeamMessagesLanguage(treatingTeamMessages) {
+        setTreatingTeamMessagesLanguage: function(treatingTeamMessages) {
             // get the language from the User Preferences Service
             var language = UserPreferences.getLanguage();
 
@@ -108,5 +127,5 @@ myApp.service('TreatingTeamMessages', ['$filter', 'RequestToServer', 'UserPrefer
             }
         }
 
-    } // public functions ending here
-}]);
+    } // public functions end here
+}]); // end of service
