@@ -2,10 +2,17 @@ var myApp=angular.module('MUHCApp');
 
 
 myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doctors','Appointments','Messages','Documents','UserPreferences', 'UserAuthorizationInfo', '$q', 'Notifications', 'UserPlanWorkflow', 'Notes', 'LocalStorage','RequestToServer',function (EncryptionService,$http,$filter, Patient,Doctors, Appointments,Messages, Documents, UserPreferences, UserAuthorizationInfo, $q, Notifications, UserPlanWorkflow, Notes,LocalStorage,RequestToServer) {
-    /*var intializedMappings = {
-        'Appointments':Appointment.setAppointments,
-        ..
-    }*/
+
+    var map = {
+        'Patient': Patient.setUserFields,
+        'Doctors': Doctors.setUserContacts,
+        'Appointments': Appointments.setUserAppointments,
+        'Messages': Messages.setUserMessages,
+        'Documents': Documents.setDocuments, 
+        'UserPreferences': UserPreferences.setUserPreferences,
+        'Notifications': Notifications.setUserNotifications,
+        'Notes': Notes.setNotes
+    };
 
 
     function updateAllServices(dataUserObject,mode){
@@ -97,11 +104,12 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
         r.resolve(true);
         return r.promise;
     }
+
     function UpdateSectionOffline(section)
     {
         var r=$q.defer();
         var data='';
-        if(section!='UserPreferences'){
+        if(section!='UserPreferences') {
             data=LocalStorage.ReadLocalStorage(section);
         }else{
             data=LocalStorage.ReadLocalStorage('Patient');
@@ -150,6 +158,7 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
     }*/
     function UpdateSectionOnline(section)
     {
+        console.log("inside updte section")
         var r=$q.defer();
         var ref= new Firebase('https://brilliant-inferno-7679.firebaseio.com/Users/');
         var pathToSection=''
@@ -166,17 +175,18 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
             pathToSection=username+'/'+deviceId;
         }
         console.log(pathToSection);
-        ref.child(pathToSection).on('value',function(snapshot){
+        ref.child(pathToSection).on('value',function(snapshot) {
             var data=snapshot.val();
             if(data!=undefined){
                 console.log(data);
                 data=EncryptionService.decryptData(data);
                 LocalStorage.WriteToLocalStorage(section,data);
+                console.log(section);
                 switch(section){
                     case 'All':
                         updateAllServices(data, 'Online');
+                        break;
                     case 'Doctors':
-                        console.log(data);
                         Doctors.setUserContacts(data);
                         break;
                     case 'Patient':
@@ -201,8 +211,16 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
                         Notes.setNotes(data);
                         break;
                     case 'UserPlanWorkflow':
-                    //To be done eventually!!!
-                    break;
+                        //To be done eventually!!!
+                        break;
+                    case 'Home': // includes all that needs to be updated in the home page
+                        // ['Appointments', 'Patient', 'Notifications', 'Doctors', 'UserPlanWorkflow', 'CheckinService', 'UpdateUI']
+                        console.log('in Home switch case');
+                        map.Appointments(data);
+                        map.Patient(data);
+                        map.Notifications(data);
+                        map.Doctors(data);
+                        break;                        
                 }
                 console.log(data);
                 //ref.child(pathToSection).set(null);

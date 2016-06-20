@@ -24,7 +24,7 @@ myApp.factory('CheckinService', ['$q', 'RequestToServer', 'Appointments', '$time
         //var distanceMeters=1000*getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude,45.5072138,-73.5784825);
         var distanceMeters = 100;
         /*alert('Distance: '+ distanceMeters+
-            'Latitude: '          + position.coords.latitude          + '\n' +
+          'Latitude: '          + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
           'Altitude: '          + position.coords.altitude          + '\n' +
           'Accuracy: '          + position.coords.accuracy          + '\n' +

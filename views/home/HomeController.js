@@ -1,23 +1,23 @@
 
-myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','CheckinService','$rootScope','UpdateUI',function ($scope, $timeout,$filter, $location,UserAuthorizationInfo,EncryptionService,Notifications,Patient,Doctors,Appointments,UserPlanWorkflow,CheckinService,$rootScope,UpdateUI) {
-homeInit();
-$scope.enableCheckin=false;
-/*
-if(!dataNot)
-{
-RequestToServer.sendRequest('Refresh',['Appointments', 'Patient'...])
-  UpdateUI.UpdateSectionOnline('Fields', ['Appointments', 'Patient'...]).then(function(){
-    homeInit();
-  });
-}else{
+myWeb.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','CheckinService','$rootScope','UpdateUI','RequestToServer',function ($scope, $timeout,$filter, $location,UserAuthorizationInfo,EncryptionService,Notifications,Patient,Doctors,Appointments,UserPlanWorkflow,CheckinService,$rootScope,UpdateUI,RequestToServer) {
+
+//homeInit();
+//$scope.enableCheckin=false;
+ /* window.alert('getting data for home controller');
+//if(testArray == 'undefined') {
+  console.log('boom');
+  RequestToServer.sendRequest('Refresh',['Appointments', 'Patient', 'Notifications', 'Doctors', 'UserPlanWorkflow', 'CheckinService', 'UpdateUI'])
+  UpdateUI.UpdateSection('Home').then(function(data) {
+  window.alert('getting data for home controller');
+  //homeInit();
+  });*/
+//} else {
   homeInit();
-}
-*/
+//}
 
-function homeInit(){
-  
 
-  // Get number of unread notifications by Type
+function homeInit() {
+    // Get number of unread notifications by Type
     var testArrray = Notifications.getUserNotifications();
     var numNewAnnouncements = 0;
     var numNewTxTeamMessages = 0;
@@ -41,7 +41,7 @@ function homeInit(){
         }
     }
     
-    $scope.Announcements = '4';
+    $scope.Announcements = numNewAnnouncements;
     $scope.TxTeamMessages = numNewTxTeamMessages;
     $scope.Appointments = numNewAppointments;
     $scope.Documents = numNewDocuments;
@@ -130,8 +130,7 @@ function treatmentPlanStatusInit()
 
         if(stages.length==0){
             $scope.noTreatmentPlan=true;
-        }
-    else{
+        } else {
 
         if(nextStageIndex==stages.length){
 
@@ -199,7 +198,7 @@ function treatmentPlanStatusInit()
 
 
 
-app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig','Appointments','$timeout','$uibModal', function($scope,$compile,uiCalendarConfig,Appointments,$timeout, $uibModal)
+app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig','Appointments','$timeout','$uibModal', 'RequestToServer',function($scope,$compile,uiCalendarConfig,Appointments,$timeout, $uibModal,RequestToServer)
 {
   init();
   function init(){
