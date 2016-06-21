@@ -1,4 +1,3 @@
-
 /*
 *Code by David Herrera May 20, 2015
 *Github: dherre3
@@ -19,11 +18,26 @@ var myApp=angular.module('MUHCApp');
     *takes credentials and places them in the UserAuthorizationInfo service, it also sends the login request to Firebase,
     *and finally it redirects the app to the loading screen.
 */
-myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$rootScope', '$state', 'UserAuthorizationInfo', 'RequestToServer', 'FirebaseService','LocalStorage','tmhDynamicLocale','DeviceIdentifiers','UserPreferences','Modal','UpdateUI','Patient',function(ResetPassword,$scope,$timeout, $rootScope, $state, UserAuthorizationInfo,RequestToServer,FirebaseService,LocalStorage,tmhDynamicLocale,DeviceIdentifiers,UserPreferences,Modal,UpdateUI,Patient) {
+myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$rootScope', '$state', 'UserAuthorizationInfo', 'RequestToServer', 'FirebaseService','LocalStorage','tmhDynamicLocale','DeviceIdentifiers','UserPreferences',function LoginController(ResetPassword,$scope,$timeout, $rootScope, $state, UserAuthorizationInfo,RequestToServer,FirebaseService,LocalStorage,tmhDynamicLocale,DeviceIdentifiers,UserPreferences) {
   var myDataRef = new Firebase(FirebaseService.getFirebaseUrl());
   //demoSignIn();
- 
- $scope.alert = {};
+  /*checkForSessionEnd=function()
+  {
+    var  authInfoLocalStorage=window.localStorage.getItem('UserAuthorizationInfo');
+    if(authInfoLocalStorage&&typeof  authInfoLocalStorage!=='undefined')
+    {
+      var authInfoObject=JSON.parse(authInfoLocalStorage);
+
+      var timeNow=(new Date()).getTime()/1000;
+      if(authInfoObject.Expires<timeNow) {
+        console.log(authInfoObject.Expires);
+        console.log((new Date()).getTime()/1000);
+        UserAuthorizationInfo.setUserAuthData(authInfoObject.UserName,authInfoObject.Password , authInfoObject.Expires,authInfoObject.Token);
+        $state.go('logOut');
+      }
+    }
+  };
+  checkForSessionEnd();*/
 
   myDataRef.onAuth(function(authData){
     var  authInfoLocalStorage=window.localStorage.getItem('UserAuthorizationInfo');
@@ -67,7 +81,7 @@ myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$root
               console.log(DeviceIdentifiers.getDeviceIdentifiers());
               RequestToServer.sendRequest('Resume', DeviceIdentifiers.getDeviceIdentifiers());
             }
-            loading();
+            $state.go('loading');
         }
       }else{
         if($state.current.name=='Home'||authInfoLocalStorage)
@@ -97,7 +111,6 @@ myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$root
   }
 
   $scope.submit = function (email,password) {
-    
   	$scope.password=password;
     $scope.email=email;
     signin(email, password);
@@ -188,38 +201,10 @@ myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$root
           console.log("Authenticated successfully with payload:", authData);
           $rootScope.activeLogin='false';
           RequestToServer.sendRequest('Login');
-          loading();
+          $state.go('loading');
         }
 
     }
 }
-function loading(){
-     Modal.open();
-     console.log('Going to loading');
-
-      var updateUI=UpdateUI.init();
-		updateUI.then(function(){
-          Modal.close();
-          var location=window.localStorage.getItem('locationMUHCApp');
-          $rootScope.profileImage=Patient.getProfileImage();
-          if(location){
-            if(location=='forms.login'){
-              $state.go('app.Home');
-            }else{
-              console.log(location);
-              $state.go(location);
-            }
-
-          }else{
-            $state.go('app.Home');
-          }
-      });
-      setTimeout(function() {
-        if(typeof Patient.getFirstName()=='undefined'){
-          $rootScope.logout();
-        }
-      }, 15000);
-   }
 
 }]);
-
