@@ -2,6 +2,8 @@ var myApp=angular.module('MUHCApp');
 myApp.service('EncryptionService',function(UserAuthorizationInfo){
 	function decryptObject(object)
 	    {
+	    		console.log("decrypting");
+	    		console.log(UserAuthorizationInfo.getPassword());
 				var secret=UserAuthorizationInfo.getPassword();
 
 				if(typeof object =='string')
@@ -39,7 +41,7 @@ myApp.service('EncryptionService',function(UserAuthorizationInfo){
 			        if (typeof object[key]=='object')
 			        {
 			        	decryptObject(object[key],secret);
-			        }else
+			        } else
 			        {
 								if(object[key]!='')
 								{
@@ -57,8 +59,11 @@ myApp.service('EncryptionService',function(UserAuthorizationInfo){
 
 		 	 return object;*/
 	    };
+
     function encryptObject(object)
 	{
+		console.log("encrypting");
+		console.log(UserAuthorizationInfo.getPassword());
 		var secret=UserAuthorizationInfo.getPassword();
 	 	if (typeof object=='string'){
 	 		var ciphertext = CryptoJS.AES.encrypt(object, secret);
@@ -80,7 +85,7 @@ myApp.service('EncryptionService',function(UserAuthorizationInfo){
 			    }else
 			    {
 			      if (typeof object[key] !=='string') object[key]=String(object[key]);
-			      var ciphertext = CryptoJS.AES.encrypt(object[key],secret );
+			      var ciphertext = CryptoJS.AES.encrypt(object[key], secret);
 			      object[key]=ciphertext.toString();
 			    }
 			}
@@ -88,28 +93,29 @@ myApp.service('EncryptionService',function(UserAuthorizationInfo){
 			return object;
 		}
 	};
-	return{
-		decryptData:function(object,secret)
+
+	return {
+		decryptData:function(object)
 	    {
-	    	return decryptObject(object,secret);
+	    	return decryptObject(object);
 	    },
-    encryptData:function(object,secret)
+    encryptData:function(object)
    {
-   	return encryptObject(object,secret);
+   	return encryptObject(object);
 	},
-	decryptWithKey:function(object,secret)
+	decryptWithKey:function(object)
 	{
 			for (var key in object)
 			{
 				if (typeof object[key]=='object')
 				{
-					decryptObject(object[key],secret);
-				}else
+					decryptObject(object[key]);
+				} else
 				{
 					if(object[key]!='')
 					{
 						try {
-							var decipherbytes = CryptoJS.AES.decrypt(object[key], secret);
+							var decipherbytes = CryptoJS.AES.decrypt(object[key]);
 							object[key]=decipherbytes.toString(CryptoJS.enc.Utf8)
 							}
 							catch(err) {

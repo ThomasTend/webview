@@ -51,11 +51,8 @@ myApp.service('UserAuthorizationInfo', function () {
             password=CryptoJS.SHA256(password).toString();
             this.Password=password;
             console.log(this.Password);
-            window.localStorage.setItem('pass',password);
-            var passString=window.localStorage.getItem('UserAuthorizationInfo');
             passObject=JSON.parse(passString);
             passObject.Password=password;
-            window.localStorage.setItem('UserAuthorizationInfo', JSON.stringify(passObject));
         },
           /**
         }

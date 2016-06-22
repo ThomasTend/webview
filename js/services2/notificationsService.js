@@ -5,9 +5,8 @@ var myApp=angular.module('MUHCApp');
 *
 *
 **/
-myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalStorage','Announcements','TxTeamMessages','Appointments','Messages','Documents','EducationalMaterial', 'UserPreferences', function($rootScope,$filter,RequestToServer,LocalStorage,Announcements, TxTeamMessages,Appointments,Messages, Documents,EducationalMaterial, UserPreferences){
+myApp.service('Notifications',['$rootScope','$filter','RequestToServer','Announcements','TxTeamMessages','Appointments','Messages','Documents','EducationalMaterial', 'UserPreferences', function($rootScope,$filter,RequestToServer,Announcements, TxTeamMessages,Appointments,Messages, Documents,EducationalMaterial, UserPreferences){
     var Notifications=[];
-    var notificationsLocalStorage=[];
     var groupNotifications={};
     var notificationTypes={
       'Document':
@@ -102,9 +101,7 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalSt
       {
         console.log('Reading notification via index');
         Notifications[index].ReadStatus = '1';
-        notificationsLocalStorage[index].ReadStatus = '1';
         notificationTypes[type].readFunction(refSerNum);
-        LocalStorage.WriteToLocalStorage('Notifications', notificationsLocalStorage);
         RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'Notifications'});
       }else{
         console.log('Reading notification via serNum');
@@ -114,10 +111,8 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalSt
           {
             console.log('Reading not,', Notifications[i]);
             Notifications[i].ReadStatus = '1';
-            notificationsLocalStorage[i].ReadStatus = '1';
             notificationTypes[type].readFunction(refSerNum);
             console.log('Done reading', Notifications[i]);
-            LocalStorage.WriteToLocalStorage('Notifications', notificationsLocalStorage);
             RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'Notifications'});
           }
         }
@@ -131,7 +126,6 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalSt
           if(Notifications[j].NotificationSerNum == notifications[i].NotificationSerNum)
           {
             Notifications.splice(j,1);
-            notificationsLocalStorage.splice(j,1);
             break;
           }
         }
@@ -152,16 +146,13 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalSt
           temp[i].DateAdded=$filter('formatDate')(temp[i].DateAdded);
           console.log(temp[i]);
           Notifications.push(temp[i]);
-          notificationsLocalStorage.push(notifications[i]);
       };
       Notifications=$filter('orderBy')(Notifications,'DateAdded',true);
       console.log(Notifications);
-      LocalStorage.WriteToLocalStorage('Notifications',notificationsLocalStorage);
     }
     return{
         setUserNotifications:function(notifications){
-            Notifications=[];
-            notificationsLocalStorage=[];
+            //Notifications=[];
             $rootScope.Notifications=0;
             addUserNotifications(notifications);
         },
@@ -169,6 +160,9 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','LocalSt
         {
           searchAndDeleteNotifications(notifications);
           addUserNotifications(notifications);
+        },
+        setNotificationReadStatus: function(index) {
+            Notifications[index].ReadStatus = '1';
         },
          getUserNotifications:function(){
             return Notifications;

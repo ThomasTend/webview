@@ -1,7 +1,6 @@
 var myApp=angular.module('MUHCApp');
-myApp.service('Diagnoses',function($filter,LocalStorage){
+myApp.service('Diagnoses',function($filter){
     var diagnoses=[];
-    var diagnosesToLocalStorage=[];
     function searchAndDeleteDiagnoses(diag)
     {
       for (var i = 0; i < diag.length; i++) {
@@ -9,7 +8,6 @@ myApp.service('Diagnoses',function($filter,LocalStorage){
           if(diag[i].DiagnosisSerNum == diagnoses[j].DiagnosisSerNum)
           {
             diagnoses.splice(j, 1);
-            diagnosesToLocalStorage.splice(j,1);
           }
         }
       }
@@ -19,8 +17,6 @@ myApp.service('Diagnoses',function($filter,LocalStorage){
     {
       if(typeof diag=='undefined') return ;
       var temp=angular.copy(diag);
-      diagnosesToLocalStorage.concat(temp);
-      LocalStorage.WriteToLocalStorage('Diagnosis', temp);
       for (var i = 0; i < diag.length; i++) {
         console.log(diag[i].CreationDate);
         diag[i].CreationDate=$filter('formatDate')(diag[i].CreationDate);
@@ -33,7 +29,6 @@ myApp.service('Diagnoses',function($filter,LocalStorage){
       setDiagnoses:function(diag)
       {
         diagnoses=[];
-        diagnosesToLocalStorage=[];
         addDiagnosis(diag)
       },
       updateDiagnoses:function(diag)

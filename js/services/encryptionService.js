@@ -26,6 +26,7 @@ myApp.service('EncryptionService',function(UserAuthorizationInfo){
 
 		 	 return object;
 	    };
+	    
     function encryptObject(object)
 	{
 

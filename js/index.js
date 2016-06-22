@@ -1,5 +1,5 @@
 var myWeb = angular.module('MUHCApp', ['ui.bootstrap','ui.router','firebase','tmh.dynamicLocale','pascalprecht.translate','ui.select','ngSanitize','ui.calendar', 'ngAnimate', 'ngMaterial']);
-myWeb.controller('MainController', function ($scope,$q,$state, UserAuthorizationInfo,$rootScope,Appointments,Documents,RequestToServer) {
+myWeb.controller('MainController', ['$scope','$q','$state', 'UserAuthorizationInfo','$rootScope','Appointments','Documents','RequestToServer', function ($scope,$q,$state, UserAuthorizationInfo,$rootScope,Appointments,Documents,RequestToServer) {
 	$rootScope.logout=function(){
 		function deleteFields(){
 			var r=$q.defer();
@@ -9,9 +9,6 @@ myWeb.controller('MainController', function ($scope,$q,$state, UserAuthorization
 			$state.go('forms.login');
 			r.resolve(true);
 			return r.promise;
-		}
-		$scope.checkActive=function(){
-
 		}
 		$scope.goToNotification=function(index,notification)
 		{
@@ -29,18 +26,17 @@ myWeb.controller('MainController', function ($scope,$q,$state, UserAuthorization
 		            $state.go('app.Documents');
 		           // menu.setMainPage('views/scansNDocuments.html', {closeMenu: true});
 		        }
-
 		}
 
 		deleteFields().then(function(){
 			setTimeout(function () {
 				location.reload();
 			}, 100);
-		})
+		});
 	}
-});
+}]);
 
-myWeb.filter('formatDate',function(){
+myWeb.filter('formatDate',function() {
 	return function(str) {
     if(typeof str==='string') {
         str=str.replace('T',' ');

@@ -1,6 +1,6 @@
 var myApp=angular.module('MUHCApp');
 //Service that deals with the announcement information for the patient
-myApp.service('Announcements', ['RequestToServer','$filter','LocalStorage','UserPreferences',function(RequestToServer,$filter, LocalStorage,UserPreferences){
+myApp.service('Announcements', ['RequestToServer','$filter','UserPreferences',function(RequestToServer,$filter,UserPreferences){
   //Initializing array that represents all the informations for Announcements
   var announcementsArray=[];
   //When there is an update, find the matching message and delete it, its added later by findAndDeleteAnnouncements function
@@ -27,8 +27,6 @@ myApp.service('Announcements', ['RequestToServer','$filter','LocalStorage','User
       //Add to my annoucements array
       announcementsArray.push(announcements[i]);
     }
-    //Update local storage section
-    LocalStorage.WriteToLocalStorage('Announcements',announcementsArray);
   }
   return {
     //Setter the announcements from 0
@@ -96,7 +94,6 @@ myApp.service('Announcements', ['RequestToServer','$filter','LocalStorage','User
         if(announcementsArray[i].AnnouncementSerNum==serNum)
         {
           announcementsArray[i].ReadStatus = '1';
-          LocalStorage.WriteToLocalStorage('Announcements',announcementsArray);
           RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'Announcements'});
           break;
         }
@@ -106,7 +103,6 @@ myApp.service('Announcements', ['RequestToServer','$filter','LocalStorage','User
     readAnnouncement:function(index, serNum)
     {
       announcementsArray[index].ReadStatus = '1';
-      LocalStorage.WriteToLocalStorage('Announcements',announcementsArray);
       RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'Announcements'});
     },
     //Get names for notifications

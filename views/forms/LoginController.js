@@ -97,7 +97,7 @@ myApp.controller('LoginController', ['ResetPassword','$scope','$timeout', '$root
   }
 
   $scope.submit = function (email,password) {
-    
+    console.log(email);
   	$scope.password=password;
     $scope.email=email;
     signin(email, password);

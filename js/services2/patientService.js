@@ -1,6 +1,6 @@
 var myApp=angular.module('MUHCApp');
 
-myApp.service('Patient',['$q','$filter','LocalStorage','UserPreferences',function($q,$filter,LocalStorage,UserPreferences){
+myApp.service('Patient',['$q','$filter','UserPreferences',function($q,$filter,UserPreferences){
     var ProfileImage='';
     var FirstName='';
     var LastName='';
@@ -54,7 +54,6 @@ myApp.service('Patient',['$q','$filter','LocalStorage','UserPreferences',functio
                   NameFileSystem='patient'+patientFields.PatientSerNum+"."+patientFields.DocumentType;
                   PathFileSystem=targetPath;
                   patientFields.PathFileSystem=targetPath;
-                  LocalStorage.WriteToLocalStorage('Patient',[patientFields]);
                   var promise=[FileManagerService.downloadFileIntoStorage(url, targetPath)];
                   $q.all(promise).then(function()
                   {
@@ -74,7 +73,6 @@ myApp.service('Patient',['$q','$filter','LocalStorage','UserPreferences',functio
 
                 }
                 delete patientFields.ProfileImage;
-                LocalStorage.WriteToLocalStorage('Patient',[patientFields]);
                 r.resolve(patientFields);
               }
             console.log(UserPreferences.getLanguage());
@@ -117,6 +115,22 @@ myApp.service('Patient',['$q','$filter','LocalStorage','UserPreferences',functio
             r.resolve(true);
           }
           return r.promise;
+        },
+        getPatientFields: function() {
+
+          var patientField = {
+            'ProfileImage': ProfileImage,
+            'FirstName': FirstName,
+            'LastName': LastName,
+            'Alias': Alias,
+            'TelNum': TelNum,
+            'Email': Email,
+            'PatientId': PatientId,
+            'UserSerNum': UserSerNum
+          };
+
+          return patientField;
+
         },
         setFirstName:function(name){
             FirstName=name;

@@ -1,5 +1,5 @@
 var myApp=angular.module('MUHCApp');
-myApp.service('EducationalMaterial',['$filter','LocalStorage', 'UserPreferences', 'RequestToServer',function ($filter, LocalStorage,UserPreferences,RequestToServer) {
+myApp.service('EducationalMaterial',['$filter', 'UserPreferences', 'RequestToServer',function ($filter,UserPreferences,RequestToServer) {
   //Types of educational material
   var educationalMaterialType={
     'Video':{
@@ -93,8 +93,7 @@ myApp.service('EducationalMaterial',['$filter','LocalStorage', 'UserPreferences'
     var temp1 = $filter('filter')(educationalMaterialArray, {PhaseName_EN:'Prior To Treatment'});
     educationalMaterialArray = temp1.concat(($filter('filter')(educationalMaterialArray, {PhaseName_EN:'During Treatment'})).concat($filter('filter')(educationalMaterialArray, {PhaseName_EN:'After Treatment'})));
     //Update local storage section
-    LocalStorage.WriteToLocalStorage('EducationalMaterial',educationalMaterialArray);
-  }
+      }
   return {
     //Setter the announcements from 0
     setEducationalMaterial:function(edumaterial)
@@ -166,7 +165,6 @@ myApp.service('EducationalMaterial',['$filter','LocalStorage', 'UserPreferences'
         if(educationalMaterialArray[i].EducationalMaterialSerNum==serNum)
         {
           educationalMaterialArray[i].ReadStatus='1';
-          LocalStorage.WriteToLocalStorage('EducationalMaterial',educationalMaterialArray);
           RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'EducationalMaterial'});
         }
       }

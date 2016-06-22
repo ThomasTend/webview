@@ -9,7 +9,7 @@ var myApp=angular.module('MUHCApp');
 *@requires $cordovaCalendar
 *@description Sets the User appointment objects for the different views.
 **/
-myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', '$filter', 'UserPreferences','LocalStorage',function ($q,RequestToServer,  UserAuthorizationInfo, $filter,UserPreferences,LocalStorage) {
+myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', '$filter', 'UserPreferences',function ($q,RequestToServer,  UserAuthorizationInfo, $filter,UserPreferences) {
     /**
     *@ngdoc property
     *@name  UserAppointmentsArray
@@ -18,7 +18,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
     **/
     var UserAppointmentsInNativeCalendar=[];
     var UserAppointmentsArray = [];
-    var appointmentsLocalStorage=[];
     var calendar={};
     var numberOfSessions=0;
     function searchAppointmentsAndDelete(appointments)
@@ -28,7 +27,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
            if(UserAppointmentsArray[j].AppointmentSerNum==appointments[i].AppointmentSerNum)
            {
              UserAppointmentsArray.splice(j,1);
-             appointmentsLocalStorage.splice(j,1);
              break;
            }
         }
@@ -105,8 +103,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
       //Format date to javascript date
       var index=-1;
       numberOfSessions=0;
-      appointmentsLocalStorage=appointmentsLocalStorage.concat(appointments);
-      LocalStorage.WriteToLocalStorage('Appointments',appointmentsLocalStorage);
       for (var i = 0; i < appointments.length; i++) {
           appointments[i].ResourceName = (appointments[i].Resource.hasOwnProperty('Machine')) ? '':appointments[i].Resource.Doctor;
           appointments[i].ScheduledStartTime = $filter('formatDate')(appointments[i].ScheduledStartTime);
@@ -275,11 +271,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
                 appointmentsObject.AppointmentList.push(serNum);
                 appointmentString=JSON.stringify(appointmentsObject);
                 window.localStorage.setItem('NativeCalendarAppoinments',appointmentString);
-            }else{
-                objectToLocalStorage={};
-                objectToLocalStorage.AppointmentList=[serNum];
-                appointmentString=JSON.stringify(objectToLocalStorage);
-                window.localStorage.setItem('NativeCalendarAppoinments',appointmentString);
             }
         }
     return {
@@ -296,7 +287,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
         //Initializing Variables
             UserAppointmentsInNativeCalendar=[];
             UserAppointmentsArray = [];
-            appointmentsLocalStorage=[];
             calendar={};
             addAppointmentsToService(appointments);
         },
@@ -380,13 +370,14 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
         getPastAppointments: function () {
           return getAppointmentsInPeriod('Past');
         },
+        getNextAppointment:function(){
+            return this.NextAppointment;
+        },
         setAppointmentCheckin:function(serNum){
               var appointments=UserAppointmentsArray;
             for(var i=0;i<appointments.length;i++){
                 if(appointments[i].AppointmentSerNum==serNum){
                     UserAppointmentsArray[i].Checkin='1';
-                    appointmentsLocalStorage[i].Checkin = '1';
-                    LocalStorage.WriteToLocalStorage('Appoinments',appointmentsLocalStorage);
                 }
             }
         },
@@ -436,9 +427,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
             if(UserAppointmentsArray[i].AppointmentSerNum == serNum)
             {
               UserAppointmentsArray[i].StatusClose = true;
-              appointmentsLocalStorage[i].StatusClose = true;
             }
-            LocalStorage.WriteToLocalStorage('Appointments', appointmentsLocalStorage);
           }
         },
         isCheckinAppointment:function(appointment)
@@ -475,9 +464,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
             if(UserAppointmentsArray[i].AppointmentSerNum == serNum)
             {
               UserAppointmentsArray[i].ReadStatus = '1';
-              appointmentsLocalStorage[i].ReadStatus = '1';
               RequestToServer.sendRequest('Read',{"Id":serNum, "Field": "Appointments"});
-              LocalStorage.WriteToLocalStorage('Appointments', appointmentsLocalStorage);
             }
           }
         },

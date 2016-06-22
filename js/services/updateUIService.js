@@ -95,6 +95,7 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
     }
     return r.promise;
     }
+
     function updateUIOffline(){
         var r=$q.defer();
         var userName=UserAuthorizationInfo.getUserName();
@@ -161,13 +162,13 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
         console.log("inside updte section")
         var r=$q.defer();
         var ref= new Firebase('https://brilliant-inferno-7679.firebaseio.com/Users/');
-        var pathToSection=''
+        var pathToSection='';
         var username=UserAuthorizationInfo.getUserName();
         var deviceId=RequestToServer.getIdentifier();
         console.log(deviceId);
         if(section!=='UserPreferences'){
             pathToSection=username+'/'+deviceId+'/'+section;
-        }else{
+        } else {
            pathToSection=username+'/'+deviceId+'/'+'Patient';
         }
         if(section=='All')
@@ -177,10 +178,10 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
         console.log(pathToSection);
         ref.child(pathToSection).on('value',function(snapshot) {
             var data=snapshot.val();
-            if(data!=undefined){
+            if(data!=undefined) {
                 console.log(data);
                 data=EncryptionService.decryptData(data);
-                LocalStorage.WriteToLocalStorage(section,data);
+                // LocalStorage.WriteToLocalStorage(section,data);
                 console.log(section);
                 switch(section){
                     case 'All':
@@ -232,6 +233,9 @@ myApp.service('UpdateUI', ['EncryptionService','$http','$filter', 'Patient','Doc
 
         return r.promise;
     }
+
+
+
     return {
         UpdateUserFields:function(){
             //Check if its a device or a computer

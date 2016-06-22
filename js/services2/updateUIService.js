@@ -1,7 +1,7 @@
 var myApp=angular.module('MUHCApp');
 
 
-myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService','$timeout', '$rootScope','Patient','Doctors','Appointments','Messages','Documents','EducationalMaterial','UserPreferences', 'UserAuthorizationInfo', '$q', 'Notifications', 'UserPlanWorkflow', 'LocalStorage','RequestToServer','$filter','Diagnoses','FirebaseService','MapLocation','Questionnaires',function (Announcements, TxTeamMessages, EncryptionService,$timeout, $rootScope, Patient,Doctors, Appointments,Messages, Documents, EducationalMaterial, UserPreferences, UserAuthorizationInfo, $q, Notifications, UserPlanWorkflow,LocalStorage,RequestToServer,$filter,Diagnoses,FirebaseService,MapLocation,Questionnaires ) {
+myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService','$timeout', '$rootScope','Patient','Doctors','Appointments','Messages','Documents','EducationalMaterial','UserPreferences', 'UserAuthorizationInfo', '$q', 'Notifications', 'UserPlanWorkflow','RequestToServer','$filter','Diagnoses','FirebaseService','MapLocation','Questionnaires',function (Announcements, TxTeamMessages, EncryptionService,$timeout, $rootScope, Patient,Doctors, Appointments,Messages, Documents, EducationalMaterial, UserPreferences, UserAuthorizationInfo, $q, Notifications, UserPlanWorkflow,RequestToServer,$filter,Diagnoses,FirebaseService,MapLocation,Questionnaires ) {
   var sectionServiceMappings={
     'All':
       {
@@ -85,6 +85,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       update:Notifications.updateUserNotifications
     }
   };
+  /* Not used for Web Portal
   function initLocalStorage()
   {
     var objectToLocalStorage={};
@@ -92,17 +93,17 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       objectToLocalStorage[key]=[{}];
     }
     LocalStorage.WriteToLocalStorage('All',objectToLocalStorage);
-  }
+  } */
     function setAllServices(dataUserObject,mode)
     {
 
       console.log(mode);
+      console.log("in updateUI");
       var promises=[];
       console.log(dataUserObject);
       if(mode=='Online')
       {
         console.log('boom');
-        initLocalStorage();
         console.log('I am in there');
         var documents=dataUserObject.Documents;
         var documentProm=Documents.setDocumentsOnline(documents);
@@ -152,10 +153,6 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
           Appointments.setUserAppointments(dataUserObject.Appointments);
           Notifications.setUserNotifications(dataUserObject.Notifications);
           console.log(dataUserObject);
-        /*if(mode=='Online')
-          {
-            LocalStorage.WriteToLocalStorage('All',dataUserObject);
-          }*/
 
       });
     }
@@ -225,7 +222,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       var r=$q.defer();
       //Firebase url
       var ref= new Firebase(FirebaseService.getFirebaseUrl()+'Users/');
-      var pathToSection=''
+      var pathToSection='';
       var username=UserAuthorizationInfo.getUserName();
       var deviceId=RequestToServer.getIdentifier();
       //Set path to read data
@@ -264,7 +261,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
                 RequestToServer.updateTimestamps('All',time);
                 sectionServiceMappings[sections]['update'](data,'Online');
                 //updateAllServices(data, 'Online');
-              }else if(sections=='ArrayFields'){
+              } else if(sections=='ArrayFields') {
                 RequestToServer.updateTimestamps(parameters,time);
 
 
@@ -272,7 +269,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
                 for (var i = 0; i < paramaters.length; i++) {
                   sectionServiceMappings[paramaters[i]]['update'](data[paramaters[i]],'Online');
                 }
-              }else{
+              } else {
                   if(!sectionServiceMappings[sections].hasOwnProperty('live'))
                   {
                       RequestToServer.updateTimestamps(sections,time);
@@ -311,6 +308,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       var pathToSection=username+'/'+deviceId+'/All';
       ref.child(pathToSection).on('value',function(snapshot){
           var data=snapshot.val();
+
           if(data&&typeof data!=='undefined'){
             //Data decryption
               data=EncryptionService.decryptData(data);
@@ -339,12 +337,13 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
         $rootScope.statusRoot="Beginning init offline";
       });
       console.log('Inside the init offline function');
-      data=LocalStorage.ReadLocalStorage('All');
       console.log(data);
       sectionServiceMappings['All'].init(data, 'Offline');
       r.resolve(true);
       return r.promise;
     }
+
+    /* Not used for Web Portal
     function initServicesFromLocalStorage()
     {
       var r=$q.defer();
@@ -376,7 +375,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       },5000)
 
       return r.promise;
-    }
+    } */ 
 
 
     /*function UpdateSectionOnline(section)
@@ -453,7 +452,10 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
         return r.promise;
     }*/
 
+
+
     return {
+      /*
         UpdateOffline:function(section)
         {
           return UpdateSectionOffline(section);
@@ -461,7 +463,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
         UpdateOnline:function(section)
         {
           return UpdateSectionOnline(section);
-        },
+        }, */
         //Function to update fields in the app, it does not initialize them, it only updates the new fields.
         //Parameter only defined when its a particular array of values.
         update:function(section,parameters)
@@ -471,36 +473,42 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
         init:function()
         {
           var r=$q.defer();
-          var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+          var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1; // true if online ?
           if(app){
-                  console.log(LocalStorage.isUserDataDefined());
+            /*
                   if(LocalStorage.isUserDataDefined())
                   {
                     return initServicesFromLocalStorage();
-                  }else{
+                  }else{ */
                     return initServicesOnline();
-                  }
-          }else{
+                 // }
+          } else {
               //Computer check if online
-              return initServicesOnline();
+              if(navigator.onLine) {
+                return initServicesOnline();
+              } else {
+                return initServicesOffline();
+              }
+              //return initServicesOnline();
            }
-        },
+        }/*,
         UpdateSection:function(section,onDemand)
         {
             var r=$q.defer();
-            var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-            if(app){
+            var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1; // true if online ?
+            if(app) {
+              /*
                 if($cordovaNetwork.isOnline()){
                     return UpdateSectionOnline(section);
-                }else{
-                    if(onDemand)
+                }else{ */
+                 /*   if(onDemand)
                     {
                       r.reject('No internet connection');
                     }else{
                       return UpdateSectionOffline(section);
                     }
-                }
-            }else{
+              //  } 
+            } else {
                 //Computer check if online
                 if(navigator.onLine){
                     console.log('online website');
@@ -511,7 +519,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
                 }
              }
             return r.promise;
-        }
+        } */
     };
 
 }]);

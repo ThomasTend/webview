@@ -1,5 +1,5 @@
 var myApp=angular.module('MUHCApp');
-myApp.service('Documents',['UserPreferences', 'UserAuthorizationInfo','$q','$rootScope', '$filter','RequestToServer','LocalStorage',function(UserPreferences,UserAuthorizationInfo,$q,$rootScope,$filter,RequestToServer,LocalStorage){
+myApp.service('Documents',['UserPreferences', 'UserAuthorizationInfo','$q','$rootScope', '$filter','RequestToServer',function(UserPreferences,UserAuthorizationInfo,$q,$rootScope,$filter,RequestToServer){
 	//Array photos contains all the documents for the patient
 	var photos=[];
 	var documentsNoFiles=[];
@@ -90,7 +90,6 @@ myApp.service('Documents',['UserPreferences', 'UserAuthorizationInfo','$q','$roo
 				photos=$filter('orderBy')(photos,'DateAdded',false);
 			};
 			console.log(photos);
-			LocalStorage.WriteToLocalStorage('Documents',documentsNoFiles);
 			$q.all(promises).then(function(results){
 				console.log(documents);
 				r.resolve(documents);
@@ -180,7 +179,6 @@ myApp.service('Documents',['UserPreferences', 'UserAuthorizationInfo','$q','$roo
 				if(photos[i].DocumentSerNum==serNum){
 					photos[i].ReadStatus='1';
 					documentsNoFiles[i].ReadStatus = '1';
-					LocalStorage.WriteToLocalStorage('Documents', documentsNoFiles);
 					RequestToServer.sendRequest('Read',{'Field':'Documents', Id:serNum});
 				}
 			}

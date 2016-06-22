@@ -1,6 +1,6 @@
 var myApp=angular.module('MUHCApp');
 //Service that deals with the treatment team message information
-myApp.service('TxTeamMessages', ['$filter','RequestToServer','LocalStorage', 'UserPreferences', function($filter,RequestToServer, LocalStorage,UserPreferences){
+myApp.service('TxTeamMessages', ['$filter','RequestToServer', 'UserPreferences', function($filter,RequestToServer,UserPreferences){
   //Initializing array that represents all the informations for TxTeamMessages
   var txTeamMessagesArray=[];
 
@@ -28,8 +28,6 @@ myApp.service('TxTeamMessages', ['$filter','RequestToServer','LocalStorage', 'Us
       //Add to my TxTeamMessages array
       txTeamMessagesArray.push(messages[i]);
     }
-    //Update local storage section
-    LocalStorage.WriteToLocalStorage('TxTeamMessages',txTeamMessagesArray);
   }
   return {
     //Setter the messages from 0
@@ -108,7 +106,6 @@ myApp.service('TxTeamMessages', ['$filter','RequestToServer','LocalStorage', 'Us
         if(serNum == txTeamMessagesArray[i].TxTeamMessageSerNum)
         {
           txTeamMessagesArray[i].ReadStatus = '1';
-          LocalStorage.WriteToLocalStorage('TxTeamMessages',txTeamMessagesArray);
           RequestToServer.sendRequest('Read',{'Id':serNum, 'Field':'TxTeamMessages'});
           break;
         }

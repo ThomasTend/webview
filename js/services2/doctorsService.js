@@ -120,7 +120,6 @@ myApp.service('Doctors',['$q','LocalStorage','$filter',function($q,LocalStorage,
           Doctors=$filter('orderBy')(Doctors,'LastName',false);
           Oncologists=$filter('orderBy')(Oncologists,'LastName',false);
           OtherDoctors=$filter('orderBy')(OtherDoctors,'LastName',false);
-          LocalStorage.WriteToLocalStorage('Doctors',doctorsStorage);
           $q.all(promises).then(function(){
             r.resolve(true);
           });
