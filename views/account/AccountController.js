@@ -29,10 +29,4 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
     $scope.Language=UserPreferences.getLanguage();
     $scope.sms=UserPreferences.getEnableSMS();
 
-    if((window.localStorage.getItem('pass')).length>7){
-        $scope.passwordLength=7;
-    }else{
-        $scope.passwordLength=window.localStorage.getItem('pass').length;
-    }
-    
 }]);

@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding:10px;height:100%;" ng-controller="HomeController">
+<div class="container-fluid" style="padding:10px;height:100%;">
 <div class="row">
     <!--<div class="col-md-1">
     </div>-->
@@ -66,7 +66,7 @@
         <strong>Email:</strong>  {{patient.Email}}<br>
         <strong>Phone:</strong>  {{patient.TelNum}}<br>
         <strong>Primary Physician:</strong> {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}<br>
-        <a href ui-sref="app.Contacts">Go to my account&raquo;</a><br>
+        <a href ui-sref="app.Contacts">Go to my account&nbsp;&raquo;</a><br>
     </div>
 
 </div>
@@ -108,7 +108,7 @@ a:active {
                   <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-  <a href style="color: black;" ng-click="Announcements=''">
+  <a ui-sref="app.Notifications" style="color: black;" ng-click="Announcements=''">
   <table>
     <tr>
         <td>
@@ -116,7 +116,7 @@ a:active {
         </td>
         <td>
           <span>&nbsp;&nbsp;&nbsp;General</span>
-          <span class="badge">{{Announcements}}</span>
+          <span ng-show="Announcements>0" class="badge">{{Announcements}}</span>
             <style>
             .badge {
                background:red;
@@ -139,7 +139,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Treating Team</span>
-            <span class="badge">{{TxTeamMessages}}</span>
+            <span ng-show="TxTeamMessages>0" class="badge">{{TxTeamMessages}}</span>
             <style>
             .badge {
                background:red;
@@ -164,7 +164,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Appointments</span>
-            <span class="badge" ng-click="setReadStatusToOneForAppointments()">{{Appointments}}</span>
+            <span ng-show="Appointments>0" class="badge">{{Appointments}}</span>
             <style>
             .badge {
                background:red;
@@ -187,7 +187,7 @@ a:active {
         </td>
         <td>
             <span>&nbsp;&nbsp;&nbsp;Documents</span>
-            <span class="badge">{{Documents}}</span>
+            <span ng-show="Documents>0" class="badge">{{Documents}}</span>
             <style>
             .badge {
                background:red;
@@ -291,7 +291,7 @@ a:active {
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="fa fa-info" style="color: #C8E6C9;"></span> Home</div>
     </div>
-    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+    <div class="panel-body" style="background-color: white;">
        <p>
         In your Home tab, you will be provided with news about your medical status, documents, hospital announcements and directions to the Hospital.
        </p>
@@ -408,7 +408,7 @@ a:active {
                       <p><div class="progressStatus" id="progressStatusPresentStage">
 
         </div>
-        <div ng-show="!treatmentPlanCompleted" class="progressStatus" id="progressStatusPastStages" style="margin-top:-200px">
+        <div  class="progressStatus" id="progressStatusPastStages" style="margin-top:-200px">
 
         </div>
 
@@ -443,7 +443,7 @@ a:active {
 
                </div>
                <div>
-                 <i class="ion-person iconHomeView" style="color:#2B6197"></i>&nbsp;{{appointmentShown.ResourceName}}
+                 <i class="fa fa-clipboard" aria-hidden="true" style="color:#2B6197"></i>&nbsp;{{appointmentShown.ResourceName}}
                </div>
                         </p>
                       </md-content>

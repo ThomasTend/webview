@@ -110,11 +110,6 @@
 
 <div class="row">
 
-
-
-
- 
-
 <div class="col-md-12">
 
   <div class="panel" style="padding: 15px;">
@@ -123,24 +118,24 @@
     </div>
     <div class="panel-body" style="background-color: white; align: center;">
       <div class="row">
-        <div class="col-xs-4">
-          <ul class="list" style="overflow-y:scroll;height:100%">
-  <li class=" list__header">
-    <strong>Primary Doctor</strong>
+        <div class="col-md-4 col-xs-12">
+          <ul class="list-group" style="overflow-y:scroll;height:100%">
+  <li class="list-group-item-heading" style="margin-top: 10px;">
+    Primary Doctor
   </li>
-  <li class="list__item__contacts" ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])">
+  <li class="list-group-item" ng-class="(doctorSelected.DoctorSerNum===primaryPhysician[0].DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(primaryPhysician[0])">
     {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}
   </li>
-  <li class="list__header">
-    <strong>Oncologists</strong>
+  <li class="list-group-item-heading" style="margin-top: 10px;">
+    Oncologists
   </li>
-  <li class="list__item__contacts" ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+  <li class="list-group-item" ng-repeat="doctor in oncologists" ng-class="(doctorSelected.DoctorSerNum===doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
     {{doctor.FirstName}} {{doctor.LastName}}
   </li>
-  <li class="list__header">
-    <strong>Other</strong>
+  <li class="list-group-item-heading" style="margin-top: 10px;">
+    Other
   </li>
-  <li class="list__item__contacts" ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
+  <li class="list-group-item" ng-repeat="doctor in otherDoctors" ng-class="(doctorSelected.DoctorSerNum==doctor.DoctorSerNum)? 'my-class' : ''" ng-click="goDoctorContact(doctor)">
     {{doctor.FirstName}} {{doctor.LastName}}
   </li>
 </ul>
@@ -150,7 +145,7 @@
         </div>
 
         <center>
-        <div class="col-xs-8">
+        <div class="col-md-8 col-xs-12" style="margin-top: 30px;">
        <div>
         <div class="row">
           <div class="col-xs-12">

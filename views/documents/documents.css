@@ -18,3 +18,20 @@
   margin-left: auto;
   margin-right: auto; 
   } 
+
+.my-class {
+  background-color: #5B82AB;
+  color: white;
+} 
+
+.toWhite {
+  color: #fff;
+}
+
+.grey {
+  color: grey;
+}
+
+.blue {
+  color: #5B82AB;
+}

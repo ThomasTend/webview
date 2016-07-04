@@ -1,5 +1,5 @@
 var myApp=angular.module('MUHCApp');
-myApp.service('Doctors',['$q','LocalStorage','$filter',function($q,LocalStorage,$filter){
+myApp.service('Doctors',['$q','$filter',function($q,$filter){
 
   //Arrays containining the different doctors.
   var Doctors=[];

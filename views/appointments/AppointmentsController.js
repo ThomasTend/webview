@@ -10,11 +10,13 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
     var date;
     var nextAppointment=Appointments.getNextAppointment();
     var lastAppointment=Appointments.getLastAppointmentCompleted();
-    if(nextAppointment.Index!=-1){ // check if there is a next appointment
-      $scope.noAppointments=false;
+    //if(nextAppointment.Index!=-1){ // check if there is a next appointment
+  /*  $scope.noAppointments=false;
       $scope.appointmentShown=nextAppointment.Object;
       $scope.titleAppointmentsHome='Next Appointment';
+
       date=nextAppointment.Object.ScheduledStartTime;
+
       
       var dateDay=date.getDate();
       var dateMonth=date.getMonth();
@@ -25,10 +27,10 @@ app.controller('AppointmentsController', ['$scope','$compile','uiCalendarConfig'
         $scope.nextAppointmentIsToday=true;
       }else{
         $scope.nextAppointmentIsToday=false;
-      }
-    }
-    // if there is no nex appointment, then you just display the last appointment
-    else if(lastAppointment!=-1){
+      } */
+    //}
+    // if there is no next appointment, then you just display the last appointment
+    /*else*/ if(lastAppointment!=-1){
       $scope.nextAppointmentIsToday=false;
       $scope.appointmentShown=lastAppointment;
       $scope.titleAppointmentsHome='Last Appointment';

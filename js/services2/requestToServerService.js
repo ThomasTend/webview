@@ -14,10 +14,10 @@ myApp.service('RequestToServer',function(UserAuthorizationInfo, EncryptionServic
           identifier='browser';
       }
     var lastUpdateTimestamp={};
-    function initTimestampsFromLocalStorage()
+    /*function initTimestampsFromLocalStorage()
     {
       lastUpdateTimestamp=JSON.parse(window.localStorage.getItem(UserAuthorizationInfo.UserName+'/Timestamps'));
-    }
+    }*/
     function initTimestamps(time)
     {
 
@@ -71,7 +71,7 @@ myApp.service('RequestToServer',function(UserAuthorizationInfo, EncryptionServic
           }else if(typeOfRequest=='Refresh')
           {
 
-            if(!lastUpdateTimestamp.hasOwnProperty('All')) initTimestampsFromLocalStorage();
+            /*if(!lastUpdateTimestamp.hasOwnProperty('All')) initTimestampsFromLocalStorage();*/
             timestamp=obtainTimestamp(content);
 
             console.log(lastUpdateTimestamp);

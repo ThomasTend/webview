@@ -38,16 +38,6 @@ var testArray = [{Type: 'Announcement', Name: 'Announcement', Content: 'New Anno
     $rootScope.Appointments = numNewAppointments;
     $rootScope.Documents = numNewDocuments;
 
-    $rootScope.setReadStatusToOneForAppointments = function() {
-      var notificationsArray=Notifications.getUserNotifications();
-
-      for(var i = 0; i < notificationsArray.length; i++) {
-        if(notificationsArray[i].Type === 'Appointment') {
-          setNotificationReadStatus(i);
-        }
-      }
-    }
-
     function setNotificationsNumberAlert() {
         $rootScope.TotalNumberOfNews=$rootScope.Notifications+$rootScope.NumberOfNewMessages;
         if($rootScope.TotalNumberOfNews===0)$rootScope.TotalNumberOfNews='';
@@ -60,7 +50,6 @@ var testArray = [{Type: 'Announcement', Name: 'Announcement', Content: 'New Anno
         }
     }
         
-
     return {
         setUserNotifications:function(notifications) {
             this.Notifications=[];

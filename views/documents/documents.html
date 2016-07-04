@@ -1,41 +1,39 @@
 <div class="row">
-  <div class="col-md-4 col-xs-12">
+  <div class="col-md-4 col-xs-4">
     <div class="panel-container green" style="cursor: pointer; margin-left: 15px;">
       <a ui-sref="app.Appointments" style="color: #fff;">
       <div class="row">
-        <div class="col-md-3 col-xs-3">
-          <span class="fa fa-calendar fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9 col-xs-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Appointments
+        <div class="col-xs-12">
+          <span class="fa fa-calendar fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
+        
+        
+          <span style="font-size: 20px;color: #C8E6C9;">Appointments</span>
         </div>
       </div>
     </a>
     </div>
   </div>
-  <div class="col-md-4 col-xs-12">
-    <div class="panel-container green" style="cursor: pointer;">
+  <div class="col-md-4 col-xs-4">
+    <div class="panel-container green" style="cursor: pointer; margin-right: 15px;">
     <a ui-sref="app.TreatmentPlan" style="color: #fff;">
       <div class="row">
-        <div class="col-md-3 col-xs-3">
-          <span class="fa fa-list fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9 col-xs-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Treatment Plan
+        <div class="col-xs-12">
+          <span class="fa fa-list fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
+    
+          <span style="font-size: 20px;color: #C8E6C9;">Treatment Plan</span>
         </div>
       </div>
     </a>
   </div>
   </div>
-  <div class="col-md-4 col-xs-12">
+  <div class="col-md-4 col-xs-4">
     <div class="panel-container green" style="cursor: pointer; margin-right: 15px; background-color: #96c238;">
     <a ui-sref="app.Documents" style="color: #fff;">
       <div class="row">
-        <div class="col-md-3 col-xs-3">
-          <span class="fa fa-folder fa-2x" style="text-align: right; padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>
-        </div>
-        <div class="col-md-9 col-xs-9" style="text-align: left; font-size: 20px; padding: 10px 0px 10px 0px; color: #C8E6C9;">
-          Documents
+        <div class="col-xs-12">
+          <span class="fa fa-folder fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
+       
+          <span style="font-size: 20px;color: #C8E6C9;">Documents</span>
         </div>
       </div>
     </a>
@@ -72,13 +70,13 @@
     </div> -->
     <div class="panel-body" style="background-color: white;overflow-y: scroll;" ng-controller="AppointmentsController">
       <div style="margin-top:10px">
-          <ul class="list-group list--inset" ng-repeat="document in documents" ng-click="goToDocument(document)">
-            <li class="list-group-item list--inset__item list__item--tappable">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="document in documents" ng-click="goToDocument(document)" ng-class="(selectedDocument.DocumentSerNum===document.DocumentSerNum)? 'my-class' : ''">
               <div style="padding:8px;">
            <div class="row" > 
              <div class="col-xs-1">
                <div align="right" >
-                 <i class="ion-document-text iconThemeViews"></i>
+                 <i class="ion-document-text iconThemeViews" ng-class="(selectedDocument.DocumentSerNum===document.DocumentSerNum)? 'toWhite' : 'blue'"></i>
                </div>
              </div>
              <div class="col-xs-11">
@@ -86,9 +84,9 @@
                 <div class="profile-name" >
                      {{document.Name}}
                    </div>
-               <div class="desc">
-                     Oct, 3 2015
-                     <div style=" color:grey;">{{document.Description}}</div>
+               <div>
+                     Oct, 3rd 2015
+                     <div ng-class="(selectedDocument.DocumentSerNum===document.DocumentSerNum)? 'toWhite' : ''">{{document.Description}}</div>
                 </div>
               </div>
             </div>

@@ -147,6 +147,7 @@ function treatmentPlanStatusInit()
             $scope.completionDate=stages[nextStageIndex-1].Date;
             endColor='#5CE68A';
         }else{
+            console.log("In treatmentPlanStatusInit");
             $scope.currentStage=stages[nextStageIndex-1].Name;
             $scope.treatmentPlanCompleted=false;
             $scope.percentage=Math.floor((100*(nextStageIndex))/stages.length);

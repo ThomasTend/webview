@@ -85,15 +85,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       update:Notifications.updateUserNotifications
     }
   };
-  /* Not used for Web Portal
-  function initLocalStorage()
-  {
-    var objectToLocalStorage={};
-    for (var key in sectionServiceMappings.length) {
-      objectToLocalStorage[key]=[{}];
-    }
-    LocalStorage.WriteToLocalStorage('All',objectToLocalStorage);
-  } */
+ 
     function setAllServices(dataUserObject,mode)
     {
 
@@ -141,6 +133,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
           plan[key].Date=$filter('formatDateToFirebaseString')(tmp);
         }
           Questionnaires.setPatientQuestionnaires(dataUserObject.Questionnaires);
+          console.log('Just before setEducationalMaterial call in UpdateUI');
           EducationalMaterial.setEducationalMaterial(dataUserObject.EducationalMaterial);
           TxTeamMessages.setTxTeamMessages(dataUserObject.TxTeamMessages);
           Announcements.setAnnouncements(dataUserObject.Announcements);
@@ -168,53 +161,6 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
         }
     }
 
-    /*function UpdateSectionOffline(section)
-    {
-        var r=$q.defer();
-        var data='';
-        console.log(section);
-        data=LocalStorage.ReadLocalStorage(section);
-        console.log(data);
-        switch(section){
-            case 'All':
-                updateAllServices(data, 'Offline');
-                break;
-            case 'Doctors':
-                Doctors.setUserContactsOnline(data);
-                break;
-            case 'Patient':
-                Patient.setUserFieldsOnline(data);
-                break;
-            case 'Appointments':
-                Appointments.setUserAppointments(data);
-                break;
-            case 'Messages':
-                Messages.setUserMessages(data);
-                break;
-            case 'Documents':
-                Documents.setDocumentsOffline(data);
-                break;
-            case 'UserPreferences':
-                UserPreferences.setUserPreferences(data.Language,data.EnableSMS);
-                break;
-            case 'Notifications':
-                Notifications.setUserNotifications(data);
-                break;
-            case 'Notes':
-                Notes.setNotes(data);
-                break;
-            case 'LabTests':
-                LabResults.setTestResults(data);
-                break;
-            case 'UserPlanWorkflow':
-            //To be done eventually!!!
-            break;
-          }
-          setTimeout(function () {
-              r.resolve(true);
-          }, 7000);
-        return r.promise;
-    }*/
     function updateSection(sections, parameters)
     {
 
@@ -343,41 +289,6 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
       return r.promise;
     }
 
-    /* Not used for Web Portal
-    function initServicesFromLocalStorage()
-    {
-      var r=$q.defer();
-      $timeout(function(){
-        $rootScope.statusRoot="Beginning init offline";
-      });
-      console.log('Inside the init offline function');
-      data=LocalStorage.ReadLocalStorage('All');
-      console.log(data);
-      sectionServiceMappings['All'].init(data, 'Offline');
-      var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
-      if(app){
-          if($cordovaNetwork.isOnline()){
-            updateSection('All').then(function()
-            {
-              r.resolve(true);
-            }).catch(function(error){
-              console.log(error);
-              r.resolve(true);
-            });
-          }else{
-            r.resolve(true);
-          }
-      }else{
-        r.resolve(true);
-      }
-      $timeout(function(){
-        r.resolve(true);
-      },5000)
-
-      return r.promise;
-    } */ 
-
-
     /*function UpdateSectionOnline(section)
     {
         var r=$q.defer();
@@ -475,13 +386,7 @@ myApp.service('UpdateUI', ['Announcements','TxTeamMessages','EncryptionService',
           var r=$q.defer();
           var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1; // true if online ?
           if(app){
-            /*
-                  if(LocalStorage.isUserDataDefined())
-                  {
-                    return initServicesFromLocalStorage();
-                  }else{ */
-                    return initServicesOnline();
-                 // }
+              return initServicesOnline();
           } else {
               //Computer check if online
               if(navigator.onLine) {

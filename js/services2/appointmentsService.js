@@ -9,7 +9,7 @@ var myApp=angular.module('MUHCApp');
 *@requires $cordovaCalendar
 *@description Sets the User appointment objects for the different views.
 **/
-myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', '$filter', 'UserPreferences',function ($q,RequestToServer,  UserAuthorizationInfo, $filter,UserPreferences) {
+myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', '$filter', 'UserPreferences', function ($q, RequestToServer, UserAuthorizationInfo, $filter, UserPreferences) {
     /**
     *@ngdoc property
     *@name  UserAppointmentsArray
@@ -20,6 +20,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
     var UserAppointmentsArray = [];
     var calendar={};
     var numberOfSessions=0;
+    var NextAppointment = {};
     function searchAppointmentsAndDelete(appointments)
     {
       for (var i = 0; i < appointments.length; i++) {
@@ -63,6 +64,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
         return null;
       }
     }
+
     function getAppointmentsInPeriod(period)
     {
       //Variables for comparing dates
@@ -95,8 +97,25 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
       return array;
     }
 
-    function addAppointmentsToService(appointments)
-    {
+    function isThereAppointmentToday() {
+            var todayAppointments = getAppointmentsInPeriod('Today');
+            if(todayAppointments.length == 0) {
+              return false;
+            } else {
+              return true;
+            }
+        }
+
+    function isThereNextAppointmentPrivate() {
+          var FutureAppointments = getAppointmentsInPeriod('Future');
+          if(FutureAppointments.length == 0) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+    function addAppointmentsToService(appointments) {
       if (appointments === undefined) return;
       //Setting min date for upcoming appointment
       var min=Infinity;
@@ -104,7 +123,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
       var index=-1;
       numberOfSessions=0;
       for (var i = 0; i < appointments.length; i++) {
-          appointments[i].ResourceName = (appointments[i].Resource.hasOwnProperty('Machine')) ? '':appointments[i].Resource.Doctor;
+          appointments[i].ResourceName = (appointments[i].Resource.hasOwnProperty('Machine')) ? appointments[i].Resource.Machine:appointments[i].Resource.Doctor;
           appointments[i].ScheduledStartTime = $filter('formatDate')(appointments[i].ScheduledStartTime);
           appointments[i].ScheduledEndTime =  $filter('formatDate')(appointments[i].ScheduledEndTime);
           UserAppointmentsArray[i] = appointments[i];
@@ -273,6 +292,7 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
                 window.localStorage.setItem('NativeCalendarAppoinments',appointmentString);
             }
         }
+        
     return {
 
          /**
@@ -295,15 +315,6 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
           searchAppointmentsAndDelete(appointments);
           addAppointmentsToService(appointments);
         },
-        isThereNextAppointment:function(){
-          var FutureAppointments=getAppointmentsInPeriod('Future');
-          if(FutureAppointments.length==0)
-          {
-            return false;
-          }else{
-            return true;
-          }
-        },
         isThereAppointments:function()
         {
           if(UserAppointmentsArray.length==0)
@@ -313,6 +324,14 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
             return true;
           }
         },
+        isThereNextAppointment: function() {
+          var FutureAppointments = getAppointmentsInPeriod('Future');
+          if(FutureAppointments.length == 0) {
+            return false;
+          } else {
+            return true;
+            }
+          },
         isThereFirstTreatmentAppointment:function()
         {
           if(numberOfSessions>0)
@@ -337,9 +356,9 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
         *@description Returns the Array of Appointments organized chronologically.
         **/
         getUserAppointments: function () {
-
             return UserAppointmentsArray;
         },
+        
          /**
         *@ngdoc method
         *@name getTodaysAppointments
@@ -371,6 +390,21 @@ myApp.service('Appointments', ['$q', 'RequestToServer','UserAuthorizationInfo', 
           return getAppointmentsInPeriod('Past');
         },
         getNextAppointment:function(){
+          if(isThereAppointmentToday()) {
+            var todayAppointments = getTodaysAppointments();
+            if(Object.prototype.toString.call(todayAppointments) === '[object Array]') { // if multiple appointments in one day
+              return todayAppointments[0];
+            } else { // if only one appointment
+              return todayAppointments;
+            }
+          } else if(isThereNextAppointmentPrivate()) {
+            var nextAppointments = getFutureAppointments();
+            if(Object.prototype.toString.call(nextAppointments) === '[object Array]') { // if nextAppointments is an array
+              return nextAppointments[0];
+            } else { // if nextAppointments is an object
+            return nextAppointments;
+            }
+          }
             return this.NextAppointment;
         },
         setAppointmentCheckin:function(serNum){

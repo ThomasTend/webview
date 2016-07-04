@@ -54,24 +54,24 @@
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-list" style="color: #C8E6C9;"></span> Educational Material</div>
     </div>
-    <div class="panel-body" style="background-color: white; overflow-y: scroll;" ng-controller="AppointmentsController">
+    <div class="panel-body" style="background-color: white; overflow-y: scroll; height: 100%; margin-top: 15px;" ng-controller="AppointmentsController">
         <div style="margin-top:10px">
-        <ul class="list-group list--inset" ng-repeat="material in materials" ng-click="selectMaterial(material)">
-            <li class="list-group-item list--inset__item list__item--tappable">
-         <div style="padding:8px;">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="material in materials" ng-click="selectMaterial(material)" ng-class="(selectedMaterial.EducationalMaterialControlSerNum==material.EducationalMaterialControlSerNum)? 'my-class' : ''">
+         <div>
            <div class="row" >
              <div class="col-xs-1">
                <div align="right" >
-                 <i class=" iconThemeViews" ng-class="material.icon"></i>
+                 <i class="iconThemeViews" ng-class="material.icon"></i>
                </div>
              </div>
              <div class="col-xs-11">
              <div  align="middle" style="margin-left:5px">
-                <div class="profile-name" >
-                     {{material.name}}
+                <div class="profile-name">
+                     {{material.Name}}
                    </div>
-               <div class="desc">
-                     <div style=" color:grey;">{{material.description}}</div>
+               <div>
+                     <div style=" color:grey;">{{material.Description}}</div>
                    </div>
                    </div>
              </div>
@@ -128,7 +128,7 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-book" style="color: #C8E6C9;"></span> {{selectedMaterial.name}}</div>
+        <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-book" style="color: #C8E6C9;"></span> {{selectedMaterial.Name}}</div>
     </div>
     <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
       <div class="row" >

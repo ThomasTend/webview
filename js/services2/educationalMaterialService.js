@@ -100,7 +100,8 @@ myApp.service('EducationalMaterial',['$filter', 'UserPreferences', 'RequestToSer
     {
       console.log(edumaterial);
       educationalMaterialArray=[];
-      addEducationalMaterial(edumaterial)
+      addEducationalMaterial(edumaterial);
+      setLanguageEduMaterial(edumaterial);
     },
     isThereEducationalMaterial:function()
     {
@@ -172,7 +173,7 @@ myApp.service('EducationalMaterial',['$filter', 'UserPreferences', 'RequestToSer
     getTypeEducationaMaterial:function(edumaterial)
     {
       return getTypeMaterial(edumaterial);
-    },  
+    },
     openEducationalMaterial:function(edumaterial)
     {
 		  return {Url:'./views/education/individual-material.html'};

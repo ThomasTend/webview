@@ -70,7 +70,7 @@
   </ul>
       <ul class="nav navbar-nav navbar-right">
         <li ui-sref-active="active" class="dropdown dropdown-lg " ng-controller="NotificationsController">
-          <a  href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="Notifications=''"><i class="fa fa-bell iconMenuBar" ng-class="(Notifications>0?'iconThemeViews':'')" style="color: #C8E6C9;"></i><span class="badge">{{Notifications}}</span></a>
+          <a  href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="Notifications=''"><i class="fa fa-bell iconMenuBar" ng-class="(Notifications>0?'iconThemeViews':'')" style="color: #C8E6C9;"></i><span ng-show="Notifications > 0" class="badge">{{Notifications}}</span></a>
           <ul class="dropdown-menu dropdown-menu-lg row" align="center">
             <hr style="margin:5px 0 5px 0;padding:0">
             <li ng-repeat="notification in notifications" ng-class="(notification.ReadStatus=='0')?'unreadNotification':''" ng-click="goToNotification($index,notification)" class="list__item--tappable">
