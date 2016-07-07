@@ -29,6 +29,7 @@ function homeInit() {
     var numNewAppointments = 0;
 
     Notifications.setUserNotifications();
+
     var testArray = Notifications.getUserNotifications();
 
     for(var i = 0; i < Notifications.getUserNotifications().length; i++) {

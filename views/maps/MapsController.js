@@ -26,5 +26,4 @@ myApp.controller('ContactsController', ['$scope','Doctors', '$timeout','UpdateUI
     };
     $scope.itemArray = Doctors.getContacts();
     $scope.doctorSelected=$scope.oncologists[0];
-
 }]);

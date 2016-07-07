@@ -1,4 +1,4 @@
-var myWeb = angular.module('MUHCApp', ['ui.bootstrap','ui.router','firebase','tmh.dynamicLocale','pascalprecht.translate','ui.select','ngSanitize','ui.calendar', 'ngAnimate', 'ngMaterial']);
+var myWeb = angular.module('MUHCApp', ['ui.bootstrap','ui.router','firebase','tmh.dynamicLocale','pascalprecht.translate','ui.select','ngSanitize','ui.calendar', 'ngAnimate', 'ngMaterial',  'ngMessages', 'material.svgAssetsCache']);
 myWeb.controller('MainController', ['$scope','$q','$state', 'UserAuthorizationInfo','$rootScope','Appointments','Documents','RequestToServer', function ($scope,$q,$state, UserAuthorizationInfo,$rootScope,Appointments,Documents,RequestToServer) {
 	$rootScope.logout=function(){
 		function deleteFields(){

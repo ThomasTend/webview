@@ -1,6 +1,6 @@
 
-myApp.controller('AccountController',['$scope','UserPreferences','Patient',function($scope,UserPreferences,Patient){
-
+myApp.controller('AccountController',['$scope','UserPreferences','Patient','ngMaterial', 'ngMessages', 'material.svgAssetsCache',function($scope,UserPreferences,Patient,ngMaterial, ngMessages) {
+  /*
   $scope.editingDiv = {
       //editFirstNameDiv: false,
       //editLastNameDiv: false,
@@ -11,6 +11,7 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
       editSMSDiv:false
 
   };
+
   $scope.hideSectionsBut = function (onlyDivToShow) {
         for (var div in $scope.editingDiv) {
             if (div !== onlyDivToShow) {
@@ -21,6 +22,7 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
 
         }
     };
+    */
     $scope.checkboxModel=UserPreferences.getEnableSMS();
     $scope.FirstName = Patient.getFirstName();
     $scope.LastName = Patient.getLastName();
@@ -37,4 +39,36 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
     
 }]);
 
+myApp.controller('SelectOptGroupController', function($scope) {
+      console.log("Here 1");
+      $scope.editingDiv = {
+          Email: false,
+          Telephone: false,
+          Language: false,
+          password: false,
+          SMS:false
+      };
 
+      $scope.options = [
+          "Email",
+          "password",
+          "SMS",
+          "Telephone",
+          "Language"
+      ];
+      console.log("Here 2");
+      $scope.goOptionSelected = function(onlyDivToShow) {
+        console.log("Here 3");
+        console.log(onlyDivToShow + " " + $scope.editingDiv[onlyDivToShow] + " asdasdasdas");
+          $scope.editingDiv[onlyDivToShow] = true;
+          $scope.optionSelected = onlyDivToShow;
+    
+          for (var option in $scope.editingDiv) {
+            if (option !== onlyDivToShow) {
+                $scope.editingDiv[option] = false;
+            }
+            console.log(option + " " + $scope.editingDiv[option] + " klfnklsnfklsdfklsdkfsk");
+          }
+      }
+
+    });
