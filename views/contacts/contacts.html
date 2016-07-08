@@ -111,35 +111,44 @@
   </div>
   </div>
 
- <div class="col-xs-12 col-xs-offset-4 col-sm-8 col-lg-8" ng-show="editingDiv.Email" style="text-align:left;margin-left:30px">
-      <form name="form" ng-submit="changeField('Email')" novalidate><br>
+    <div class="col-xs-12 col-xs-offset-4 col-sm-8 col-lg-8" ng-show="editingDiv.Email" style="text-align:left;margin-left:30px">
+      <form name="form" ng-submit="changeField('Email')" novalidate>
       <strong>Enter your new email:</strong>&nbsp;<input class="text-input" id="firstNameField" type="text" name="editEmail" ng-model="account.Email" placeholder="Email"/>
-      <br><strong>Enter your password:</strong>&nbsp;<input id="firstNameField" class="text-input" type="password" name="editPasswordEmail" ng-model="account.emailPassword" style="margin-left:2px" placeholder="Password"/>&nbsp;<br><input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.Email=false">Cancel</a></form>
+      <br><br><strong>Enter your password:</strong>&nbsp;<input id="firstNameField" class="text-input" type="password" name="editPasswordEmail" ng-model="account.emailPassword" style="margin-left:2px" placeholder="Password"/><br><br><input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.Email=false">Cancel</a></form>
     </div>
      <div class="col-xs-12 col-sm-12 col-lg-12" ng-show="editingDiv.password" style="text-align:left;margin-left:30px">
-      <form name="form" ng-submit="changeField('Password')" novalidate><br>&nbsp;&nbsp;<strong>Enter old password:</strong>&nbsp;<input id="passwordField" class="text-input" type="password" name="editPassword" ng-model="account.oldPassword" placeholder="Password"/><br>
-      <strong>Enter new password:</strong>&nbsp;<input id="passwordField" style="margin-left:1px" type="password" name="editPassword" class="text-input" ng-model="account.newPassword" placeholder="Password"/><br>
-     &nbsp;&nbsp;<strong>Re-enter password:</strong>&nbsp;<input id="passwordField" class="text-input" style="margin-left:3px" type="password" name="editPassword" ng-model="account.rePassword" placeholder="Password"/><br>&nbsp;
-     <div style="margin-left=30px"><input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.password=false">Cancel</a></div></form>
+      <form name="form" ng-submit="changeField('Password')" novalidate><strong>Enter old password:</strong>&nbsp;<input id="passwordField" class="text-input" type="password" name="editPassword" ng-model="account.oldPassword" placeholder="Password"/><br><br>
+      <strong>Enter new password:</strong>&nbsp;<input id="passwordField" style="margin-left:1px" type="password" name="editPassword" class="text-input" ng-model="account.newPassword" placeholder="Password"/><br><br>
+     <strong>Re-enter password:</strong>&nbsp;<input id="passwordField" class="text-input" style="margin-left:3px" type="password" name="editPassword" ng-model="account.rePassword" placeholder="Password"/><br><br>
+     <input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.password=false">Cancel</a></form>
     </div>
     <div class="col-xs-12 col-sm-12 col-lg-12" ng-show="editingDiv.SMS" align="left" style="text-align:left;margin-left:30px">
-     <br> <form name="form" ng-submit="changeImage('SMS')" align="left" novalidate><strong>SMS Notifications:</strong>&nbsp;
+     <form name="form" ng-submit="changeImage('SMS')" align="left" novalidate><strong>SMS Notifications:</strong>&nbsp;
+      <!--
+      <md-input-container>
+        <label>Options</label>
+        <md-select name="Language" ng-model="SMSPreference">
+          <md-option ng-repeat="for SMSPreference in SMSPreferences" value="{{SMSPreference}}">{{option}}</md-option>
+        </md-select>
+      </md-input-container>-->
         <select name="Language" ng-model="account.SMSPreference">
               <option value="Enable">Enable</option>
               <option value="Disable">Disable</option>
           </select>
+          <br><br>
       <input class="btn btn-primary" type="submit" id="submitLanChange" value="Submit" />&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.SMS=false">Cancel</a><br>
       </form>
     </div>
      <div class="col-xs-12 col-sm-12 col-lg-12" ng-show="editingDiv.Telephone" style="text-align:left;margin-left:30px">
-      <form name="form" ng-submit="changeField('TelNum')" novalidate><br><strong>Enter New Telephone Number:&nbsp;</strong><input id="firstNameField" class="text-input" type="text" name="editFirstName" ng-model="account.editFirstName" size="21" placeholder="Telephone Number"/>&nbsp;<input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.Telephone=false">Cancel</a></form>
+      <form name="form" ng-submit="changeField('TelNum')" novalidate><strong>Enter New Telephone Number:&nbsp;</strong><input id="firstNameField" class="text-input" type="text" name="editFirstName" ng-model="account.editFirstName" size="21" placeholder="Telephone Number"/><br><br><input class="btn btn-primary" type="submit" id="submit" value="Submit"/>&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.Telephone=false">Cancel</a></form>
     </div>
       <div class="col-xs-12 col-sm-12 col-lg-12" ng-show="editingDiv.Language" style="text-align:left;margin-left:30px">
-      <form name="form" ng-submit="changeField('Lan')" novalidate><br><strong>Language:</strong>&nbsp;
+      <form name="form" ng-submit="changeField('Lan')" novalidate><strong>Language:</strong>&nbsp;
           <select name="Language"  ng-model="account.LanguagePreference">
               <option value="English">EN</option>
               <option value="French">FR</option>
           </select>
+          <br><br>
           <input class="btn btn-primary" type="submit" id="submitLanChange" value="Submit" />&nbsp;<a class="btn btn-primary" id="cancelEdit" ng-click="editingDiv.Language=false">Cancel</a><br>
       </form>
               </div>

@@ -41,6 +41,7 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient','ngMa
 
 myApp.controller('SelectOptGroupController', function($scope) {
       console.log("Here 1");
+
       $scope.editingDiv = {
           Email: false,
           Telephone: false,
@@ -48,6 +49,11 @@ myApp.controller('SelectOptGroupController', function($scope) {
           password: false,
           SMS:false
       };
+      /*
+      $scope.SMSPreferences = [
+        "Enable",
+        "Disable"
+      ];*/
 
       $scope.options = [
           "Email",
@@ -56,6 +62,7 @@ myApp.controller('SelectOptGroupController', function($scope) {
           "Telephone",
           "Language"
       ];
+      
       console.log("Here 2");
       $scope.goOptionSelected = function(onlyDivToShow) {
         console.log("Here 3");

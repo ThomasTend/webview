@@ -443,7 +443,7 @@ a:active {
 
                </div>
                <div>
-                 <i class="fa fa-clipboard" aria-hidden="true" style="color:#2B6197"></i>&nbsp;{{appointmentShown.ResourceName}}
+                 <i class="fa fa-clipboard" aria-hidden="true" style="color:#2B6197"></i>&nbsp;<span ng-bind="(appointmentShown.Resource.hasOwnProperty('Machine')) ? appointmentShown.Resource.Machine : appointmentShown.Resource.Doctor"></span>
                </div>
                         </p>
                       </md-content>
