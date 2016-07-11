@@ -140,6 +140,7 @@ myApp.service('Notifications',['$rootScope','$filter','RequestToServer','Announc
           temp[i].Custom =  notificationTypes[temp[i].NotificationType].Custom;
           temp[i].Icon = notificationTypes[temp[i].NotificationType].icon;
           temp[i].Color = notificationTypes[temp[i].NotificationType].color;
+          console.log("typeof bug in notificationsService.js" + typeof(notificationTypes[temp[i].NotificationType].PageUrl));
           if(!notificationTypes[temp[i].NotificationType].hasOwnProperty('openFunction')) temp[i].PageUrl = notificationTypes[temp[i].NotificationType].PageUrl(temp[i].RefTableRowSerNum);
           temp[i].Content = notificationTypes[temp[i].NotificationType].namesFunction(temp[i].RefTableRowSerNum);
           console.log(temp[i].Content);
