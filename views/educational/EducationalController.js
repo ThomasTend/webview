@@ -20,5 +20,14 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
     })
  
   }
+  /*
+  $scope.shareOnFacebook = function(type,material)
+  {
+    window.open("https://www.facebook.com/sharer/sharer.php?u="+material.ShareURL,'_blank');
+    facebookShareButtonClass = 'Active';
+    ShareButtonClass[type] = 'Active';
+    ShareButtonClass['Twitter'] = '';
+
+  }*/
 
 }]);
