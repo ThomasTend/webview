@@ -28,6 +28,15 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
     ShareButtonClass[type] = 'Active';
     ShareButtonClass['Twitter'] = '';
 
-  }*/
+  }
 
+  var shareButtonClasses = ['microsoft', 'google', 'yahoo'];
+
+  $scope.shareMicrosoft = function(material, type) {
+    windows.open("" + material.ShareURL, '_blank', false);
+    for(var i = 0; i < shareButtonClasses.length; i++) {
+      (shareButtonClasses[i] == material) ? shareButtonClasses[]
+    }
+  }
+  */
 }]);
