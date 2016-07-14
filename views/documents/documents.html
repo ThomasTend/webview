@@ -200,19 +200,28 @@
     </div>
     <div class="panel-footer clearfix" style="background-color: white; height: 70px;">
       <div class="pull-right">
+
+<!--
           <div class="share-button sharer" style="display: inline-block;">
 <button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;"><span class="fa fa-share" style="color: #C8E6C9"></span> Share</button>
 <div class="social top center networks-5 ">
- <!-- Facebook Share Button -->
-    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url" target="_blank"><i class="fa fa-facebook"></i></a> 
-    <!-- Google Plus Share Button -->
+    <a class="fbtn share facebook" href="https://www.facebook.com/sharer/sharer.php?u=url" target="_blank"><i class="fa fa-facebook"></i></a>
     <a class="fbtn share gplus" href="https://plus.google.com/share?url=url" target="_blank"><i class="fa fa-google-plus"></i></a> 
-    <!-- Twitter Share Button -->
     <a class="fbtn share twitter" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs" target="_blank"><i class="fa fa-twitter"></i></a> 
- </a>
 </div>
 </div>
+-->
+
+<p>
+  <a href class="btn copy" style="background-color: #74A333; color: #C8E6C9;">Copy</a>
+    &nbsp;
+  <input type="text" class="toCopy" value="{{selectedMaterial.ShareURL}}">
+</p>
+
+
 </div>
+</div>
+<!--
           <style>
           .social .fbtn {
     width: 50px;
@@ -277,8 +286,10 @@
   transition: all 0.4s ease 0s;
   visibility: hidden;
 }
+-->
           </style>
           <script>
+          /*
           $( document ).ready(function() {
   //custom button for homepage
      $( ".share-btn" ).click(function(e) {
@@ -288,7 +299,8 @@
      
             $(this).next( ".networks-5" ).toggleClass( "active" );
     });   
-});
+}); 
+*/
           </script>
     </div>
   </div>

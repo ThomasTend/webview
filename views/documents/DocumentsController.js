@@ -22,9 +22,25 @@ myApp.controller('DocumentsController',['Documents', '$scope', 'UserPreferences'
 
   function init(){
 
+      var copyBtn = document.querySelector('.copy');
+
+  copyBtn.addEventListener('click', function(event) {
+  var textToCopy = document.querySelector('.toCopy');
+  textToCopy.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+  });
+
       $scope.documents=Documents.getDocuments();
       $scope.selectedDocument=$scope.documents[0];
 console.log($scope.documents);
+console.log($scope.documents[0].ShareURL);
 if(UserPreferences.getLanguage()=='EN'){
   for(var i=0;i<$scope.documents.length;i++){
     $scope.documents[i].Name=$scope.documents[i].AliasName_EN; 

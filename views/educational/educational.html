@@ -57,7 +57,8 @@
     <div class="panel-body" style="background-color: white; overflow-y: scroll; height: 100%; margin-top: 15px;" ng-controller="AppointmentsController">
         <div style="margin-top:10px">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="material in materials" ng-click="selectMaterial(material)" ng-class="(selectedMaterial.EducationalMaterialControlSerNum==material.EducationalMaterialControlSerNum)? 'my-class' : ''">
+            <h4 class="list-group-item-heading">Prior To Treatment</h4>
+            <li class="list-group-item" ng-repeat="materialB in materialsBefore" ng-click="selectMaterial(materialB)" ng-class="(selectedMaterial.EducationalMaterialControlSerNum==materialB.EducationalMaterialControlSerNum)? 'my-class' : ''">
          <div>
            <div class="row" >
              <div class="col-xs-1">
@@ -68,16 +69,62 @@
              <div class="col-xs-11">
              <div  align="middle" style="margin-left:5px">
                 <div class="profile-name">
-                     {{material.Name}}
+                     {{materialB.Name}}
                    </div>
                <div>
-                     <div style=" color:grey;">{{material.Description}}</div>
+                     <div style=" color:grey;">{{materialB.Description}}</div>
                    </div>
                    </div>
              </div>
            </div>
              </div>
        </li>
+       <br>
+       <h4 class="list-group-item-heading">During Treatment</h4>
+       <li class="list-group-item" ng-repeat="materialD in materialsDuring" ng-click="selectMaterial(materialD)" ng-class="(selectedMaterial.EducationalMaterialControlSerNum==materialD.EducationalMaterialControlSerNum)? 'my-class' : ''">
+         <div>
+           <div class="row" >
+             <div class="col-xs-1">
+               <div align="right" >
+                 <i class="iconThemeViews" ng-class="material.icon"></i>
+               </div>
+             </div>
+             <div class="col-xs-11">
+             <div  align="middle" style="margin-left:5px">
+                <div class="profile-name">
+                     {{materialD.Name}}
+                   </div>
+               <div>
+                     <div style=" color:grey;">{{materialD.Description}}</div>
+                   </div>
+                   </div>
+             </div>
+           </div>
+             </div>
+       </li>
+       <br>
+       <h4 class="list-group-item-heading">After Treatment</h4>
+       <li class="list-group-item" ng-repeat="materialA in materialsAfter" ng-click="selectMaterial(materialA)" ng-class="(selectedMaterial.EducationalMaterialControlSerNum==materialA.EducationalMaterialControlSerNum)? 'my-class' : ''">
+         <div>
+           <div class="row" >
+             <div class="col-xs-1">
+               <div align="right" >
+                 <i class="iconThemeViews" ng-class="material.icon"></i>
+               </div>
+             </div>
+             <div class="col-xs-11">
+             <div  align="middle" style="margin-left:5px">
+                <div class="profile-name">
+                     {{materialA.Name}}
+                   </div>
+               <div>
+                     <div style=" color:grey;">{{materialA.Description}}</div>
+                   </div>
+                   </div>
+             </div>
+           </div>
+             </div>
+       </li></li>
      </ul>
      </div>
     </div>
@@ -152,22 +199,35 @@
     </div>
     <div class="panel-footer clearfix" style="background-color: white; height: 70px;">
       <div class="pull-right">
+        <p>
+          <a href class="btn copy" style="background-color: #74A333; color: #C8E6C9;">Copy</a>
+            &nbsp;
+          <input type="text" class="toCopy" value="{{selectedMaterial.ShareURL}}">
+        </p>
+
+
+      <!--
           <div class="share-button sharer" style="display: inline-block;">
-<button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;"><span class="fa fa-share" style="color: #C8E6C9"></span><a href="mailto:?subject=&amp;body={{selectedMaterial.ShareURL}}" target="_blank" style="text-decoration: none; color: #C8E6C9;"> Share</a></button>
-<div class="social top center networks-3 ">
- <!--
-    <a class="share-btn share microsoft" href="mailto:?subject=&amp;body={{selectedMaterial.ShareURL}}" target="_blank"><i class="fa fa-windows fa-1x" aria-hidden="true"></i></a> 
-    
-    <a class="share-btn share google" href="https://plus.google.com/share?url=url" ng-click="shareGoogle(selectedMaterial, 'google')" target="_blank"><i class="fa fa-google fa-1x" aria-hidden="true"></i></a> 
-   
-    <a class="share-btn share yahoo" ng-click="shareYahoo(selectedMaterial, 'yahoo')" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs" target="_blank"><i class="fa fa-yahoo fa-1x"></i></a> 
-  -->
+<button type="button" class="btn share-btn pull-right" style="background-color: #74A333; color: #C8E6C9;" ng-clik="notToggle({{toggle}})"><span class="fa fa-share" style="color: #C8E6C9"></span> Share</button>
+
+<div ng-show="true">
+      <p>fdasfasdfsdfsa</p>
+    </div>
+-->
+<!--
+<div class="social top center networks-5">
+
+    <a class="fbtn share microsoft" ng-class="ShareButtonClass['Facebook']" ng-click="shareOnFacebook(selectedDocument)" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank"><i class="fa fa-windows fa-1x" aria-hidden="true"></i></a> 
+    <a class="fbtn share google" href="https://plus.google.com/share?url=url" target="_blank"><i class="fa fa-google fa-1x" aria-hidden="true"></i></a> 
+    <a class="fbtn share yahoo" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs" target="_blank"><i class="fa fa-yahoo fa-1x"></i></a> 
 
 </div>
+-->
+<!-- </div> -->
 </div>
-</div>
-          <style>/*
-          .social .share-btn {
+          <style>
+          /*
+          .social .fbtn {
     width: 50px;
     display: inline-block;
     color: #fff;
@@ -191,8 +251,23 @@
 }
  
 .yahoo {
-    color: #fff;
-    background-color: #720e9e;
+    background-color: #55acee;
+}
+ 
+.stumbleupon {
+    background-color: #eb4924;
+}
+ 
+.pinterest {
+    background-color: #cc2127;
+}
+ 
+.linkedin {
+    background-color: #0077b5;
+}
+ 
+.buffer {
+    background-color: #323b43;
 }
 
 .share-button.sharer {
@@ -208,7 +283,9 @@
   transition: all 0.4s ease 0s;
   visibility: visible;
 }
+.share-button.sharer .social.networks-5 {
 
+}
 .share-button.sharer .social.top {
   margin-top: -80px;
   transform-origin: 0 0 0;
