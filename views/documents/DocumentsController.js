@@ -37,10 +37,10 @@ myApp.controller('DocumentsController',['Documents', '$scope', 'UserPreferences'
   }
   });
 
-      $scope.documents=Documents.getDocuments();
-      $scope.selectedDocument=$scope.documents[0];
-console.log($scope.documents);
-console.log($scope.documents[0].ShareURL);
+      $scope.documents = Documents.getDocuments();
+      $scope.selectedDocument = $scope.documents[0];
+      console.log($scope.documents);
+
 if(UserPreferences.getLanguage()=='EN'){
   for(var i=0;i<$scope.documents.length;i++){
     $scope.documents[i].Name=$scope.documents[i].AliasName_EN; 
