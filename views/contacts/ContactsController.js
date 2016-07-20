@@ -49,11 +49,6 @@ myApp.controller('SelectOptGroupController', function($scope) {
           password: false,
           SMS:false
       };
-      /*
-      $scope.SMSPreferences = [
-        "Enable",
-        "Disable"
-      ];*/
 
       $scope.options = [
           "Email",

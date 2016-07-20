@@ -181,16 +181,24 @@
     <div class="panel-heading">
         <div class="panel-title" style="color: #C8E6C9;"></span><span class="glyphicon glyphicon-book" style="color: #C8E6C9;"></span> {{selectedMaterial.Name}}</div>
     </div>
-    <div class="panel-body" style="background-color: white;" ng-controller="AppointmentsController">
+    <div class="panel-body" style="background-color: white;">
       <div class="row" >
           <div class="col-xs-12">
               <div  align="middle" style="margin-left:5px">
                 <div style="margin-top:30px" align="center">
-                  <div>
-                    <div class="embed-responsive embed-responsive-16by9">
-                      <iframe class="embed-responsive-item" ng-src="{{generateURL(selectedMaterial)}}"></iframe>
+                    <div ng-show="tableOfContents">
+                      <select ng-change="selectSection(section)" ng-model="section">
+                        <option ng-repeat="section in listTableContents" value="section">{{section.Name_EN}}</option>
+                      </select>
+                      </br>
+                      </br>
+                      <div class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="{{generateURLForBookletSections(selectedSection)}}"></iframe>
                     </div>
-                  </div>
+                    </div>
+                    <div ng-show="notBooklet" class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="{{generateURL(selectedMaterial)}}"></iframe>
+                    </div>
               <img height="auto" width="60%" ng-src="{{selectedDocument.Content}}">
               </div>
                 <!--<div align="center">-->

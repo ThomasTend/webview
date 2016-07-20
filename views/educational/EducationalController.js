@@ -1,5 +1,5 @@
 var myApp=angular.module('MUHCApp');
-myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeout','$sce',function($scope,EducationalMaterial,$timeout,$sce){
+myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeout','$sce',function($scope,EducationalMaterial,$timeout,$sce) {
 
   var materials = EducationalMaterial.getEducationalMaterial();
 
@@ -30,8 +30,10 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
   console.log("materialsAfter");
   console.log(materialsAfter);
 
+  $scope.notBooklet = true;
 
   $scope.selectedMaterial = materialsBefore[0];
+
   console.log(materials);
 
   var copyBtn = document.querySelector('.copy');
@@ -47,23 +49,69 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
   } catch (err) {
     console.log('Oops, unable to copy');
   }
+
   });
 
-  $scope.generateURL = function (material) {
-    
-    if(material.Type == 'Factsheet')
-    {
-      return material.source;
-    }else{
-      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/2dPfuxb1H8E');
+  $scope.tableOfContents = false;
+
+  var sections = {};
+
+  $scope.generateURL = function(material) {
+
+    var url = material.Url;
+
+    if((url.indexOf("pdf") > -1) && (url.indexOf("youtube") == -1)) { // the material is a pdf
+      $scope.tableOfContents = false;
+      $scope.notBooklet = true;
+      // display the pdf
+      return $sce.trustAsResourceUrl(url);
+    } else if((url.indexOf("php") > -1) && (url.indexOf("youtube") == -1)) { // the material is a php factsheet
+      $scope.tableOfContents = false;
+      $scope.notBooklet = true;
+      // display the factsheet
+      return $sce.trustAsResourceUrl(url);
+    } else if(url.indexOf("youtube") > -1) { // the material is a youtube video
+      $scope.tableOfContents = false;
+      $scope.notBooklet = true;
+      // display the video
+      return $sce.trustAsResourceUrl(url);
+    } else if(url === "") { // the material is a booklet
+      // use the TableContents array to make a menu of the php sections to display
+      $scope.notBooklet = false;
+      var tableOfContentsArray = material.TableContents;
+      $scope.listTableContents = tableOfContentsArray;
+      $scope.selectedSection = tableOfContentsArray[0];
+      $scope.tableOfContents = true;
+      sections = tableOfContentsArray;
     }
+
   };
 
-  $scope.selectMaterial=function(material)
-  {
-    $timeout(function(){
-      $scope.selectedMaterial=material;
-    })
+  $scope.selectSection = function(section) {
+    console.log("dfsdgsdgsdg" + typeof(section));
+    for(var i = 0; i < sections.length; i++) {
+      if(sections[i].Name_EN === section) {
+        console.log("sections at i");
+        console.log(sections[i]);
+        $timeout(function() {
+          $scope.selectedSection = sections[i];
+        });
+        break;
+      }
+    }
+    console.log(section);
+    console.log($scope.selectedSection);
+  };
+
+  $scope.generateURLForBookletSections = function(section) {
+    console.log(section);
+    return $sce.trustAsResourceUrl(section.URL_EN);
+  };
+
+  $scope.selectMaterial = function(material) {
+    $timeout(function() {
+      $scope.selectedMaterial = material;
+    }); 
   };
 
   /*
