@@ -55,6 +55,9 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
   $scope.tableOfContents = false;
 
   var sections = {};
+  console.log("Test outside all functions");
+  var counter = 0;
+  console.log("value of counter is " + counter);
 
   $scope.generateURL = function(material) {
 
@@ -80,31 +83,45 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
       $scope.notBooklet = false;
       var tableOfContentsArray = material.TableContents;
       $scope.listTableContents = tableOfContentsArray;
+      console.log("in generateURL " + material.Name_EN);
+      console.log("generateURL value of counter is " + counter);
+      if(counter == 0) {
       $scope.selectedSection = tableOfContentsArray[0];
+      }
       $scope.tableOfContents = true;
       sections = tableOfContentsArray;
     }
 
   };
 
+
+
   $scope.selectSection = function(section) {
-    console.log("dfsdgsdgsdg" + typeof(section));
+    console.log("In selectSection");
+    console.log("dfsdgsdgsdg " + typeof(section));
     for(var i = 0; i < sections.length; i++) {
       if(sections[i].Name_EN === section) {
         console.log("sections at i");
         console.log(sections[i]);
-        $timeout(function() {
-          $scope.selectedSection = sections[i];
-        });
+        $scope.selectedSection = sections[i];
         break;
       }
     }
+    console.log("selectSection B value of counter is " + counter);
+    if(section === sections[0].Name_EN) {
+      counter = 0;
+    } else {
+      counter = 1;
+    }
+    console.log("selectSection A value of counter is " + counter);
     console.log(section);
     console.log($scope.selectedSection);
   };
 
   $scope.generateURLForBookletSections = function(section) {
+    console.log("In generateURLForBookletSections");
     console.log(section);
+    console.log(typeof(section));
     return $sce.trustAsResourceUrl(section.URL_EN);
   };
 
@@ -113,36 +130,5 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
       $scope.selectedMaterial = material;
     }); 
   };
-
-  /*
-
-  $scope.notToggle = function(toggle) {
-      if(toggle == false) {
-        $scope.toggle = true;
-      } else {
-        $scope.toggle = false;
-      }
-  };
-
-  */
-
-  /*
-  $scope.shareOnFacebook = function(type,material)
-  {
-    window.open("https://www.facebook.com/sharer/sharer.php?u="+material.ShareURL,'_blank');
-    facebookShareButtonClass = 'Active';
-    ShareButtonClass[type] = 'Active';
-    ShareButtonClass['Twitter'] = '';
-
-  }
-
-  var shareButtonClasses = ['microsoft', 'google', 'yahoo'];
-
-  $scope.shareMicrosoft = function(material, type) {
-    windows.open("" + material.ShareURL, '_blank', false);
-    for(var i = 0; i < shareButtonClasses.length; i++) {
-      (shareButtonClasses[i] == material) ? shareButtonClasses[]
-    }
-  }
-  */
+  
 }]);
