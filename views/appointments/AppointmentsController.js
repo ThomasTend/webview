@@ -281,8 +281,8 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         },
 
         MainCalendar: {
-            height: 608,
-            contentHeight: 608,
+            height: 604,
+            contentHeight: 604,
             editable: false,
             slotDuration: '00:15:00',
             slotLabelInterval: '01:00:00',
