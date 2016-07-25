@@ -21,6 +21,7 @@
 	-webkit-border-radius: 0;
 	-o-border-radius: 0;
 }
+
 .hero-unit .btn, .pagination-centered .btn {
 	float: none;
 	font-weight: normal;
@@ -543,7 +544,7 @@
   -o-transition: none;
   transition: none;
 }*/
-#sidenav-app{
+/*#sidenav-app{
   max-width: none;
   width :auto;
   margin-left: -15px;
@@ -570,6 +571,32 @@ md-card {
 .md-list-item-app > button {
   width:100%;
   text-align:left !important;
+}*/
+.popover-title{
+    color:black;
+}
+.red{
+  color:red;
+  font-size:8px;
+}
+.green{
+  color:green;
+  font-size:8px;
+}
+.blue{
+  color:blue;
+  font-size:8px;
+}
+.calendarButton {
+  color: #74A333;
+}
+.fc-content{
+  font-size: 14px;
+}
+.appContent{
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12);
+  margin-bottom: 8px;
+  padding-bottom: 10px;
 }
 .panel-container.green {
     background-color: #74A333;

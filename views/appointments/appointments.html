@@ -1,319 +1,107 @@
-<div class="row">
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-8 col-xs-12">
+<!-- begining of the content of the page -->
+<div layout="row" layout-fill ">
+    <md-content layout="column " flex="30" hide-md hide-sm hide-xs>
+        <md-card md-whiteframe="3 " >
+                <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                    <span>Next Appointment</span>
+                </md-toolbar>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline ">{{nextApppointmentType}}</span>
+                        <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
+                        <span class="md-subhead "><i class="ion-person iconHomeView "></i>&nbsp;{{nextAppointmentResourceName}}</span>
+                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{nextAppointmentMapName}} </a> </i>
+                        <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                    </md-card-title-text>
+                </md-card-title>
+        </md-card>
+        <md-card  >
+            <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                <span>Mini</span>
+            </md-toolbar>
+            <div ui-calendar="uiConfig.MiniCalendar " calendar="myCalendar2"></div>
+        </md-card>
+       <md-card md-whiteframe="3" flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
+                        <span class="md-subhead ">Please give us a call at (514)-hotline-blink</span>
+                        <span class="md-subhead ">or email us at bieber@bieber.com</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card> 
+    </md-content>
 
-<div class="row">
-  <div class="col-md-122 col-xs-12">
-    <br>
-    <div style="font-size: 20px; color: #51759a;">My Chart > Appointments</div>
-    <hr style="border-color: #74A333;">
-  </div>
-</div>
-
-<!--
-<div class="row">
-  <div class="col-md-4 col-xs-4">
-    <div class="panel-container green" style="cursor: pointer; margin-left: 15px; background-color: #96c238;">
-      <a ui-sref="app.Appointments" style="color: #fff;">
-      <div class="row">
-        <div class="col-xs-12">
-          <span class="fa fa-calendar fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
+    <md-content layout="column " flex >
+    <md-card >
+            <md-toolbar style = "background-color: #74A333; " md-whiteframe="5 ">
+              <div class="md-toolbar-tools ">
+                    <span flex> </span>
+                    <md-button class = "md-raised " style = "color: #74A333; background-color: #E6EE9C; " ng-click = "changeView( 'month', 'myCalendar1') "> Month </md-button>
+                    <md-button class = "md-raised " style="color: #74A333; " ng-click = "changeView( 'agendaWeek', 'myCalendar1') "> Week</md-button>
+                    <md-button  class = "md-raised " style="color: #74A333; " ng-click = "changeView( 'agendaDay', 'myCalendar1') "> Day </md-button>
+                    <md-button class = "md-raised " style="color: #74A333; " ng-click = "toggleList() " > Agenda </md-button>
+                    <span flex> </span>
+                    <md-button class = "md-raised " style = "background-color: color: #74A333;"> Today </md-button>
+                </div>
+            </md-toolbar>
+            <md-toolbar style="background-color: white " layout-align="center center " md-whiteframe="1 ">
+            <div class="md-toolbar-tools ">
+            <md-button class = "mainCalendar " ng-click = "prevView( 'myCalendar1') " > 
+                <i style = "color:#74A333; " class="ion-chevron-left iconHomeView "></i>&nbsp;  
+            </md-button>
+            <span flex></span>
+            <h3 class = "mainCalendar " style = "color:#74A333; ">{{currentDisplayedMonth}}</h3>
+            <h3 class = "agendaList " style = "color:#74A333; ">Appointments</h3>
+            <span flex></span>
+            <md-button class = "mainCalendar " ng-click = "nextView( 'myCalendar1') "> 
+                <i style = "color:#74A333; " class="ion-chevron-right iconHomeView "></i>&nbsp;  
+            </md-button>
+            </div>
+            </md-toolbar>
         
-        
-          <span style="font-size: 20px;color: #C8E6C9;">Appointments</span>
-        </div>
-      </div>
-    </a>
-    </div>
-  </div>
-  <div class="col-md-4 col-xs-4">
-    <div class="panel-container green" style="cursor: pointer; margin-right: 15px;">
-    <a ui-sref="app.TreatmentPlan" style="color: #fff;">
-      <div class="row">
-        <div class="col-xs-12">
-          <span class="fa fa-list fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
-    
-          <span style="font-size: 20px;color: #C8E6C9;">Treatment Plan</span>
-        </div>
-      </div>
-    </a>
-  </div>
-  </div>
-  <div class="col-md-4 col-xs-4">
-    <div class="panel-container green" style="cursor: pointer; margin-right: 15px; ">
-    <a ui-sref="app.Documents" style="color: #fff;">
-      <div class="row">
-        <div class="col-xs-12">
-          <span class="fa fa-folder fa-2x" style="padding: 10px 0px 10px 0px; color: #C8E6C9;"></span>&nbsp;&nbsp;&nbsp;
-       
-          <span style="font-size: 20px;color: #C8E6C9;">Documents</span>
-        </div>
-      </div>
-    </a>
-  </div>
-  </div>
-</div>
--->
-
-<!--<div style="height:90vh;overflow-y:scroll;padding-left:20px;padding-right:20px" -->
-<div class = "container-fluid">
-  <div class = "row">
-    <div class = "col-lg-4 col-md-4 col-sm-6">
-     <md-sidenav
-     class="md-sidenav-left md-whiteframe-z2"
-     md-is-locked-open="true" id = "sidenav-app">
-     <md-tabs class = "md-tabs-app" md-border-bottom >
-      <md-tab label="Next" ng-click="displayNext()" >
-      <md-content class="md-padding">
-        <md-list flex> 
-          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in futureAppointments"  >
-          <md-button ng-click="clickEventOnList(app)" >
-          <div class="md-list-item-text" layout="column">
-          <h3 > <Strong> {{app.AppointmentType_EN}}</Strong></h3>
-          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3> 
-          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
-          </div>
-
-          </md-button>
-          </md-list-item>
+     <div class = "mainCalendar " ui-calendar="uiConfig.MainCalendar " calendar="myCalendar1 " ng-model="eventSources " ></div>
+    <md-content class = "agendaList " style="height:600px; ">
+    <md-list>
+        <md-list-item class="md-3-line " ng-repeat-start="app in appointments "  layout="row " id = "agendaAppointment{{$index}}">
+            <div class="md-list-item-text " layout="column " flex="75 ">
+                <h4><b>{{app.AppointmentType_EN}}</b></h4>
+                <p><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</p>
+                    <p>
+                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{app.MapDescription_EN}}</a> </i> </p>
+                    <p><i class="ion-person iconHomeView "></i>&nbsp;Dr. Beiber</p>
+            </div>
+            <img ng-src="{{nextAppointmentDoctorImage}} " flex="15 ">
+            
+        </md-list-item>
+        <md-divider ng-repeat-end=""></md-divider>
         </md-list>
-        </md-content>
-      </md-tab>
-      <md-tab label="Past">
-        <md-content class="md-padding">
-        <md-list flex> 
-          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in pastAppointments" >
-          <md-button ng-click="clickEventOnList(app)">
-          <div class="md-list-item-text" layout="column">
-          <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
-          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3>
-          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
-          </div>
-          </md-button>
-          </md-list-item>
-        </md-list>
-        </md-content>
-      </md-tab>
-      <md-tab label="All">
-        <md-content class="md-padding">
-        <md-list flex> 
-          <md-list-item class="md-3-line md-list-item-app" ng-repeat="app in appointments" >
-          <md-button ng-click="clickEventOnList(app)">
-          <div class="md-list-item-text" layout="column">
-          <h3> <Strong> {{app.AppointmentType_EN}}</Strong></h3>
-          <h3> <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</h3> 
-          <p><i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}</p>
-          </div>
-          </md-button>
-          </md-list-item>
-        </md-list>
-        </md-content>
-      </md-tab>
-      <md-tab>
-      <md-tab-label> <md-icon md-svg-icon="./img/search.svg"></md-icon></md-tab-label>
-        <md-content class="md-padding">
-        </md-content>
-      </md-tab>
-      </md-tabs>
-   </md-sidenav> <!-- End of the side nav responsible for displaying the appointmetns tables-->
- </div> <!-- end of the master area -->
- <div class = "sideCard col-lg-8 col-md-8 col-sm-6">
-    <md-content  id="content" class="lightgreen" >
-    <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline"><u><b>{{mainAppointmentType}}</b></u></span>
-            <span class="md-headline">{{appointmentType}}</span>
-            <span class="md-subhead"><i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{scheduleStartTime|formatDateAppointmentTask}}</span>
-            <span class="md-subhead"><i class="ion-person iconHomeView"></i>&nbsp;{{resourceName}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-title-media style = "max-width:750px">
-          <div class="md-media-lg card-media">
-            <img ng-src="{{getLocationImage()}}" />
-          </div>
-        </md-card-title-media>
-      </md-content>
- </div>  <!-- End of sideCard div and the detail area-->
-</div>
-</div>
-    
-</div>
-<div class="col-md-2">
-  </div>
-</div>
+    </md-content>
+    </md-card>
+      <md-card class = "mainCalendar " md-whiteframe="3" flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
+                        <span class="md-subhead ">Please give us a call at (514)-hotline-blink</span>
+                        <span class="md-subhead ">or email us at bieber@bieber.com</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card> 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--            
-                <div class="row">
-                    <div class="col-xs-4">
-
-                      <div class="row">
-
-                        <div class="col-xs-12">
-                          <div class="div-container-section" style="padding:10px">
-                            <div class="row">
-                              <div class="col-xs-1">
-                                <i class="icon fa fa-calendar iconThemeViews"></i>
-                              </div>
-                              <div class="col-xs-11">
-                                <div align="center">
-                                <h4 style="margin-top:0">{{titleAppointmentsHome}}</h4>
-                              </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-xs-12">
-                                  <div align="center">
-                                  <strong>{{appointmentShown.AppointmentType_EN}} </strong><a href ng-click="menu.setMainPage('views/educational-material.html',{closedMenu:true})"><i class="ion-help-circled iconHomeView"></i></a><br>
-                                  {{appointmentShown.ScheduledStartTime|formatDateAppointmentTask}}<br>
-                                  {{appointmentShown.ResourceName}}<br>
-                                  <i class="icon ion-ios-location iconHomeView"></i> {{appointmentShown.Location}}
-                                </div>
-                                </div>
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <div class="row">
-                          <div class="col-xs-12">
-                            <div class="div-container-section" >
-
-                              <div class="row">
-                                <div class="col-xs-1">
-                                  <i class="fa fa-list icon iconThemeViews"></i>
-                                </div>
-                                <div class="col-xs-11">
-                                  <div align="center">
-                                  <h4 style="padding-top:0;margin-top:0">Appointment List</h4>
-                                </div>
-                                </div>
-                              </div>
-                              <div class="navigation-bar">
-    <div class="navigation-bar__center">
-      <div class="button-bar" style="width:280px;margin:0 auto;margin-top:7px">
-        <div class="button-bar__item">
-          <input type="radio" ng-model="radioModel" value="All" name="navi-segment-a" checked>
-          <div class="button-bar__button" align="center">All</div>
-        </div>
-
-        <div class="button-bar__item">
-          <input type="radio" ng-model="radioModel" value="Past" name="navi-segment-a">
-          <div class="button-bar__button" align="center">Past</div>
-        </div>
-        <div class="button-bar__item">
-          <input type="radio" ng-model="radioModel" value="Today" name="navi-segment-a">
-          <div class="button-bar__button" align="center">Today</div>
-        </div>
-        <div class="button-bar__item">
-          <input type="radio" ng-model="radioModel" value="Upcoming" name="navi-segment-a">
-          <div class="button-bar__button" align="center">Future</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div ng-show="radioModel=='All'">
-        <input type="search" value="" placeholder="Search" class="search-input" ng-model="searchText" style="margin:10px 0 10px 0">
-  </div>
-  <div style="height:45vh;overflow-y:scroll;margin-top:10px">
-
-    <ul class="list">
-         <li class="row list__itemo-appointments list__item-appointments--tight list__item__appointments--tappable" ng-repeat="app in appointments|filter:searchText" style="border-bottom:1px solid lightgrey;" ng-click="clickEventOnList(app.AppointmentSerNum)">
-           <div class="col-xs-1" style="opacity: 0.6;filter: alpha(opacity=60);width:10px;height:10px" ng-style="{ 'background-color': getStyle($index) }">
-           </div>
-           <div class="col-xs-11 plan-right">
-             <div >
-             <strong>{{app.AppointmentType_EN}}</strong>
-           </div>
-              <div >
-                <div ng-show="app.sessionNumber!==undefined"><strong>{{app.sessionNumber}}</strong></div>
-              <i class="fa fa-calendar" style="color:#2B6197"></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}
-
-               </div>
-               <div>
-                 <i class="ion-person iconHomeView"></i>&nbsp;{{app.ResourceName}}
-               </div>
-           </div>
-         </li>
-       </ul>
-</div>
-
-                            </div>
-                          </div>
-                        </div>
-
-                        <!--<div class="btn-group calTools">
-                          <button class="btn" ng-click="changeLang()">
-                            {{changeTo}}
-                          </button>
-                          <button class="btn" ng-click="addRemoveEventSource(eventSources,eventSource)">
-                            Toggle Source
-                          </button>
-                          <button type="button" class="btn btn-primary" ng-click="addEvent()">
-                            Add Event
-                          </button>
-                        </div>
-
-                        <ul class="unstyled">
-                            <li ng-repeat="e in events">
-                                <div class="alert alert-info">
-                                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
-                                    <b> <input ng-model="e.title"></b>
-                                    {{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}
-                                </div>
-                            </li>
-                        </ul>
-
+        <!-- <md-toolbar style="background-color: #74A333; margin-top:8px; " layout-align="center center " md-whiteframe="3 "> Appointments </md-toolbar>
+        <md-content class="appContent " flex="50 ">
+            <md-list flex>
+                <md-list-item class="md-3-line " ng-repeat="app in appointments " ng-click="null " layout="row ">
+                    <div class="md-list-item-text " layout="column " flex="75 ">
+                        <h4><b>{{app.AppointmentType_EN}}</b></h4>
+                        <p><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</hp>
+                            <p>
+                                <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{app.MapDescription_EN}}</a> </i> </p>
+                            <p><i class="ion-person iconHomeView "></i>&nbsp;Dr. Beiber</p>
                     </div>
-
-
-
-
-                    <div class="col-xs-8">
-
-                              <div class="row">
-                                <div class="div-container-section" style="padding:5px">
-                                  <div class="row">
-                                    <div class="col-xs-1">
-                                      <i class="fa fa-calendar icon iconThemeViews"></i>
-                                    </div>
-                                    <div class="col-xs-11">
-                                      <div align="center" style="margin-left:-25px">
-                                          <h4>Calendar</h4>
-                                      </div>
-
-                                    </div>
-                                  </div>
-                                <div align="center" style="margin-top:10px">
-                                <div class="btn-group">
-                                    <button class="btn btn-primary" ng-click="changeView('agendaDay', 'myCalendar1')">AgendaDay</button>
-                                    <button class="btn btn-primary" ng-click="changeView('agendaWeek', 'myCalendar1')">AgendaWeek</button>
-                                    <button class="btn btn-primary" ng-click="changeView('month', 'myCalendar1')">Month</button>
-                                </div>
-                              </div>
-
-                            <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
-                            </div>
-                            </div>
-                    </div>
-
-                  </div>-->
-
-                <!--/div-->
+                    <img ng-src="{{nextAppointmentDoctorImage}} " flex="25 ">
+                    <md-divider></md-divider>
+                </md-list-item>
+        </md-content> -->
+    </md-content>
+</div>
