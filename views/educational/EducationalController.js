@@ -94,8 +94,6 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
 
   };
 
-
-
   $scope.selectSection = function(section) {
     console.log("In selectSection");
     console.log("dfsdgsdgsdg " + typeof(section));
@@ -128,7 +126,7 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
   $scope.selectMaterial = function(material) {
     $timeout(function() {
       $scope.selectedMaterial = material;
-    }); 
+    });
   };
   
 }]);

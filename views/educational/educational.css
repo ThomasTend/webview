@@ -3,3 +3,10 @@
     margin: 5px 5px 5px 5px;
 } 
 
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    /* cursor: not-allowed; */
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 1;
+}
