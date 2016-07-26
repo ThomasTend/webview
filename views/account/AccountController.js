@@ -9,7 +9,7 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
       editLanDiv: false,
       editPasswordDiv: false,
       editSMSDiv:false
-
+      
   };
   $scope.hideSectionsBut = function (onlyDivToShow) {
         for (var div in $scope.editingDiv) {

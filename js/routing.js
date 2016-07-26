@@ -77,6 +77,11 @@ var myApp=angular.module('MUHCApp');
         templateUrl:'./views/educational/educational.html',
         controller:'EducationalController'
     })
+    .state('app.Feedback', {
+        url:'/Feedback',
+        templateUrl:'./views/feedback/feedback.html',
+        controller:'FeedbackController'
+    })
 
 
 $translatePartialLoaderProvider.addPart('home');

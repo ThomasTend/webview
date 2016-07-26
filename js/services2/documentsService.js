@@ -9,7 +9,7 @@ myApp.service('Documents',['UserPreferences', 'UserAuthorizationInfo','$q','$roo
 		var tmp=[];
 		for (var i = 0; i < documents.length; i++) {
 			for (var j = 0; j < photos.length; j++) {
-				if(photos[j].DocumentSerNum==documents[i].DocumentSerNum)
+				if(photos[j].DocumentSerNum == documents[i].DocumentSerNum)
 				{
 					console.log(photos[j]);
 					photos.splice(j,1);

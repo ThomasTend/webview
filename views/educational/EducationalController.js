@@ -1,5 +1,5 @@
 var myApp=angular.module('MUHCApp');
-myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeout','$sce',function($scope,EducationalMaterial,$timeout,$sce) {
+myApp.controller('EducationalController',['$rootScope','$scope','EducationalMaterial','$timeout','$sce',function($rootScope,$scope,EducationalMaterial,$timeout,$sce) {
 
   var materials = EducationalMaterial.getEducationalMaterial();
 
@@ -60,7 +60,7 @@ myApp.controller('EducationalController',['$scope','EducationalMaterial','$timeo
   console.log("value of counter is " + counter);
 
   $scope.generateURL = function(material) {
-
+    
     var url = material.Url;
 
     if((url.indexOf("pdf") > -1) && (url.indexOf("youtube") == -1)) { // the material is a pdf
