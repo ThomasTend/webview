@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding:10px;height:100%;" >
+<div class="container-fluid" style="padding:10px;height:100%;" id = "topOfAppointments" >
   <div class="row">
     <div class="col-md-2">
     </div>
@@ -6,7 +6,7 @@
 <!-- begining of the content of the page -->
 <div layout="row">
     <md-content layout="column" style="background-color: #ecf5e0;" flex="30" hide-md hide-sm hide-xs>
-        <md-card md-whiteframe="3" flex ="25" >
+        <md-card md-whiteframe="3" >
                 <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
                     <span>Next Appointment</span>
                 </md-toolbar>
@@ -22,7 +22,17 @@
         </md-card>
         <md-card  >
             <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
-                <span>Mini</span>
+            <div class="md-toolbar-tools ">
+            <md-button ng-click = "prevView( 'myCalendar2') " >
+                <i style = "color:white; " class="ion-chevron-left iconHomeView "></i>&nbsp;  
+            </md-button>
+            <span flex></span>
+                <h4>{{currentDisplayedMonthMini}}</h4>
+                <span flex></span>
+            <md-button  ng-click = "nextView( 'myCalendar2') "> 
+                <i style = "color:white" class="ion-chevron-right iconHomeView "></i>&nbsp;  
+            </md-button>
+            </div>
             </md-toolbar>
             <div ui-calendar="uiConfig.MiniCalendar " calendar="myCalendar2"></div>
         </md-card>
@@ -38,21 +48,35 @@
     </md-content>
 
     <md-content layout="column" flex style="background-color: #ecf5e0;">
+            <md-card md-whiteframe="3" show-md show-sm show-xs hide-gt-md >
+                <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                    <span>Next Appointment</span>
+                </md-toolbar>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline ">{{nextApppointmentType}}</span>
+                        <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
+                        <span class="md-subhead "><i class="ion-person iconHomeView "></i>&nbsp;{{nextAppointmentResourceName}}</span>
+                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{nextAppointmentMapName}} </a> </i>
+                        <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                    </md-card-title-text>
+                </md-card-title>
+        </md-card>
     <md-card >
             <md-toolbar style = "background-color: #74A333; " md-whiteframe="5 ">
               <div class="md-toolbar-tools ">
                     <span flex> </span>
-                    <md-button class = "md-raised " style = "color: #74A333; background-color: #E6EE9C; " ng-click = "changeView( 'month', 'myCalendar1') "> Month </md-button>
-                    <md-button class = "md-raised " style="color: #74A333; " ng-click = "changeView( 'agendaWeek', 'myCalendar1') "> Week</md-button>
-                    <md-button  class = "md-raised " style="color: #74A333; " ng-click = "changeView( 'agendaDay', 'myCalendar1') "> Day </md-button>
-                    <md-button class = "md-raised " style="color: #74A333; " ng-click = "toggleList() " > Agenda </md-button>
+                    <md-button class = "md-raised calendarViewButton monthButton" style = "color: #74A333; background-color: #FFE082;" ng-click = "changeView( 'month', 'myCalendar1') "> Month </md-button>
+                    <md-button class = "md-raised calendarViewButton agendaWeekButton" style="color: #74A333; " ng-click = "changeView( 'agendaWeek', 'myCalendar1') "> Week</md-button>
+                    <md-button  class = "md-raised calendarViewButton agendaDayButton" style="color: #74A333; " ng-click = "changeView( 'agendaDay', 'myCalendar1') "> Day </md-button>
+                    <md-button class = "md-raised calendarViewButton agendaListButton" style="color: #74A333; " ng-click = "toggleList() " > Agenda </md-button>
                     <span flex> </span>
-                    <md-button class = "md-raised " style = "background-color: color: #74A333;"> Today </md-button>
+                    <md-button class = "md-raised " style = "background-color: color: #74A333;" ng-click="goToToday()"> Today </md-button>
                 </div>
             </md-toolbar>
             <md-toolbar style="background-color: white " layout-align="center center " md-whiteframe="1 ">
             <div class="md-toolbar-tools ">
-            <md-button class = "mainCalendar " ng-click = "prevView( 'myCalendar1') " > 
+            <md-button class = "mainCalendar " ng-click = "prevView( 'myCalendar1') " >
                 <i style = "color:#74A333; " class="ion-chevron-left iconHomeView "></i>&nbsp;  
             </md-button>
             <span flex></span>

@@ -587,7 +587,7 @@ md-card {
   color:blue;
   font-size:8px;
 }
-.calendarButton {
+.calendarViewButton {
   color: #74A333;
 }
 .fc-content{
@@ -601,6 +601,9 @@ md-card {
 .panel-container.green {
     background-color: #74A333;
     color: #C8E6C9;
+}
+.fc-row.fc-week.fc-widget-content{
+  min-height: 0px; 
 }
 .panel-container {
     position: relative;

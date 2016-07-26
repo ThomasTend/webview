@@ -70,14 +70,6 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     if ($scope.futureAppointments.length == 0) {
         $scope.noFutureAppointments = true;
     }
-    // $scope.goToListState = function(){
-    //     console.log("I'm changing the state to list");
-    //     $state.go('app.Appointments.list');
-    // };
-    //  $scope.goToAppointmentState = function(){
-    //     console.log("I'm changing the state to normal");
-    //     $state.go('app.Appointments');
-    // };
     //Function to select the color of the appointment depending on whether the date has passed or not
     $scope.getStyle = function(index) {
         var today = $scope.today;
@@ -94,18 +86,16 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     $scope.toggleCalendar = function (){
          $(".agendaList").hide();
          $(".mainCalendar").show();
-        
-
-        //$scope.displayCalendar = true; 
     };
     $scope.toggleList = function () {
          $(".mainCalendar").hide();
          $(".agendaList").show();
          $scope.scrollToAppointment();
-        //$scope.displayCalendar = false;
-        hideAllPops();
-        
-
+         $location.hash("topOfAppointments");
+         $anchorScroll();
+         hideAllPops();
+         clearButtonsStyle();
+         $(".agendaListButton").css("background-color", "#FFE082");
     };
     $scope.scrollToAppointment = function()
     {   
@@ -125,6 +115,7 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         console.log($scope.appointments[minIndex]);
         $location.hash('agendaAppointment'+minIndex);
         $anchorScroll();
+
     };
 
     var date = new Date();
@@ -231,6 +222,14 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     $scope.alertOnDayClick = function(date, jsEvent, view) {
         $scope.date = new Date(date.format());
     };
+    $scope.alertOnDayClickMini = function (date, jsEvent, view){
+         hideAllPops();
+         $scope.date = new Date(date.format());
+         console.log($scope.date);
+         $scope.scrollToAppointment();
+         $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('gotoDate',date);
+         $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('getDate').format('MMMM YYYY');
+    };
 
     /* alert on Drop */
     $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
@@ -238,7 +237,7 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     };
     /* alert on Resize */
     $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
-        $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+        hideAllPops();
     };
     /* add and removes an event source of choice */
     $scope.addRemoveEventSource = function(sources, source) {
@@ -264,15 +263,14 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     };
     $scope.uiConfig = {
         MiniCalendar: {
-            height: 400,
-            contentHeight: 400,
+            aspectRatio: 1.5,
             editable: false,
             header: {
                 left: '',
                 center: '',
                 right: ''
             },
-            // dayClick: $scope.alertOnDayClick,
+            dayClick: $scope.alertOnDayClickMini
             // eventClick: $scope.alertOnEventClick,
             // eventDrop: $scope.alertOnDrop,
             // eventResize: $scope.alertOnResize,
@@ -306,9 +304,21 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     /* Change View */
     $scope.changeView = function(view, calendar) {
         hideAllPops();
+        clearButtonsStyle();
+        $("."+view+"Button").css("background-color", "#FFE082")
         $scope.toggleCalendar();
-        $scope.currentDisplayedCalendarView = view; 
+        //$scope.currentDisplayedCalendarView = view; 
         uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+    };
+    /* moves calendar dates to the currentDate*/
+    $scope.goToToday = function (){
+        hideAllPops();
+        uiCalendarConfig.calendars['myCalendar1'].fullCalendar('today');
+        uiCalendarConfig.calendars['myCalendar2'].fullCalendar('today');
+        //$scope.date = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format();
+        //console.log($scope.date);
+        //$scope.scrollToAppointment();
+        $scope.setTodayMonthViews(); 
     };
     $scope.renderCalender = function(calendar) {
         if (uiCalendarConfig.calendars[calendar]) {
@@ -323,45 +333,35 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         });
         $compile(element)($scope)
     };
-    $scope.onDayRender = function(date, cell) {
-        
-    };
-
+    function clearButtonsStyle(){
+         $(".calendarViewButton").css("background-color", "white")
+    }
+    $scope.setTodayMonthViews = function () {
     $scope.currentDisplayedMonth = moment().format('MMMM YYYY');
-
-    // These functions should also work on mini calendar?
+    $scope.currentDisplayedMonthMini = moment().format('MMM YYYY');
+    };
+    $scope.setTodayMonthViews();
     $scope.getCurrentMonth = function(calendar) {
         $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
     };
+    $scope.getCurrentDay = function(calendar) {
+        $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM DD YYYY');
+    };
     $scope.nextView = function(calendar) {
+        hideAllPops();
+       // var displayedCalendarTitle = uiCalendarConfig.calendars[calendar].fullCalendar('getView')["type"];
+        // console.log(displayCalendarTitle);
         uiCalendarConfig.calendars[calendar].fullCalendar('next');
-        $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
+        if (calendar == 'myCalendar1') $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
+        else $scope.currentDisplayedMonthMini = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMM YYYY');
     };
     $scope.prevView = function(calendar) {
+        hideAllPops();
         uiCalendarConfig.calendars[calendar].fullCalendar('prev');
-        $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
+        if (calendar == 'myCalendar1') $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
+        else $scope.currentDisplayedMonthMini = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMM YYYY');
 
     };
-    // $scope.dayClick = function (calendar){
-    //     uiCalendarConfig.calendars[calendar].fullCalendar({
-    //         dayClick: function(date, jsEvent, view) {
-
-    //     alert('Clicked on: ' + date.format());
-
-    //     alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-    //     alert('Current view: ' + view.name);
-
-    //     // change the day's background color just for fun
-    //     $(this).css('background-color', 'red');
-
-    //         }
-    //     });
-    // }
-
-    /* config object */
-
-
     $scope.changeLang = function() {
         if ($scope.changeTo === 'Hungarian') {
             $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
@@ -373,9 +373,5 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
             $scope.changeTo = 'Hungarian';
         }
     };
-    /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.eventsF];
-    //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-
-
 }]);
