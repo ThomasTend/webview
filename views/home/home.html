@@ -9,6 +9,26 @@
 <!--Welcome Message Plus Status-->
 <div class="col-md-6 col-xs-12">
 
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Rate the app</h4>
+        </div>
+        <div class="modal-body">
+          <rate-app ser-num="5"></rate-app>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
     
 <!--<div class=" div-container-section row">
 <div class="col-xs-12 " >
@@ -264,17 +284,17 @@ a:active {
         </div>
         <div class="col-xs-6 col-md-6">
   <md-whiteframe class="md-whiteframe-3dp" flex-sm="100" flex-gt-sm="300" flex-gt-md="300" layout layout-align="center center" style="height: 100px;">
-    <a ui-sref="app.Feedback" style="color: black;">
-  <table>
-    <tr>
-        <td>
-    <i class="fa fa-question fa-4x" aria-hidden="true" style="color: #96C238;"></i>
-        </td>
-        <td>
+  <a href style="text-decoration: none; color: #000000;" data-toggle="modal" data-target="#myModal">
+    <table>
+      <tr>
+          <td>
+            <i class="fa fa-question fa-4x" aria-hidden="true" style="color: #96C238;"></i>
+          </td>
+          <td>
             <span>&nbsp;&nbsp;&nbsp;Feedback</span>
-        </td>
-    </tr>
-</table>
+          </td>
+      </tr>
+    </table>
 </a>
   </md-whiteframe>
         </div>

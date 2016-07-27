@@ -1,18 +1,16 @@
 /**
- * @name rate-material
- * @description Directive is the components in charge of the 5 start rating system, takes an educationalMaterialControlSerNum as parameter.
+ * @name rate-app
+ * @description This directive is in charge of the rating of the app
  * 
  * 
  */
+
 angular.module('MUHCApp')
 .directive('rateMaterial', function(Patient, RequestToServer) {
   return {
     restrict: 'E',
     transclude: true,
-    scope: {
-        eduMaterialControlSerNum: '=serNum'
-    },
-    templateUrl: './views/educational/rating-education-template-directive.html',
+    templateUrl: './views/app-rating-template-directive.html',
     link: function (scope, element) {
 
     initRater();
@@ -29,7 +27,7 @@ angular.module('MUHCApp')
             });
         }
     }
-    scope.rateMaterial = function(index)
+    scope.rateApp = function(index)
     {
         scope.emptyRating = false;
         scope.ratingValue = index+1;
@@ -45,8 +43,7 @@ angular.module('MUHCApp')
     scope.submit = function()
     {
         var patientSerNum = Patient.getUserSerNum();
-        var edumaterialControlSerNum = scope.eduMaterialControlSerNum;
-        RequestToServer.sendRequest('QuestionnaireRating',{'PatientSerNum':patientSerNum,'EducationalMaterialControlSerNum':edumaterialControlSerNum,'RatingValue':scope.ratingValue});
+        RequestToServer.sendRequest('Feedback',{'PatientSerNum':patientSerNum, 'RatingValue':scope.ratingValue});
         scope.submitted = true;
     }
       
