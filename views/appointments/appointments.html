@@ -1,147 +1,121 @@
-<div class="container-fluid" style="padding:10px;height:100%;" id = "topOfAppointments" >
-  <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8 col-xs-12">
-        <div class="row">
-  <div class="col-md-122 col-xs-12">
-    <br>
-    <div style="font-size: 20px; color: #51759a;">My Chart > Appointments</div>
-    <hr style="border-color: #74A333;">
-  </div>
-</div>
-<!-- begining of the content of the page -->
-<div layout="row">
-    <md-content layout="column" style="background-color: #ecf5e0;" flex="30" hide-md hide-sm hide-xs>
-        <md-card md-whiteframe="3" >
-                <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
-                    <span>Next Appointment</span>
-                </md-toolbar>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline ">{{nextApppointmentType}}</span>
-                        <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
-                        <span class="md-subhead "><i class="ion-person iconHomeView "></i>&nbsp;{{nextAppointmentResourceName}}</span>
-                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{nextAppointmentMapName}} </a> </i>
-                        <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
-                    </md-card-title-text>
-                </md-card-title>
-        </md-card>
-        <md-card  >
-            <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
-            <div class="md-toolbar-tools ">
-            <md-button ng-click = "prevView( 'myCalendar2') " >
-                <i style = "color:white; " class="ion-chevron-left iconHomeView "></i>&nbsp;  
-            </md-button>
-            <span flex></span>
-                <h4>{{currentDisplayedMonthMini}}</h4>
-                <span flex></span>
-            <md-button  ng-click = "nextView( 'myCalendar2') "> 
-                <i style = "color:white" class="ion-chevron-right iconHomeView "></i>&nbsp;  
-            </md-button>
+<div class="container-fluid" style="padding:10px;height:100%;" id="topOfAppointments">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <!-- begining of the content of the page -->
+            <div layout="row">
+                <md-content layout="column" style="background-color: #ecf5e0;" flex="30" hide-md hide-sm hide-xs>
+                    <md-card md-whiteframe="3">
+                        <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                            <span>Next Appointment</span>
+                        </md-toolbar>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline ">{{nextApppointmentType}}</span>
+                                <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
+                                <span class="md-subhead " ng-bind-html="nextAppointmentResourceName"></span>
+                                <i class="icon ion-ios-location iconHomeView "><a ng-click="showNextAppLocation($event)"> {{nextAppointmentMapName}} </a> </i>
+                                <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                    <md-card>
+                        <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                            <div class="md-toolbar-tools ">
+                                <md-button ng-click="prevView( 'myCalendar2') ">
+                                    <i style="color:white; " class="ion-chevron-left iconHomeView "></i>&nbsp;
+                                </md-button>
+                                <span flex></span>
+                                <h4>{{currentDisplayedMonthMini}}</h4>
+                                <span flex></span>
+                                <md-button ng-click="nextView( 'myCalendar2') ">
+                                    <i style="color:white" class="ion-chevron-right iconHomeView "></i>&nbsp;
+                                </md-button>
+                            </div>
+                        </md-toolbar>
+                        <div ui-calendar="uiConfig.MiniCalendar " calendar="myCalendar2"></div>
+                    </md-card>
+                    <md-card md-whiteframe="3" flex>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
+                                <span class="md-subhead ">Please give us a call at (514)-hotline-blink</span>
+                                <span class="md-subhead ">or email us at bieber@bieber.com</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-content>
+                <md-content layout="column" flex style="background-color: #ecf5e0;">
+                    <md-card md-whiteframe="3" show-md show-sm show-xs hide-gt-md>
+                        <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
+                            <span>Next Appointment</span>
+                        </md-toolbar>
+                        <md-card-title>
+                           <md-card-title-text>
+                                <span class="md-headline ">{{nextApppointmentType}}</span>
+                                <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
+                                <span class="md-subhead " ng-bind-html="nextAppointmentResourceName"></span>
+                                <i class="icon ion-ios-location iconHomeView "><a ng-click="showNextAppLocation($event)"> {{nextAppointmentMapName}} </a> </i>
+                                <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                    <md-card layout="column">
+                        <md-toolbar style="background-color: #74A333; " md-whiteframe="5 ">
+                            <div class="md-toolbar-tools ">
+                                <span flex> </span>
+                                <md-button class="md-raised calendarViewButton monthButton" style="color: #74A333; background-color: #FFE082;" ng-click="changeView( 'month', 'myCalendar1') "> Month </md-button>
+                                <md-button class="md-raised calendarViewButton agendaWeekButton" style="color: #74A333; " ng-click="changeView( 'agendaWeek', 'myCalendar1') "> Week</md-button>
+                                <md-button class="md-raised calendarViewButton agendaDayButton" style="color: #74A333; " ng-click="changeView( 'agendaDay', 'myCalendar1') "> Day </md-button>
+                                <md-button class="md-raised calendarViewButton agendaListButton" style="color: #74A333; " ng-click="toggleList() "> Agenda </md-button>
+                                <span flex> </span>
+                                <md-button class="md-raised " style=" color: #74A333; border-color: black;" ng-click="goToToday()"> Today </md-button>
+                            </div>
+                        </md-toolbar>
+                        <md-toolbar style="background-color: white " layout-align="center center " md-whiteframe="1 ">
+                            <div class="md-toolbar-tools ">
+                                <md-button class="mainCalendar " ng-click="prevView( 'myCalendar1') ">
+                                    <i style="color:#74A333; " class="ion-chevron-left iconHomeView "></i>&nbsp;
+                                </md-button>
+                                <span flex></span>
+                                <h3 class="mainCalendar " style="color:#74A333; ">{{currentDisplayedMonth}}</h3>
+                                <h3 class="agendaList " style="color:#74A333; ">Appointments</h3>
+                                <span flex></span>
+                                <md-button class="mainCalendar " ng-click="nextView( 'myCalendar1') ">
+                                    <i style="color:#74A333; " class="ion-chevron-right iconHomeView "></i>&nbsp;
+                                </md-button>
+                            </div>
+                        </md-toolbar>
+                        <div class="mainCalendar " ui-calendar="uiConfig.MainCalendar " calendar="myCalendar1 " ng-model="eventSources "></div>
+                        <md-content class="agendaList " style="height:82vh;">
+                            <md-list>
+                                <md-list-item class="md-3-line " ng-repeat-start="app in appointments " layout="row " id="agendaAppointment{{$index}}">
+                                    <div class="md-list-item-text " layout="column " flex="75 ">
+                                        <h4><b>{{app.AppointmentType_EN}}</b></h4>
+                                        <p><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</p>
+                                        <p>
+                                            <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event, app.MapDescription_EN, app.MapUrl) "> {{app.MapDescription_EN}}</a> </i> </p>
+                                        <p ng-bind-html="getResource(app)"></p>
+                                    </div>
+                                    <img ng-src="{{nextAppointmentDoctorImage}} " flex="15 ">
+                                </md-list-item>
+                                <md-divider ng-repeat-end=""></md-divider>
+                            </md-list>
+                        </md-content>
+                    </md-card>
+                    <md-card class="mainCalendar " md-whiteframe="3" flex>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline " style="color:#75a23b;"><h3>About the calendar</h3></span>
+                                <span class="md-subhead" style = "font-size:1em;" ><i class="ion-record iconHomeView" style = "color:#5CE68A; font-size:30px;" ></i>&nbsp;Past Appointments</span>
+                                <span class="md-subhead" style = "font-size:1em;"><i class="ion-record iconHomeView" style = "color: #3399ff; font-size:30px;""></i>&nbsp; Future Appointments</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </md-card>
+                </md-content>
             </div>
-            </md-toolbar>
-            <div ui-calendar="uiConfig.MiniCalendar " calendar="myCalendar2"></div>
-        </md-card>
-       <md-card md-whiteframe="3" flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
-                        <span class="md-subhead ">Please give us a call at (514)-hotline-blink</span>
-                        <span class="md-subhead ">or email us at bieber@bieber.com</span>
-                    </md-card-title-text>
-                </md-card-title>
-            </md-card> 
-    </md-content>
-
-    <md-content layout="column" flex style="background-color: #ecf5e0;">
-            <md-card md-whiteframe="3" show-md show-sm show-xs hide-gt-md >
-                <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
-                    <span>Next Appointment</span>
-                </md-toolbar>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline ">{{nextApppointmentType}}</span>
-                        <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
-                        <span class="md-subhead "><i class="ion-person iconHomeView "></i>&nbsp;{{nextAppointmentResourceName}}</span>
-                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{nextAppointmentMapName}} </a> </i>
-                        <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
-                    </md-card-title-text>
-                </md-card-title>
-        </md-card>
-    <md-card >
-            <md-toolbar style = "background-color: #74A333; " md-whiteframe="5 ">
-              <div class="md-toolbar-tools ">
-                    <span flex> </span>
-                    <md-button class = "md-raised calendarViewButton monthButton" style = "color: #74A333; background-color: #FFE082;" ng-click = "changeView( 'month', 'myCalendar1') "> Month </md-button>
-                    <md-button class = "md-raised calendarViewButton agendaWeekButton" style="color: #74A333; " ng-click = "changeView( 'agendaWeek', 'myCalendar1') "> Week</md-button>
-                    <md-button  class = "md-raised calendarViewButton agendaDayButton" style="color: #74A333; " ng-click = "changeView( 'agendaDay', 'myCalendar1') "> Day </md-button>
-                    <md-button class = "md-raised calendarViewButton agendaListButton" style="color: #74A333; " ng-click = "toggleList() " > Agenda </md-button>
-                    <span flex> </span>
-                    <md-button class = "md-raised " style = "background-color: color: #74A333;" ng-click="goToToday()"> Today </md-button>
-                </div>
-            </md-toolbar>
-            <md-toolbar style="background-color: white " layout-align="center center " md-whiteframe="1 ">
-            <div class="md-toolbar-tools ">
-            <md-button class = "mainCalendar " ng-click = "prevView( 'myCalendar1') " >
-                <i style = "color:#74A333; " class="ion-chevron-left iconHomeView "></i>&nbsp;  
-            </md-button>
-            <span flex></span>
-            <h3 class = "mainCalendar " style = "color:#74A333; ">{{currentDisplayedMonth}}</h3>
-            <h3 class = "agendaList " style = "color:#74A333; ">Appointments</h3>
-            <span flex></span>
-            <md-button class = "mainCalendar " ng-click = "nextView( 'myCalendar1') "> 
-                <i style = "color:#74A333; " class="ion-chevron-right iconHomeView "></i>&nbsp;  
-            </md-button>
-            </div>
-            </md-toolbar>
-        
-     <div class = "mainCalendar " ui-calendar="uiConfig.MainCalendar " calendar="myCalendar1 " ng-model="eventSources " ></div>
-    <md-content class = "agendaList " style="height:600px; ">
-    <md-list>
-        <md-list-item class="md-3-line " ng-repeat-start="app in appointments "  layout="row " id = "agendaAppointment{{$index}}">
-            <div class="md-list-item-text " layout="column " flex="75 ">
-                <h4><b>{{app.AppointmentType_EN}}</b></h4>
-                <p><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</p>
-                    <p>
-                        <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{app.MapDescription_EN}}</a> </i> </p>
-                    <p><i class="ion-person iconHomeView "></i>&nbsp;Dr. Beiber</p>
-            </div>
-            <img ng-src="{{nextAppointmentDoctorImage}} " flex="15 ">
-            
-        </md-list-item>
-        <md-divider ng-repeat-end=""></md-divider>
-        </md-list>
-    </md-content>
-    </md-card>
-      <md-card class = "mainCalendar " md-whiteframe="3" flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
-                        <span class="md-subhead ">Please give us a call at (514)-hotline-blink</span>
-                        <span class="md-subhead ">or email us at bieber@bieber.com</span>
-                    </md-card-title-text>
-                </md-card-title>
-            </md-card> 
-
-        <!-- <md-toolbar style="background-color: #74A333; margin-top:8px; " layout-align="center center " md-whiteframe="3 "> Appointments </md-toolbar>
-        <md-content class="appContent " flex="50 ">
-            <md-list flex>
-                <md-list-item class="md-3-line " ng-repeat="app in appointments " ng-click="null " layout="row ">
-                    <div class="md-list-item-text " layout="column " flex="75 ">
-                        <h4><b>{{app.AppointmentType_EN}}</b></h4>
-                        <p><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{app.ScheduledStartTime|formatDateAppointmentTask}}</hp>
-                            <p>
-                                <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event) "> {{app.MapDescription_EN}}</a> </i> </p>
-                            <p><i class="ion-person iconHomeView "></i>&nbsp;Dr. Beiber</p>
-                    </div>
-                    <img ng-src="{{nextAppointmentDoctorImage}} " flex="25 ">
-                    <md-divider></md-divider>
-                </md-list-item>
-        </md-content> -->
-    </md-content>
-</div>
-</div>
-<div class="col-md-2">
-    </div>
+        </div>
+        <div class="col-md-2">
+        </div>
     </div>

@@ -2,10 +2,11 @@
 var app = angular.module('MUHCApp');
 
 // binding the controller of appointments.html and attaching our required services 
-app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', '$compile', 'uiCalendarConfig', 'Appointments', '$timeout', '$uibModal', '$mdMedia', '$mdDialog', function($scope,$location, $anchorScroll, $compile, uiCalendarConfig, Appointments, $timeout, $uibModal, $mdMedia, $mdDialog) {
+app.controller('AppointmentsController', ['$scope', '$location', '$anchorScroll', '$compile', 'uiCalendarConfig', 'Appointments', '$timeout', '$uibModal', '$mdMedia', '$mdDialog', function($scope, $location, $anchorScroll, $compile, uiCalendarConfig, Appointments, $timeout, $uibModal, $mdMedia, $mdDialog) {
     init(); // calling the init function below 
-    $scope.displayCalendar = true; 
+    $scope.displayCalendar = true;
     $scope.date = new Date();
+
     function init() {
         $scope.dateToday = new Date();
         var date;
@@ -14,20 +15,27 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         displayNextEvent();
         $(".agendaList").hide();
     }
+    console.log(Appointments.getUserAppointments());
+
     function displayNextEvent() {
         if (Appointments.isThereNextAppointment()) {
-            console.log($scope.nextAppointment.Object);
             $scope.nextApppointmentType = $scope.nextAppointment.Object.AppointmentType_EN;
             $scope.nextAppointmentDateStartDate = $scope.nextAppointment.Object.ScheduledStartTime;
-            $scope.nextAppointmentResourceName = $scope.nextAppointment.Object.Resource.Machine;
+            if ($scope.nextAppointment.Object.Resource.hasOwnProperty("Machine")) {
+                $scope.nextAppointmentResourceName = '<i class="ion-ios-pulse-strong iconHomeView "></i>&nbsp;' + $scope.nextAppointment.Object.Resource.Machine;
+            } else if ($scope.nextAppointment.Object.Resource.hasOwnProperty("Doctor")) {
+                $scope.nextAppointmentResourceName = '<i class="ion-person iconHomeView "></i>&nbsp;' + $scope.nextAppointment.Object.Resource.Doctor;
+            }
             $scope.nextAppointmentMapImage = $scope.nextAppointment.Object.MapUrl;
             $scope.nextAppointmentMapName = $scope.nextAppointment.Object.MapDescription_EN;
             $scope.nextAppointmentDoctorImage = getDoctorImageForAppointment($scope.nextAppointment.Object);
         }
     }
-
+    $scope.showNextAppLocation = function(ev) {
+        $scope.showLocation(ev, $scope.nextAppointmentMapName, $scope.nextAppointmentMapImage);
+    };
     $scope.currentDisplayedCalendarView = 'Month';
-    $scope.showLocation = function(ev) {
+    $scope.showLocation = function(ev, mapName, mapLocation) {
         $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
@@ -37,8 +45,8 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
             targetEvent: ev,
             locals: {
                 items: {
-                    nextAppointmentMapImage: $scope.nextAppointmentMapImage,
-                    nextAppointmentMapName: $scope.nextAppointmentMapName
+                    nextAppointmentMapImage: mapLocation,
+                    nextAppointmentMapName: mapName
                 }
             },
             clickOutsideToClose: true,
@@ -59,14 +67,14 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     //Today's date
     $scope.today = new Date();
     $scope.futureAppointments = Appointments.getFutureAppointments(); // get the future appointments of the user
-    $scope.pastAppointments = Appointments.getPastAppointments();   // get past appointments of the user
+    $scope.pastAppointments = Appointments.getPastAppointments(); // get past appointments of the user
     $scope.appointments = Appointments.getUserAppointments(); // get ALL the appointmnets of the user
-    
+
     // check if there are no appointmnets for the user
     if ($scope.appointments.length == 0) {
         $scope.noAppointments = true;
     }
-        // check if there are no future appointments for the user 
+    // check if there are no future appointments for the user 
     if ($scope.futureAppointments.length == 0) {
         $scope.noFutureAppointments = true;
     }
@@ -83,37 +91,36 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         }
     };
 
-    $scope.toggleCalendar = function (){
-         $(".agendaList").hide();
-         $(".mainCalendar").show();
+    $scope.toggleCalendar = function() {
+        // clearButtonsStyle();
+        $(".agendaList").hide();
+        $(".mainCalendar").show();
     };
-    $scope.toggleList = function () {
-         $(".mainCalendar").hide();
-         $(".agendaList").show();
-         $scope.scrollToAppointment();
-         $location.hash("topOfAppointments");
-         $anchorScroll();
-         hideAllPops();
-         clearButtonsStyle();
-         $(".agendaListButton").css("background-color", "#FFE082");
+    $scope.toggleList = function() {
+        $(".mainCalendar").hide();
+        $(".agendaList").show();
+        $scope.scrollToAppointment();
+        $location.hash("topOfAppointments");
+        $anchorScroll();
+        hideAllPops();
+        clearButtonsStyle();
+        $(".agendaListButton").css("background-color", "#FFE082");
     };
-    $scope.scrollToAppointment = function()
-    {   
+    $scope.scrollToAppointment = function() {
         var current = $scope.date;
         console.log($scope.date);
         var min = Infinity;
         var minIndex = 0;
-        for (var i = 0;i< $scope.appointments.length; i++) {
-            var minVal = Math.abs($scope.appointments[i].ScheduledStartTime.getTime()-current.getTime());
-            if(minVal<min)
-            {
+        for (var i = 0; i < $scope.appointments.length; i++) {
+            var minVal = Math.abs($scope.appointments[i].ScheduledStartTime.getTime() - current.getTime());
+            if (minVal < min) {
                 minIndex = i;
                 min = minVal;
             }
         }
         console.log(minIndex);
         console.log($scope.appointments[minIndex]);
-        $location.hash('agendaAppointment'+minIndex);
+        $location.hash('agendaAppointment' + minIndex);
         $anchorScroll();
 
     };
@@ -122,7 +129,7 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    
+
     // $scope.eventSource = {
     //     url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
     //     className: 'gcal-event', // an option!
@@ -175,60 +182,100 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         $scope.mainAppointmentType = ""
     };
 
-    var otherPop = false; 
-    
+    var otherPop = false;
+
     $scope.alertOnEventClick = function(event, jsEvent, view) {
         $this = $(this);
         $scope.date = event.start._i;
-        console.log('event click',event);
-        if (!event.hasOwnProperty('isPoped')){
-            console.log("I don't have a poped property creating one.."); 
+        console.log('event click', event);
+        if (!event.hasOwnProperty('isPoped')) {
+            console.log("I don't have a poped property creating one..");
             if (otherPop) hideAllPops();
-            event.isPoped = true; 
-            $this.popover({ html: true, title: event.title, placement: 'top', container: 'body', animation: true, content : (
-                ('<i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;')+
-                (event.start.format('MMMM YYYY, hh:mm a'))+
-                ('<br><i class="ion-person iconHomeView "></i>&nbsp;'+event.mapDescription)) })
-            .popover('toggle');
-            otherPop = true;
-        }else if (event.isPoped == true){
-            hideAllPops();
-        }else {
-            if (otherPop) hideAllPops();
-            $this.popover({ html: true, title: event.title, placement: 'top', container: 'body', animation: true, content : (
-                ('<i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;')+
-                (event.start.format('MMMM YYYY, hh:mm a'))+
-                ('<br><i class="ion-person iconHomeView "></i>&nbsp;'+event.mapDescription)) })
-            .popover('toggle');
             event.isPoped = true;
-            otherPop = true; 
+            $this.popover({
+                    html: true,
+                    title: event.title,
+                    placement: 'top',
+                    container: 'body',
+                    animation: true,
+                    content: (
+                        ('<i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;') +
+                        (event.start.format('MMMM YYYY, hh:mm a')) +
+                        ('<br><i class="ion-location iconHomeView "></i>&nbsp;' + event.mapDescription))
+                })
+                .popover('toggle');
+            otherPop = true;
+        } else if (event.isPoped == true) {
+            hideAllPops();
+        } else {
+            if (otherPop) hideAllPops();
+            $this.popover({
+                    html: true,
+                    title: event.title,
+                    placement: 'top',
+                    container: 'body',
+                    animation: true,
+                    content: (
+                        ('<i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;') +
+                        (event.start.format('MMMM YYYY, hh:mm a')) +
+                        ('<br><i class="ion-person iconHomeView "></i>&nbsp;' + event.mapDescription))
+                })
+                .popover('toggle');
+            event.isPoped = true;
+            otherPop = true;
         }
     };
 
-    hideAllPops = function (){ 
-        for (i = 0 ; i <  uiCalendarConfig.calendars['myCalendar1'].fullCalendar('clientEvents').length; i++ ){
-           uiCalendarConfig.calendars['myCalendar1'].fullCalendar('clientEvents')[i].isPoped = false;
+    hideAllPops = function() {
+        for (i = 0; i < uiCalendarConfig.calendars['myCalendar1'].fullCalendar('clientEvents').length; i++) {
+            uiCalendarConfig.calendars['myCalendar1'].fullCalendar('clientEvents')[i].isPoped = false;
         }
         $('.fc-event').each(function() {
             $(this).popover('destroy');
         });
-        otherPop = false; 
+        otherPop = false;
     };
-    $scope.$on('$destroy',function()
-    {
+    $scope.$on('$destroy', function() {
         hideAllPops();
+        document.removeEventListener('mouseup', mouseDownHidePopups);
     });
-    
+
+    var currentSelectedDay;
+
     $scope.alertOnDayClick = function(date, jsEvent, view) {
+        // hideAllPops();
+        if (!$(this).hasClass("fc-today")) {
+            if (currentSelectedDay) {
+                currentSelectedDay.css("background-color", "white");
+            }
+            currentSelectedDay = $(this);
+            currentSelectedDay.css("background-color", "#fedf88");
+        }
+
         $scope.date = new Date(date.format());
     };
-    $scope.alertOnDayClickMini = function (date, jsEvent, view){
-         hideAllPops();
-         $scope.date = new Date(date.format());
-         console.log($scope.date);
-         $scope.scrollToAppointment();
-         $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('gotoDate',date);
-         $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('getDate').format('MMMM YYYY');
+
+    clearSelectedDayColor = function() {
+        $(".fc-day").css("background-color", "white");
+    }
+    document.addEventListener('mouseup', mouseDownHidePopups)
+
+    function mouseDownHidePopups(event) {
+        console.log(event.srcElement.className);
+        console.log(event.srcElement.className !== 'fc-title');
+        if (event.srcElement.className !== 'fc-title' && event.srcElement.className !== 'popover-content') {
+            console.log(event);
+            hideAllPops();
+        }
+    }
+
+    $scope.alertOnDayClickMini = function(date, jsEvent, view) {
+        //hideAllPops();
+        $scope.date = new Date(date.format());
+        console.log($scope.date);
+        $scope.scrollToAppointment();
+        $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('gotoDate', date);
+        $scope.currentDisplayedMonth = uiCalendarConfig.calendars['myCalendar1'].fullCalendar('getDate').format('MMMM YYYY');
     };
 
     /* alert on Drop */
@@ -263,7 +310,7 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     };
     $scope.uiConfig = {
         MiniCalendar: {
-            aspectRatio: 1.5,
+
             editable: false,
             header: {
                 left: '',
@@ -271,16 +318,16 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
                 right: ''
             },
             dayClick: $scope.alertOnDayClickMini
-            // eventClick: $scope.alertOnEventClick,
-            // eventDrop: $scope.alertOnDrop,
-            // eventResize: $scope.alertOnResize,
-            // eventRender: $scope.eventRender,
-            // dayRender: $scope.onDayRender
+                // eventClick: $scope.alertOnEventClick,
+                // eventDrop: $scope.alertOnDrop,
+                // eventResize: $scope.alertOnResize,
+                // eventRender: $scope.eventRender,
+                // dayRender: $scope.onDayRender
         },
 
         MainCalendar: {
-            height: 604,
-            contentHeight: 604,
+            // height: 604,
+            // contentHeight: 604,
             editable: false,
             slotDuration: '00:15:00',
             slotLabelInterval: '01:00:00',
@@ -303,22 +350,21 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
     };
     /* Change View */
     $scope.changeView = function(view, calendar) {
-        hideAllPops();
+        //hideAllPops();
         clearButtonsStyle();
-        $("."+view+"Button").css("background-color", "#FFE082")
+        $("." + view + "Button").css("background-color", "#FFE082")
         $scope.toggleCalendar();
         //$scope.currentDisplayedCalendarView = view; 
         uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
     };
     /* moves calendar dates to the currentDate*/
-    $scope.goToToday = function (){
-        hideAllPops();
+    $scope.goToToday = function() {
+        //hideAllPops();
         uiCalendarConfig.calendars['myCalendar1'].fullCalendar('today');
         uiCalendarConfig.calendars['myCalendar2'].fullCalendar('today');
-        //$scope.date = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format();
-        //console.log($scope.date);
-        //$scope.scrollToAppointment();
-        $scope.setTodayMonthViews(); 
+        $scope.date = new Date();
+        $scope.scrollToAppointment();
+        $scope.setTodayMonthViews();
     };
     $scope.renderCalender = function(calendar) {
         if (uiCalendarConfig.calendars[calendar]) {
@@ -333,12 +379,13 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         });
         $compile(element)($scope)
     };
-    function clearButtonsStyle(){
-         $(".calendarViewButton").css("background-color", "white")
+
+    function clearButtonsStyle() {
+        $(".calendarViewButton").css("background-color", "white");
     }
-    $scope.setTodayMonthViews = function () {
-    $scope.currentDisplayedMonth = moment().format('MMMM YYYY');
-    $scope.currentDisplayedMonthMini = moment().format('MMM YYYY');
+    $scope.setTodayMonthViews = function() {
+        $scope.currentDisplayedMonth = moment().format('MMMM YYYY');
+        $scope.currentDisplayedMonthMini = moment().format('MMM YYYY');
     };
     $scope.setTodayMonthViews();
     $scope.getCurrentMonth = function(calendar) {
@@ -348,15 +395,15 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
         $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM DD YYYY');
     };
     $scope.nextView = function(calendar) {
-        hideAllPops();
-       // var displayedCalendarTitle = uiCalendarConfig.calendars[calendar].fullCalendar('getView')["type"];
+        //hideAllPops();
+        // var displayedCalendarTitle = uiCalendarConfig.calendars[calendar].fullCalendar('getView')["type"];
         // console.log(displayCalendarTitle);
         uiCalendarConfig.calendars[calendar].fullCalendar('next');
         if (calendar == 'myCalendar1') $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
         else $scope.currentDisplayedMonthMini = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMM YYYY');
     };
     $scope.prevView = function(calendar) {
-        hideAllPops();
+        //hideAllPops();
         uiCalendarConfig.calendars[calendar].fullCalendar('prev');
         if (calendar == 'myCalendar1') $scope.currentDisplayedMonth = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMMM YYYY');
         else $scope.currentDisplayedMonthMini = uiCalendarConfig.calendars[calendar].fullCalendar('getDate').format('MMM YYYY');
@@ -373,5 +420,12 @@ app.controller('AppointmentsController', ['$scope','$location','$anchorScroll', 
             $scope.changeTo = 'Hungarian';
         }
     };
+    $scope.getResource = function(app) {
+        if (app.Resource.hasOwnProperty("Machine")) {
+            return '<i class="ion-ios-pulse-strong iconHomeView "></i>&nbsp;' + app.Resource.Machine;
+        } else if (app.Resource.hasOwnProperty("Doctor")) {
+            return '<i class="ion-person iconHomeView "></i>&nbsp;' + app.Resource.Doctor;
+        }
+    }
     $scope.eventSources = [$scope.events, $scope.eventsF];
 }]);
