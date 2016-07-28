@@ -44,9 +44,19 @@ angular.module('MUHCApp')
     };
     scope.submit = function()
     {
+        console.log("IN SUBMIT RATING");
         var patientSerNum = Patient.getUserSerNum();
         var edumaterialControlSerNum = scope.eduMaterialControlSerNum;
-        RequestToServer.sendRequest('QuestionnaireRating',{'PatientSerNum':patientSerNum,'EducationalMaterialControlSerNum':edumaterialControlSerNum,'RatingValue':scope.ratingValue});
+        console.log("edumaterialControlSerNum is " + edumaterialControlSerNum);
+        if(edumaterialControlSerNum > -1) {
+            console.log("Hence, rate material");
+            RequestToServer.sendRequest('QuestionnaireRating',{'PatientSerNum':patientSerNum,'EducationalMaterialControlSerNum':edumaterialControlSerNum,'RatingValue':scope.ratingValue});
+            scope.submitted = true;
+        } else {
+            console.log("Hence, rate app");
+            RequestToServer.sendRequest('Feedback',{'PatientSerNum':patientSerNum,'RatingValue':scope.ratingValue});
+            scope.submitted = true;
+            }
         scope.submitted = true;
     }
       

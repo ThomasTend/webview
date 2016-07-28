@@ -1,9 +1,10 @@
 <div ng-hide="submitted">
-        <span style="margin-top: -10px;">Rate this material: </span>&nbsp;&nbsp;
+        <p>
     <span style="display:inline-block;opacity:0.5" ng-repeat="star in rate" ng-click="rateMaterial($index)">
             <i ng-class="star.Icon" style="font-size:35px;color:#DAA520" ></i>
         </span>&nbsp;&nbsp;
     <span><a href class="btn" style="background-color: #74A333; color:#C8E6C9; margin-top: -10px;" ng-click="submit()" ng-disabled="emptyRating">Rate it!</a></span>
+    </p>
 </div>
 <div ng-show="submitted" style="margin-top:5px">
     <p style="color:#5cb85c;opacity:0.8;">Thank you for your feedback</p>
