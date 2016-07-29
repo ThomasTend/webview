@@ -4,23 +4,10 @@ var myApp=angular.module('MUHCApp');
 
 myApp.controller('HomeController', ['$scope', '$timeout', '$filter', '$location','UserAuthorizationInfo','EncryptionService','Notifications', 'Patient', 'Doctors', 'Appointments','UserPlanWorkflow','$rootScope','UpdateUI','RequestToServer', function ($scope, $timeout, $filter, $location, UserAuthorizationInfo, EncryptionService, Notifications, Patient, Doctors, Appointments, UserPlanWorkflow, $rootScope, UpdateUI, RequestToServer) {
 
-
-//homeInit();
-//$scope.enableCheckin=false;
- /* window.alert('getting data for home controller');
-//if(testArray == 'undefined') {
-  console.log('boom');
-  RequestToServer.sendRequest('Refresh',['Appointments', 'Patient', 'Notifications', 'Doctors', 'UserPlanWorkflow', 'CheckinService', 'UpdateUI'])
-  UpdateUI.UpdateSection('Home').then(function(data) {
-  window.alert('getting data for home controller');
-  //homeInit();
-  });*/
-//} else {
   homeInit();
-//}
-
 
 function homeInit() {
+
     // Get number of unread notifications by Type
     
     var numNewAnnouncements = 0;
@@ -54,7 +41,7 @@ function homeInit() {
     $scope.Appointments = numNewAppointments;
     $scope.Documents = numNewDocuments;
 
-	$scope.dateToday=new Date();
+	$scope.dateToday = new Date();
 	if(UserPlanWorkflow.isEmpty())
   {
     if(UserPlanWorkflow.isCompleted()){
@@ -66,31 +53,7 @@ function homeInit() {
     $scope.status='No treatment plan available!';
 
     } 
-  /*
-  if(CheckinService.haveNextAppointmentToday())
-  {
-    if(!CheckinService.isAlreadyCheckedin())
-    {
-			CheckinService.isAllowedToCheckin().then(function(value){
-				if(value)
-        {
-					$timeout(function(){
-						  $scope.enableCheckin=true;
-					})
-        }else{
-					$timeout(function(){
-						  $scope.enableCheckin=false;
-					})
-        }
-			})
-
-    }else{
-      $scope.enableCheckin=false;
-    }
-  }else{
-    $scope.enableCheckin=false;
-  } */
-
+  
   if(Appointments.isThereAppointments())
   {
     if(Appointments.isThereNextAppointment()){
@@ -116,7 +79,6 @@ function homeInit() {
 
 $scope.checkin=function()
 {
-	//CheckinService.checkinToAppointment();
 	$scope.messageCheckedIn="You have successfully checked in proceed to waiting room!";
 	$timeout(function(){
 		$scope.enableCheckin=false;

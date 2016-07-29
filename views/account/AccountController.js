@@ -1,26 +1,4 @@
-var myApp=angular.module('MUHCApp');
-myApp.controller('AccountController',['$scope','UserPreferences','Patient',function($scope,UserPreferences,Patient){
-
-  $scope.editingDiv = {
-      //editFirstNameDiv: false,
-      //editLastNameDiv: false,
-      editEmailDiv: false,
-      editTelNumDiv: false,
-      editLanDiv: false,
-      editPasswordDiv: false,
-      editSMSDiv:false
-      
-  };
-  $scope.hideSectionsBut = function (onlyDivToShow) {
-        for (var div in $scope.editingDiv) {
-            if (div !== onlyDivToShow) {
-                //console.log($scope.editingDiv[div]);
-                $scope.editingDiv[div] = false;
-
-            }
-
-        }
-    };
+myApp.controller('AccountController',['$scope','UserPreferences','Patient',function($scope,UserPreferences,Patient) {
     $scope.checkboxModel=UserPreferences.getEnableSMS();
     $scope.FirstName = Patient.getFirstName();
     $scope.LastName = Patient.getLastName();
@@ -30,3 +8,35 @@ myApp.controller('AccountController',['$scope','UserPreferences','Patient',funct
     $scope.sms=UserPreferences.getEnableSMS();
 
 }]);
+
+myApp.controller('SelectOptGroupController', function($scope) {
+     
+      $scope.editingDiv = {
+          Email: false,
+          Telephone: false,
+          Language: false,
+          password: false,
+          SMS:false
+      };
+
+      $scope.options = [
+          "Email",
+          "password",
+          "SMS",
+          "Telephone",
+          "Language"
+      ];
+      
+      $scope.goOptionSelected = function(onlyDivToShow) {
+          $scope.editingDiv[onlyDivToShow] = true;
+          $scope.optionSelected = onlyDivToShow;
+    
+          for (var option in $scope.editingDiv) {
+            if (option !== onlyDivToShow) {
+                $scope.editingDiv[option] = false;
+            }
+          }
+      }
+
+    });
+    

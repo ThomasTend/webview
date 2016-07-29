@@ -1,23 +1,23 @@
 /**
  * @name rate-material
- * @description Directive is the components in charge of the 5 start rating system, takes an educationalMaterialControlSerNum as parameter.
+ * @description 5 star rating system for educational material and app rating
  * 
  * 
  */
 angular.module('MUHCApp')
 .directive('rateMaterial', function(Patient, RequestToServer) {
   return {
-    restrict: 'E',
-    transclude: true,
+    restrict: 'E', // E for "element", i.e. an html tag
+    transclude: true, // allow transclusion, i.e. html in between the open and close rateMAterial tag
     scope: {
-        eduMaterialControlSerNum: '=serNum'
+        eduMaterialControlSerNum: '=serNum' // pass the edu material ser-num as argument or -1 to rate the app
     },
     templateUrl: './views/educational/rating-education-template-directive.html',
     link: function (scope, element) {
 
     initRater();
     
-    function initRater()
+    function initRater() // initialize the stars
     {
         scope.rate = [];
         scope.submitted = false;
@@ -29,7 +29,7 @@ angular.module('MUHCApp')
             });
         }
     }
-    scope.rateMaterial = function(index)
+    scope.rateMaterial = function(index) // change the css of the selected stars ()fill them to indicate the rating
     {
         scope.emptyRating = false;
         scope.ratingValue = index+1;
@@ -42,17 +42,17 @@ angular.module('MUHCApp')
             scope.rate[i].Icon = 'ion-ios-star-outline';
         }
     };
-    scope.submit = function()
+    scope.submit = function() // called by ng-click on the submit button
     {
         console.log("IN SUBMIT RATING");
-        var patientSerNum = Patient.getUserSerNum();
-        var edumaterialControlSerNum = scope.eduMaterialControlSerNum;
+        var patientSerNum = Patient.getUserSerNum(); // get the patient ser-num
+        var edumaterialControlSerNum = scope.eduMaterialControlSerNum; // get the argument's value
         console.log("edumaterialControlSerNum is " + edumaterialControlSerNum);
-        if(edumaterialControlSerNum > -1) {
+        if(edumaterialControlSerNum > -1) { // I set the ser-num to -1 to specify that we want to rate the app
             console.log("Hence, rate material");
             RequestToServer.sendRequest('QuestionnaireRating',{'PatientSerNum':patientSerNum,'EducationalMaterialControlSerNum':edumaterialControlSerNum,'RatingValue':scope.ratingValue});
             scope.submitted = true;
-        } else {
+        } else { // any other ser-num is to rate an educational material
             console.log("Hence, rate app");
             RequestToServer.sendRequest('Feedback',{'PatientSerNum':patientSerNum,'RatingValue':scope.ratingValue});
             scope.submitted = true;

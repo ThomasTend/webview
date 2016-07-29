@@ -4,9 +4,6 @@
     </div>
     <div class="col-md-8 col-xs-12">
 <div class="row">
-    <!--<div class="col-md-1">
-    </div>-->
-<!--Welcome Message Plus Status-->
 <div class="col-md-6 col-xs-12">
 
 <!-- Modal -->
@@ -27,51 +24,9 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
       </div>
-      
+
     </div>
   </div>
-    
-<!--<div class=" div-container-section row">
-<div class="col-xs-12 " >
-<h3>{{patient.FirstName}} {{patient.LastName}}</h3>
-<div align="center">
-<img ng-src="{{patient.ProfileImage}}" width="60%" style="max-height:250px">
-</div>
-</div>
-<div class="row" >
-	<div class="col-xs-12" style="margin:10px">
-		<strong>Email:</strong>  {{patient.Email}}<br>
-		<strong>Phone:</strong>  {{patient.TelNum}}<br>
-		<a href ui-sref="app.Account">Go to my account&raquo;</a><br>
-		<strong>Primary Physician:</strong> {{primaryPhysician[0].FirstName}} {{primaryPhysician[0].LastName}}<br>
-		<a href ui-sref="app.Contacts">Go to my contacts&raquo;</a>
-	</div>
-
-</div>
-</div>-->
-			
-<!--
-<h4>Contacts</h4>
-
-<div class="div-container-section row">
-			<div class="col-xs-2">
-					<i class="icon iconThemeViews fa fa-user-md"></i>
-			</div>
-			<div class="col-xs-8">
-				<div  align="center">
-					<strong>	Primary Doctor</strong>
-				</div>
-				<div align="center">
-						<p>{{primaryPhysician.FirstName}} {{primaryPhysician.LastName}}</p>
-						<p style="color:grey">Department of Radiation Oncology</p>
-
-
-				</div>
-			</div>
-</div>
-
-<a href>Go to my contacts &raquo;</a>-->
-<!--<div class="col-xs-12 col-md-4">-->
 
 <div class="panel">
     <div class="panel-heading">
@@ -306,115 +261,11 @@ a:active {
     </md-content>
   </div>
     </div>
-
     </div>
-
-
-<!--
-
-<div class="panel">
-    <div class="panel-heading">
-        <div class="panel-title" style="color: #C8E6C9;"></span><span class="fa fa-info" style="color: #C8E6C9;"></span> Home</div>
-    </div>
-    <div class="panel-body" style="background-color: white;">
-       <p>
-        In your Home tab, you will be provided with news about your medical status, documents, hospital announcements and directions to the Hospital.
-       </p>
-    </div>
-
-    </div>
-
-  -->
-
-
     </div>
 	
 
   	<div class="col-md-6 col-xs-12">
-		<!--	<h4>{{titleAppointmentsHome}}</h4>
-
-				<div class="div-container-section row">
-					<div class="col-xs-2">
-						<div align="right" >
-				<i class="fa fa-calendar iconThemeViews" ></i>
-				</div>
-					</div>
-					<div class="col-xs-9">
-						<div  align="center">
-						<div ng-show="!noAppointments">
-								<h4>{{appointmentShown.AppointmentType_EN}}</h4>
-									 {{appointmentShown.ScheduledStartTime|formatDateAppointmentTask}}<br>
-
-
-
-				 		</div>
-
-				 <div ng-show="noAppointments">
-					 <h3> No Appointments! </h3>
-				 </div>
-				 	</div>
-
-					</div>
-					<div class="col-xs-12" style="margin:5px">
-						<div align="center">
-								<p ng-show="messageCheckedIn||appointmentShown.Checkin=='1'"><strong>You have successfully checked in procceed to waiting room</strong></p>
-											<button ng-disabled="!enableCheckin" class="btn btn-block btn-primary" ng-click="checkin()"><i class="fa fa-check-square-o" > </i>Check-in</button>
-						</div>
-					</div>
-				</div>
-				<a href ui-sref="app.Appointments">Go to my appointments &raquo;</a>
-
-
-  	<h4>Notifications</h4>
-
-  		<div class="div-container-section row">
-				<div class="col-xs-2">
-					<div  align="right" >
-						<i class="iconThemeViews fa fa-bell"></i>
-					</div>
-				</div>
-				<div class="col-xs-9">
-
-					<div align="center">
-						<div ng-show="Notifications>0&&Notifications>1">
-							<strong>You have {{Notifications}} new notifications</strong>
-						</div>
-						<div ng-show="Notifications>0&&Notifications==1">
-							<strong>You have {{Notifications}} new notification</strong>
-						</div>
-						<div ng-show="Notifications==0||Notifications==''">
-							<h4>No notifications</h4>
-						</div>
-					</div>
-				</div>
-  		</div>
-				<a href ui-sref="app.Notifications">Go to my notifications &raquo;</a>
-			<h4>New Messages</h4>
-
-				<div class="div-container-section row">
-					<div class="col-xs-2">
-						<div align="right">
-						<i class="iconThemeViews icon ion-email" style="font-size:30px"></i>
-					</div>
-					</div>
-					<div class="col-xs-9">
-						<div align="center">
-						<div ng-show="NumberOfNewMessages>0&&NumberOfNewMessages>1">
-							<strong>You have {{NumberOfNewMessages}} new messages</strong>
-						</div>
-						<div ng-show="NumberOfNewMessages>0&&NumberOfNewMessages==1">
-							<strong>You have {{NumberOfNewMessages}} new message</strong>
-						</div>
-						<div ng-show="NumberOfNewMessages==0">
-							<h4>No new messages</h4>
-						</div>
-						</div>
-					</div>
-
-				</div>
-				<a href ui-sref="app.Messages">Go to my messages&raquo;</a>
-
-            -->
 
 <div class="panel">
     <div class="panel-heading">

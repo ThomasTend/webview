@@ -1,7 +1,3 @@
-//
-//  Created by David Herrera on 2015-05-04.
-//  Copyright (c) 2015 David Herrera. All rights reserved.
-//
 /**
  * @author MUHC Hospital, David Herrera, John Kildea
  * @copyright 2015 MUHC Hospital

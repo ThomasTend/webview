@@ -69,10 +69,6 @@ $scope.goToNotification=function(index,notification)
             //var announcement = Announcement.getAnnouncementBySerNum(notification.TypeSerNum);
             $state.go('app.Home');
         }
-
 }
-
-
-
 
 }]);
