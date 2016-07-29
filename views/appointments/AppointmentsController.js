@@ -22,6 +22,7 @@ app.controller('AppointmentsController', ['$scope', '$location', '$anchorScroll'
         $scope.lastAppointment = Appointments.getLastAppointmentCompleted(); // the last appointment that the client completed
         $scope.today = new Date(); //Today's date
         $scope.appointments = Appointments.getUserAppointments(); // get all the appointmnets of the user
+        $scope.date = new Date();
         displayNextAppointment();
         $(".agendaList").hide();
     }
@@ -30,7 +31,7 @@ app.controller('AppointmentsController', ['$scope', '$location', '$anchorScroll'
 
     //this functions displays the next appointment in the next appointment card 
     function displayNextAppointment() {
-        if (!Appointments.isThereNextAppointment()) {
+        if (Appointments.isThereNextAppointment()) {
             // get the type of appointment
             $scope.nextApppointmentType = $scope.nextAppointment.Object.AppointmentType_EN;
             //start time of the appointment 
@@ -44,14 +45,14 @@ app.controller('AppointmentsController', ['$scope', '$location', '$anchorScroll'
             // image of map of location that represents the place of appointment
             $scope.nextAppointmentMapImage = $scope.nextAppointment.Object.MapUrl;
             $scope.nextAppointmentMapName = $scope.nextAppointment.Object.MapDescription_EN;
-            $scope.nextAppointmentDoctorImage = getResourceImageForAppointment($scope.nextAppointment.Object);
+            $scope.nextAppointmentDoctorImage = "./img/doctor.png";
             $scope.nextAppointmentContactEmail = getAppointmentContactEmail($scope.nextAppointment.Object);
         } else {
             $scope.nextApppointmentType = "No upcoming appointments";
         }
     }
     // image of doctor or machine conducting the appointment
-    function getResourceImageForAppointment(app) {
+    $scope.getResourceImageForAppointment = function(app) {
         return "./img/doctor.png";
     }
     //Email of the doctor or person responsible for appointment 
@@ -285,10 +286,7 @@ app.controller('AppointmentsController', ['$scope', '$location', '$anchorScroll'
         // if a mouse is clicked outside a popup, it closes all popups that have 
         // been created
     function mouseDownHidePopups(event) {
-        console.log(event.srcElement.className);
-        console.log(event.srcElement.className !== 'fc-title');
         if (event.srcElement.className !== 'fc-title' && event.srcElement.className !== 'popover-content') {
-            console.log(event);
             hideAllPops();
         }
     }

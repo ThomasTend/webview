@@ -127,7 +127,7 @@ Summer 2016 -->
                                             <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event, app.MapDescription_EN, app.MapUrl) "> {{app.MapDescription_EN}}</a> </i> </p>
                                         <p ng-bind-html="getResource(app)"></p>
                                     </div>
-                                    <img ng-src="{{nextAppointmentDoctorImage}} " flex="15 ">
+                                    <img ng-src="{{getResourceImageForAppointment()}} " flex="15 ">
                                 </md-list-item>
                                 <md-divider ng-repeat-end=""></md-divider>
                             </md-list>
