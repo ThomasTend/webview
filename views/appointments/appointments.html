@@ -1,19 +1,29 @@
+<!-- written by Amro Gazlan 
+Summer 2016 -->
 <div class="container-fluid" style="padding:10px;height:100%;" id="topOfAppointments">
     <div class="row">
         <div class="col-md-2">
         </div>
         <div class="col-md-8 col-xs-12">
-        <div class="row">
-        <div class="col-md-12 col-xs-12">
-                <br>
-                <div style="font-size: 20px; color: #51759a;">My Chart > Appointments</div>
-                <hr style="border-color: #74A333;">
+            <!-- the breadcrumb at the top of the Appointmnets page -->
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <br>
+                    <div style="font-size: 20px; color: #51759a;">My Chart > Appointments</div>
+                    <hr style="border-color: #74A333;">
+                </div>
             </div>
-            </div>
-            <!-- begining of the content of the page -->
+            <!-- begining of the contents of the page 
+            the contents are divided into to main columns.
+            Left column that displays mini calendar, next appointment card and contact information card.
+            Right column disappears when the window is resized to the size of a tablet. 
+            Right column that displays the main appointments calendar as well as the agenda list 
+            -->
             <div layout="row">
+                <!--start of the left column-->
                 <md-content layout="column" style="background-color: #ecf5e0;" flex="30" hide-md hide-sm hide-xs>
                     <md-card md-whiteframe="3">
+                        <!-- start of the next appoinment card -->
                         <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
                             <span>Next Appointment</span>
                         </md-toolbar>
@@ -23,11 +33,12 @@
                                 <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
                                 <span class="md-subhead " ng-bind-html="nextAppointmentResourceName"></span>
                                 <i class="icon ion-ios-location iconHomeView "><a ng-click="showNextAppLocation($event)"> {{nextAppointmentMapName}} </a> </i>
-                                <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                                <span class="md-subhead "> <b>Email: </b>{{nextAppointmentContactEmail}}</span>
                             </md-card-title-text>
                         </md-card-title>
                     </md-card>
                     <md-card>
+                        <!--start of the mini calendar -->
                         <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
                             <div class="md-toolbar-tools ">
                                 <md-button ng-click="prevView( 'myCalendar2') ">
@@ -44,6 +55,7 @@
                         <div ui-calendar="uiConfig.MiniCalendar " calendar="myCalendar2"></div>
                     </md-card>
                     <md-card md-whiteframe="3" flex>
+                        <!-- start of the contact information card -->
                         <md-card-title>
                             <md-card-title-text>
                                 <span class="md-headline " style="color:#75a23b; "><h3>Questions regarding your appointments?</h3></span>
@@ -53,7 +65,12 @@
                         </md-card-title>
                     </md-card>
                 </md-content>
+                <!-- End of left column -->
+                <!--start of the right column-->
                 <md-content layout="column" flex style="background-color: #ecf5e0;">
+                    <!-- this is the next appointments card similar to the one in the left column, 
+                  but it appears when the window is resized to tablet mode, so it appears before the main calendar 
+                  in the tablet view -->
                     <md-card md-whiteframe="3" show-md show-sm show-xs hide-gt-md>
                         <md-toolbar style="background-color: #74A333; " layout-align="center center " md-whiteframe="3 ">
                             <span>Next Appointment</span>
@@ -64,12 +81,14 @@
                                 <span class="md-subhead "><i class="fa fa-calendar " style="color:#2B6197 "></i>&nbsp;{{nextAppointmentDateStartDate|formatDateAppointmentTask}}</span>
                                 <span class="md-subhead " ng-bind-html="nextAppointmentResourceName"></span>
                                 <i class="icon ion-ios-location iconHomeView "><a ng-click="showNextAppLocation($event)"> {{nextAppointmentMapName}} </a> </i>
-                                <span class="md-subhead "> <b>Email: </b>bieber@justin.com</span>
+                                <span class="md-subhead "> <b>Email: </b>{{nextAppointmentContactEmail}}</span>
                             </md-card-title-text>
                         </md-card-title>
                     </md-card>
+                    <!--start of the main calendar -->
                     <md-card layout="column">
                         <md-toolbar style="background-color: #74A333; " md-whiteframe="5 ">
+                            <!--start of different views buttons toolbar -->
                             <div class="md-toolbar-tools ">
                                 <span flex> </span>
                                 <md-button class="md-raised calendarViewButton monthButton" style="color: #74A333; background-color: #FFE082;" ng-click="changeView( 'month', 'myCalendar1') "> Month </md-button>
@@ -81,6 +100,7 @@
                             </div>
                         </md-toolbar>
                         <md-toolbar style="background-color: white " layout-align="center center " md-whiteframe="1 ">
+                            <!-- start of the month switching and day switching toolbar -->
                             <div class="md-toolbar-tools ">
                                 <md-button class="mainCalendar " ng-click="prevView( 'myCalendar1') ">
                                     <i style="color:#74A333; " class="ion-chevron-left iconHomeView "></i>&nbsp;
@@ -94,7 +114,9 @@
                                 </md-button>
                             </div>
                         </md-toolbar>
+                        <!-- this is the calendar view, like month day week -->
                         <div class="mainCalendar " ui-calendar="uiConfig.MainCalendar " calendar="myCalendar1 " ng-model="eventSources "></div>
+                        <!-- this is the agenda list view -->
                         <md-content class="agendaList " style="height:82vh;">
                             <md-list>
                                 <md-list-item class="md-3-line " ng-repeat-start="app in appointments " layout="row " id="agendaAppointment{{$index}}">
@@ -105,12 +127,13 @@
                                             <i class="icon ion-ios-location iconHomeView "><a ng-click="showLocation($event, app.MapDescription_EN, app.MapUrl) "> {{app.MapDescription_EN}}</a> </i> </p>
                                         <p ng-bind-html="getResource(app)"></p>
                                     </div>
-                                    <img ng-src="{{nextAppointmentDoctorImage}} " flex="15 ">
+                                    <img ng-src="{{getResourceImageForAppointment()}} " flex="15 ">
                                 </md-list-item>
                                 <md-divider ng-repeat-end=""></md-divider>
                             </md-list>
                         </md-content>
                     </md-card>
+                    <!-- start of the calendar information card -->
                     <md-card class="mainCalendar " md-whiteframe="3" flex>
                         <md-card-title>
                             <md-card-title-text>
