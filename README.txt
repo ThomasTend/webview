@@ -2,6 +2,9 @@ Thomas Tendron
 github: ThomasTend
 email: thomas.tendron@mail.mcgill.ca
 
+Amro Gazlan
+github: Guzlan
+
 Work that hasn't been done yet:
 
 - Test and make the notifications work fully. There are still some bugs in the console. 
@@ -24,4 +27,12 @@ Work that hasn't been done yet:
 - Solve the loading problem, i.e. download the content page by page using the controllers for each view as the user navigates the site,
  instead of loading the whole website each time one refreshes a page.
 
- - Make sure all the submit buttons in the user settings work.
+- Get contact email for doctor or machine for an appointment and display them in agenda and next appointment card in appointment page
+
+- Get image of doctor or machine for an appointment in getResourceImageForAppointment function  in appointment page
+
+- Ability to change languages of all the information on the appointment page 
+
+- Insert proper contacting information at the "Questions regarding your appointments page"  in appointment page
+
+- Different colors for different appointments type. Right now its different color based on past and future appointment
